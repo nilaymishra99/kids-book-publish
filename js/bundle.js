@@ -11,6 +11,20 @@ import { turnTo, openReader } from "./reader.js";
 
 setupNav();
 const $ = (sel) => document.querySelector(sel);
+
+const headshot = new HeadshotPicker($("#headshot"), {
+  name: () => state.name || "your child",
+  onChange: (dataUrl) => (state.photo = dataUrl),
+});
+
+$("#photo").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file || !file.type.startsWith("image/")) return;
+  const img = new Image();
+  img.onload = () => headshot.setImage(img);
+  img.src = URL.createObjectURL(file);
+});
+
 const { ageGroups, stories, interests, pricing } = await loadData();
 const config = await loadConfig();
 const BUNDLE_SIZE = pricing.bundle.books;
@@ -53,19 +67,6 @@ $("#name").addEventListener("input", (e) => (state.name = e.target.value.trim())
 document.querySelectorAll('input[name="pronoun"]').forEach((r) =>
   r.addEventListener("change", () => (state.pronoun = document.querySelector('input[name="pronoun"]:checked').value))
 );
-
-const headshot = new HeadshotPicker($("#headshot"), {
-  name: () => state.name || "your child",
-  onChange: (dataUrl) => (state.photo = dataUrl),
-});
-
-$("#photo").addEventListener("change", (e) => {
-  const file = e.target.files[0];
-  if (!file || !file.type.startsWith("image/")) return;
-  const img = new Image();
-  img.onload = () => headshot.setImage(img);
-  img.src = URL.createObjectURL(file);
-});
 
 // ---------- Step 2: interests and style ----------
 $("#interest-chips").innerHTML = interests
