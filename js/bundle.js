@@ -165,7 +165,17 @@ const validators = [
   () => (state.interests.size ? true : (alert("Pick at least one interest."), false)),
   () => true,
 ];
+// Read the form directly, so a slow page load can't leave the state behind the screen.
+function syncFromDom() {
+  state.name = $("#name").value.trim();
+  state.age = Number($("#age").value);
+  state.pronoun = document.querySelector('input[name="pronoun"]:checked')?.value || "they";
+  state.style = document.querySelector('input[name="style"]:checked')?.value || state.style;
+  state.format = document.querySelector('input[name="format"]:checked')?.value || state.format;
+  state.pages = Number($("#pages").value) || state.pages;
+}
 document.addEventListener("click", (e) => {
+  if (e.target.closest("[data-next]")) syncFromDom();
   if (e.target.closest("[data-next]") && validators[state.step]()) {
     if (state.step === 2) renderFormats();
     showStep(state.step + 1);
