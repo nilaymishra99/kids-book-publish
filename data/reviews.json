@@ -1,0 +1,47 @@
+{
+  "_comment": "SAMPLE reviews used as placeholders until real customer reviews are collected. Each one is marked sample:true and shown with a 'Sample review' label. Remove the sample flag and the label only for genuine reviews.",
+  "reviews": [
+    {
+      "name": "Meera K.",
+      "place": "Bengaluru",
+      "rating": 5,
+      "text": "My daughter (4) asked for her book every night for a week. Seeing her own face and her grandma on the pages made her giggle every time.",
+      "sample": true
+    },
+    {
+      "name": "Rohan S.",
+      "place": "London",
+      "rating": 5,
+      "text": "Ordered the hardcover as a 7th birthday present. The photos were clear, the story felt personal, and the printing looked lovely.",
+      "sample": true
+    },
+    {
+      "name": "Aisha M.",
+      "place": "Dubai",
+      "rating": 5,
+      "text": "Easy to use on my phone. The free preview let me check every page before I paid, which made the decision simple.",
+      "sample": true
+    },
+    {
+      "name": "Tom & Lisa R.",
+      "place": "Toronto",
+      "rating": 4,
+      "text": "Our 9-year-old is now the hero of a space comic. Loved the speech bubbles and the end page with the whole family.",
+      "sample": true
+    },
+    {
+      "name": "Sunita P.",
+      "place": "Pune",
+      "rating": 4,
+      "text": "Uploading the photos was quick and the consent step felt reassuring. I'd love more story choices, so I'm hoping those are coming.",
+      "sample": true
+    },
+    {
+      "name": "James O.",
+      "place": "Manchester",
+      "rating": 5,
+      "text": "Arrived well packed and in good time. Ordering a second one for the cousins next month.",
+      "sample": true
+    }
+  ]
+}

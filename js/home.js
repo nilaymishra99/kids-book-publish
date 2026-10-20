@@ -78,3 +78,16 @@ document.getElementById("price-grid").innerHTML = pricing.formats
   .join("");
 
 renderStories();
+
+const { reviews } = await fetch("/data/reviews.json").then((r) => r.json());
+document.getElementById("reviews-grid").innerHTML = reviews
+  .map(
+    (r) => `
+    <figure class="card review-card">
+      <div class="stars" role="img" aria-label="${r.rating} out of 5 stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
+      <blockquote>“${esc(r.text)}”</blockquote>
+      <figcaption><strong>${esc(r.name)}</strong> · ${esc(r.place)}</figcaption>
+      ${r.sample ? '<span class="sample-tag">Sample review</span>' : ""}
+    </figure>`
+  )
+  .join("");

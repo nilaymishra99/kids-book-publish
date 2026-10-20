@@ -1611,6 +1611,321 @@
           ]
         }
       ]
+    },
+    {
+      "id": "first-day-school",
+      "title": "{hero}'s First Day at School",
+      "ageGroup": "3-5",
+      "theme": "School",
+      "category": "learning",
+      "emoji": "🎒",
+      "blurb": "Backpack on, tummy full of butterflies. A new school, new friends and a very big hug at home-time.",
+      "palette": [
+        "#8fb8de",
+        "#f7e7a1"
+      ],
+      "sidekick": {
+        "name": "Bella",
+        "emoji": "🐰",
+        "desc": "a cheerful bunny with a red school bag"
+      },
+      "panels": [
+        {
+          "scene": "a bedroom in the morning, a small child looking at a new school bag hanging on the door",
+          "bg": [
+            "#fdebd0",
+            "#f5cba7"
+          ],
+          "props": [
+            "🎒",
+            "☀️",
+            "🌅"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "Today is the big day! {hero} is starting school.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Will I like it there?"
+            }
+          ]
+        },
+        {
+          "scene": "a family walking hand in hand to a school gate with bright colourful banners",
+          "bg": [
+            "#d6eaf8",
+            "#85c1e9"
+          ],
+          "props": [
+            "🏫",
+            "🌈",
+            "🎈"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "{c1} walked with {hero} all the way to the gate.",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "I'll be right here at home-time!"
+            }
+          ]
+        },
+        {
+          "scene": "a classroom with a friendly teacher and children sitting on colourful mats",
+          "bg": [
+            "#d5f5e3",
+            "#82e0aa"
+          ],
+          "props": [
+            "📚",
+            "🎨",
+            "🧩"
+          ],
+          "cast": [
+            "hero",
+            "c2"
+          ],
+          "caption": "Inside, the teacher smiled and waved hello.",
+          "speech": [
+            {
+              "who": "c2",
+              "text": "Would you like to sit next to me?"
+            }
+          ]
+        },
+        {
+          "scene": "a child painting a big colourful sunflower at an easel beside a new friend",
+          "bg": [
+            "#fadbd8",
+            "#f1948a"
+          ],
+          "props": [
+            "🖌️",
+            "🌻",
+            "🦋"
+          ],
+          "cast": [
+            "hero",
+            "c2"
+          ],
+          "caption": "{hero} painted a sunflower and made a new friend.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Your painting is beautiful!"
+            }
+          ]
+        },
+        {
+          "scene": "a playground at lunchtime with children on swings and slides, bright sunshine",
+          "bg": [
+            "#fcf3cf",
+            "#f7dc6f"
+          ],
+          "props": [
+            "🛝",
+            "⚽",
+            "☀️"
+          ],
+          "cast": [
+            "hero",
+            "c3"
+          ],
+          "caption": "At lunchtime, {hero} played with everyone.",
+          "speech": [
+            {
+              "who": "c3",
+              "text": "Want to play tag?"
+            }
+          ]
+        },
+        {
+          "scene": "a family hugging at the school gate at home-time, the child waving a painting",
+          "bg": [
+            "#fdf2e9",
+            "#f5b041"
+          ],
+          "props": [
+            "🏠",
+            "🖼️",
+            "💛"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "Home-time! Everyone wanted to hear about {hero}'s day.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "I had the best day ever!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bike-ride",
+      "title": "{hero} Learns to Ride a Bike",
+      "ageGroup": "6-8",
+      "theme": "Growing Up",
+      "category": "adventure",
+      "emoji": "🚲",
+      "blurb": "Wobbly at first, then wind in the hair! A story about trying again, with a little help from family.",
+      "palette": [
+        "#f5b7b1",
+        "#aed6f1"
+      ],
+      "sidekick": {
+        "name": "Sparky",
+        "emoji": "🐕",
+        "desc": "a bouncy golden puppy with a red ribbon"
+      },
+      "panels": [
+        {
+          "scene": "a child looking at a shiny blue bicycle in the garden on a sunny day",
+          "bg": [
+            "#aed6f1",
+            "#5dade2"
+          ],
+          "props": [
+            "🚲",
+            "☀️",
+            "🌼"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "{hero} had a shiny new bike and a big plan.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Today I ride without training wheels!"
+            }
+          ]
+        },
+        {
+          "scene": "a parent steadying the back of a bicycle while the child pedals along a grassy path",
+          "bg": [
+            "#d5f5e3",
+            "#58d68d"
+          ],
+          "props": [
+            "🌳",
+            "🌿",
+            "🍃"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "{c1} held on tight... for now.",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "Pedal, and keep looking ahead!"
+            }
+          ]
+        },
+        {
+          "scene": "the child wobbling and falling gently onto the grass, a puppy running over to lick their face",
+          "bg": [
+            "#fdebd0",
+            "#eb984e"
+          ],
+          "props": [
+            "💫",
+            "🐾",
+            "😅"
+          ],
+          "cast": [
+            "hero",
+            "c2"
+          ],
+          "caption": "Wobble... oops! Falling down is part of learning.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Ouch, but I'm not giving up!"
+            }
+          ]
+        },
+        {
+          "scene": "the child dusting off their knees and smiling, with the puppy wagging its tail",
+          "bg": [
+            "#fcf3cf",
+            "#f4d03f"
+          ],
+          "props": [
+            "🐕",
+            "💪",
+            "⭐"
+          ],
+          "cast": [
+            "hero",
+            "c2"
+          ],
+          "caption": "{hero} tried again. And again.",
+          "speech": [
+            {
+              "who": "c2",
+              "text": "Woof! You're doing great!"
+            }
+          ]
+        },
+        {
+          "scene": "the child pedalling along a long path with steady arms while a parent runs behind, cheering",
+          "bg": [
+            "#d6eaf8",
+            "#3498db"
+          ],
+          "props": [
+            "🏁",
+            "🌬️",
+            "🌳"
+          ],
+          "cast": [
+            "hero",
+            "c1",
+            "c3"
+          ],
+          "caption": "Without even noticing, {hero} was riding on {their} own!",
+          "speech": [
+            {
+              "who": "c3",
+              "text": "Look at you go!"
+            }
+          ]
+        },
+        {
+          "scene": "the family cheering at the finish line as the child lifts the handlebars high",
+          "bg": [
+            "#fadbd8",
+            "#ff6b6b"
+          ],
+          "props": [
+            "🎉",
+            "🏆",
+            "🎈"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "Hooray! {hero} rode all the way to the big tree.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "I did it!"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

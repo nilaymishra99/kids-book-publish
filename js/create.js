@@ -1,8 +1,10 @@
 // The five-step "create your comic" wizard.
 
-import { BRAND, loadData, loadConfig, storyCardHtml, formatPrice, esc } from "./common.js";
+import { BRAND, loadData, loadConfig, storyCardHtml, formatPrice, esc, setupNav } from "./common.js";
 import { renderBook, aiPanelKeys, resolveCast } from "./comic.js";
 import { saveBook, getBook } from "./store.js";
+
+setupNav();
 
 const MAX_PEOPLE = 5;
 const RELATIONS = ["Mum", "Dad", "Brother", "Sister", "Grandma", "Grandpa", "Nani", "Nana", "Dadi", "Dada", "Aunt", "Uncle", "Cousin", "Friend", "Pet"];
