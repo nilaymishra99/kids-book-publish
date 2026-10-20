@@ -3,6 +3,7 @@
 import { BRAND, loadData, loadConfig, storyCardHtml, formatPrice, esc, setupNav } from "./common.js";
 import { renderBook } from "./comic.js";
 import { illustrate } from "./builder.js";
+import { turnTo, openReader } from "./reader.js";
 import { bookPrice } from "./story-model.js";
 import { saveBook, getBook } from "./store.js";
 
@@ -377,13 +378,14 @@ function showViewer() {
 function goToPage(i) {
   state.pageIndex = Math.max(0, Math.min(state.pages.length - 1, i));
   const img = $("#viewer-img");
-  img.src = state.pages[state.pageIndex];
+  turnTo(img, state.pages[state.pageIndex]);
   img.alt = `Preview page ${state.pageIndex + 1} of ${state.pages.length}`;
   $("#page-count").textContent = `Page ${state.pageIndex + 1} / ${state.pages.length}`;
   for (const b of $("#thumbs").children) b.setAttribute("aria-current", String(Number(b.dataset.page) === state.pageIndex));
 }
 
 $("#prev-page").addEventListener("click", () => goToPage(state.pageIndex - 1));
+$("#watch").addEventListener("click", () => openReader(state.pages, `${state.book.hero.name}'s comic`));
 $("#next-page").addEventListener("click", () => goToPage(state.pageIndex + 1));
 $("#thumbs").addEventListener("click", (e) => {
   const b = e.target.closest("[data-page]");

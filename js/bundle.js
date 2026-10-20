@@ -6,6 +6,7 @@ import { renderBook } from "./comic.js";
 import { illustrate } from "./builder.js";
 import { bookPages, bookPrice, bundlePrice } from "./story-model.js";
 import { saveBook } from "./store.js";
+import { turnTo, openReader } from "./reader.js";
 
 setupNav();
 const $ = (sel) => document.querySelector(sel);
@@ -243,7 +244,7 @@ function selectBook(i) {
 function showPage(n) {
   const pages = state.books[state.current].pagesRendered;
   state.pageIndex = Math.max(0, Math.min(pages.length - 1, n));
-  $("#viewer-img").src = pages[state.pageIndex];
+  turnTo($("#viewer-img"), pages[state.pageIndex]);
   $("#page-count").textContent = `Page ${state.pageIndex + 1} / ${pages.length}`;
 }
 
@@ -252,6 +253,10 @@ $("#book-tabs").addEventListener("click", (e) => {
   if (b) selectBook(Number(b.dataset.book));
 });
 $("#prev-page").addEventListener("click", () => showPage(state.pageIndex - 1));
+$("#watch").addEventListener("click", () => {
+  const book = state.books[state.current];
+  openReader(book.pagesRendered, state.chosen[state.current].title.replace("{hero}", state.name));
+});
 $("#next-page").addEventListener("click", () => showPage(state.pageIndex + 1));
 
 // ---------- Checkout the bundle ----------

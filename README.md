@@ -88,6 +88,23 @@ flow works end to end.
    consent for under-18s); if you sell to the US/EU, COPPA/GDPR apply as well.
 6. **Prices**: edit `data/pricing.json` (currency, amounts, shipping countries).
 
+## How the AI comic is made
+
+1. **Sidekick sheet:** the story's character is drawn once from its description.
+2. **Character sheets:** the child and each family member are drawn as a cartoon
+   character from their uploaded photo. This is the closest cartoon likeness we
+   can get. The photo is sent to the image provider for this step only.
+3. **Pages:** every comic page (plus the cover) is drawn in full colour by the
+   image model, with the character sheets as references so faces stay the same
+   from page to page. The captions and speech bubbles are written into the
+   prompt from `data/stories.json`, so the browser can't change them.
+4. **Animation:** pages turn with a 3D flip in the preview, and the reader
+   (`js/reader.js`) plays the book with autoplay. The cover floats gently.
+
+Each book needs about 17–32 images, so costs grow with page count. Image
+resolution is 1024 × 1024. The print files are 8 × 8 in at 200 dpi, so before
+printing, check the page sharpness (higher quality setting or upscaling).
+
 ## Stories, page counts and bundles
 
 Each story in `data/stories.json` has three parts:

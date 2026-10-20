@@ -278,3 +278,33 @@ fieldset { border: none; padding: 0; margin: 0 0 18px; }
 
 /* Book length and bundle wizard */
 .page-hint { font-size: 0.95rem; color: var(--brand-dark); }
+
+/* ---------- Animation ---------- */
+@keyframes pageTurn {
+  0% { opacity: 0; transform: perspective(900px) rotateY(-18deg) translateX(24px) scale(0.97); }
+  60% { opacity: 1; transform: perspective(900px) rotateY(3deg) translateX(-4px) scale(1.01); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+.turn { animation: pageTurn 0.55s ease-out both; }
+.float { animation: floaty 4s ease-in-out infinite; }
+.sparkle { position: absolute; font-size: 1.4rem; animation: twinkle 2.4s ease-in-out infinite; pointer-events: none; }
+.viewer-stage, .cover-card { position: relative; }
+.btn:hover { animation: none; }
+
+.reader { position: fixed; inset: 0; z-index: 200; background: radial-gradient(circle at 50% 30%, #fff7d6, #cfe6ff 70%); display: flex; flex-direction: column; align-items: center; padding: 14px; gap: 12px; overflow: auto; }
+.reader-bar { width: min(900px, 100%); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.reader-actions { display: flex; gap: 8px; }
+.reader-stage { width: min(900px, 100%); flex: 1; display: grid; place-items: center; min-height: 0; }
+.reader-stage img { max-width: 100%; max-height: 72vh; border-radius: 14px; box-shadow: var(--shadow-hover); background: #fff; }
+.reader-controls { display: flex; gap: 16px; align-items: center; font-weight: 700; color: var(--slate); }
+@media (prefers-reduced-motion: reduce) {
+  .turn, .float, .sparkle { animation: none; }
+}

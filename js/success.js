@@ -3,6 +3,7 @@
 
 import { BRAND, loadData, loadConfig, esc } from "./common.js";
 import { renderBook } from "./comic.js";
+import { openReader } from "./reader.js";
 import { getBook, getBooksByBundle } from "./store.js";
 
 const $ = (sel) => document.querySelector(sel);
@@ -108,13 +109,18 @@ try {
         <div class="thumbs" style="justify-content:center">
           ${pages.slice(0, 4).map((src, p) => `<img src="${src}" alt="Page ${p + 1}" style="width:110px;border:2px solid var(--line);border-radius:8px">`).join("")}
         </div>
-        <p><button class="btn btn-sm" data-book="${i}">Download PDF</button></p>
+        <p><button class="btn btn-sm btn-white" data-read="${i}">🎬 Read animated</button> <button class="btn btn-sm" data-book="${i}">Download PDF</button></p>
       </div>`
     )
     .join("");
   $("#pages").addEventListener("click", (e) => {
     const b = e.target.closest("[data-book]");
     if (b) downloadBook(rendered[Number(b.dataset.book)].pages);
+    const r = e.target.closest("[data-read]");
+    if (r) {
+      const { book, story, pages } = rendered[Number(r.dataset.read)];
+      openReader(pages, story.title.replace("{hero}", book.hero.name));
+    }
   });
 
   $("#loading").hidden = true;

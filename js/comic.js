@@ -403,6 +403,10 @@ function outlinedText(ctx, text, x, y, size, fill = "#fff") {
 }
 
 function drawCoverPage(ctx, book, story, assets, brand) {
+  if (assets.ai.cover) {
+    drawCover(ctx, assets.ai.cover, 0, 0, PAGE, PAGE);
+    return;
+  }
   const [c1, c2] = story.palette;
   const grad = ctx.createLinearGradient(0, 0, PAGE, PAGE);
   grad.addColorStop(0, c1);
@@ -564,8 +568,12 @@ export async function renderBook(book, story, { watermark: wm = false, brand = "
 
   bookPages(story, book.pages).forEach((panel, i) => {
     page = newPage();
-    drawPanel(page.ctx, pageRect(), panel, i, book, story, assets);
-    pageFooter(page.ctx, i + 1, brand);
+    if (assets.ai[i]) {
+      drawCover(page.ctx, assets.ai[i], 0, 0, PAGE, PAGE);
+    } else {
+      drawPanel(page.ctx, pageRect(), panel, i, book, story, assets);
+      pageFooter(page.ctx, i + 1, brand);
+    }
     finish(page);
   });
 
