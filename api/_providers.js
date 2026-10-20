@@ -89,7 +89,10 @@ async function looksAtPhoto({ system, question, photo }) {
     }),
   });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) return null;
+  if (!res.ok) {
+    console.error("Gemini face finding error:", res.status, JSON.stringify(data?.error || data).slice(0, 300));
+    return null;
+  }
   const text = data?.candidates?.[0]?.content?.parts?.map((p) => p.text || "").join("") || "{}";
   try {
     return JSON.parse(text);
