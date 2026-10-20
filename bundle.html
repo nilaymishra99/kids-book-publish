@@ -61,12 +61,12 @@
             </div>
           </fieldset>
           <div class="field">
-            <label for="photo">One clear photo of your child</label>
+            <label for="photo">A photo of your child</label>
             <input type="file" id="photo" accept="image/*">
-            <span class="hint">Front-facing, one person, face clearly visible.</span>
+            <span class="hint">If there's more than one person, you'll choose which headshot to use.</span>
           </div>
-          <img id="photo-preview" alt="" hidden style="width:160px;height:160px;object-fit:cover;border-radius:50%;border:2px solid var(--brand)">
-          <label class="check" style="margin-top:14px"><input type="checkbox" id="consent"> I'm the child's parent or guardian and I'm happy for this photo to be used to make the books. I've read the <a href="/privacy" target="_blank" rel="noopener">privacy policy</a>.</label>
+          <div id="headshot" class="cropper" style="max-width:360px"></div>
+          <label class="check" style="margin-top:14px"><input type="checkbox" id="consent"> I'm the child's parent or guardian and I'm happy for this photo to be used to make the books. We keep only the headshot you choose. I've read the <a href="/privacy" target="_blank" rel="noopener">privacy policy</a>.</label>
         </div>
         <p class="notice error" id="err1" hidden role="alert"></p>
         <div class="step-nav"><a class="btn btn-white" href="/">← Home</a><button class="btn" data-next>Next: interests →</button></div>

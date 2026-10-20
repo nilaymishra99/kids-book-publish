@@ -308,3 +308,17 @@ fieldset { border: none; padding: 0; margin: 0 0 18px; }
 @media (prefers-reduced-motion: reduce) {
   .turn, .float, .sparkle { animation: none; }
 }
+
+/* ---------- Headshot picker ---------- */
+.cropper.headshot-box { border-radius: 14px; aspect-ratio: auto; min-height: 160px; padding: 12px; display: block; }
+.headshot-choose { display: grid; gap: 12px; }
+.headshot-title { font-weight: 700; color: var(--slate); margin: 0; }
+.headshot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+.headshot-option { background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 8px; cursor: pointer; font: inherit; color: var(--slate); text-align: center; transition: border-color 0.15s, transform 0.15s; }
+.headshot-option img { width: 100%; aspect-ratio: 1; border-radius: 50%; object-fit: cover; }
+.headshot-option span { display: block; font-size: 0.85rem; margin-top: 6px; }
+.headshot-option:hover, .headshot-option:focus-visible { border-color: var(--brand); transform: translateY(-2px); }
+.headshot-result { display: grid; gap: 10px; justify-items: center; text-align: center; }
+.headshot-avatar { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid var(--brand); }
+.people .person:has(.headshot-choose) { grid-column: 1 / -1; }
+.headshot-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }

@@ -88,6 +88,24 @@ flow works end to end.
    consent for under-18s); if you sell to the US/EU, COPPA/GDPR apply as well.
 6. **Prices**: edit `data/pricing.json` (currency, amounts, shipping countries).
 
+## Headshots
+
+Each uploaded photo is checked for faces before anything else happens:
+
+1. The browser's own face detector is used when it's available.
+2. Otherwise the photo goes to `/api/detect-faces`, which returns a box and a
+   short neutral description for each person (for example "young boy, glasses").
+   It never names anyone.
+3. One person: their headshot is used automatically.
+   Several people: the parent chooses which headshot to use.
+   No face: the parent is asked for a clearer photo.
+4. Only the chosen headshot (a 768 px square) is kept and sent to the avatar
+   step. The full photo is discarded in the browser after detection.
+
+Without `OPENAI_API_KEY` the site uses the browser's detector, or the centre of
+the photo with a note. Set `DETECT_MODEL` or `DETECT_HOURLY_LIMIT` to tune
+detection.
+
 ## How the AI comic is made
 
 1. **Sidekick sheet:** the story's character is drawn once from its description.

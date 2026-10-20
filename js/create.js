@@ -4,6 +4,7 @@ import { BRAND, loadData, loadConfig, storyCardHtml, formatPrice, esc, setupNav 
 import { renderBook } from "./comic.js";
 import { illustrate } from "./builder.js";
 import { turnTo, openReader } from "./reader.js";
+import { HeadshotPicker } from "./headshots.js";
 import { bookPrice } from "./story-model.js";
 import { saveBook, getBook } from "./store.js";
 
@@ -118,88 +119,6 @@ function validateHero() {
 
 // ---------- Step 3: photos ----------
 
-class Cropper {
-  constructor(el, onChange) {
-    this.el = el;
-    this.onChange = onChange;
-    this.size = 480;
-    this.canvas = document.createElement("canvas");
-    this.canvas.width = this.canvas.height = this.size;
-    this.img = null;
-    this.zoom = 1;
-    this.ox = 0;
-    this.oy = 0;
-    el.addEventListener("pointerdown", (e) => {
-      if (!this.img) return;
-      el.setPointerCapture(e.pointerId);
-      this.drag = { x: e.clientX, y: e.clientY };
-    });
-    el.addEventListener("pointermove", (e) => {
-      if (!this.drag) return;
-      const k = this.size / el.clientWidth;
-      this.ox += (e.clientX - this.drag.x) * k;
-      this.oy += (e.clientY - this.drag.y) * k;
-      this.drag = { x: e.clientX, y: e.clientY };
-      this.draw();
-    });
-    const end = () => {
-      if (this.drag) this.onChange?.();
-      this.drag = null;
-    };
-    el.addEventListener("pointerup", end);
-    el.addEventListener("pointercancel", end);
-  }
-
-  setImage(img) {
-    this.img = img;
-    this.zoom = 1;
-    this.ox = this.oy = 0;
-    this.el.innerHTML = "";
-    this.el.append(this.canvas);
-    this.el.classList.add("has-photo");
-    this.draw();
-  }
-
-  setZoom(z) {
-    this.zoom = z;
-    this.draw();
-  }
-
-  geometry(size) {
-    const iw = this.img.naturalWidth;
-    const ih = this.img.naturalHeight;
-    const scale = Math.max(size / iw, size / ih) * this.zoom;
-    const dw = iw * scale;
-    const dh = ih * scale;
-    const k = size / this.size;
-    const maxX = (dw - size) / 2;
-    const maxY = (dh - size) / 2;
-    this.ox = Math.max(-maxX / k, Math.min(maxX / k, this.ox));
-    this.oy = Math.max(-maxY / k, Math.min(maxY / k, this.oy));
-    return { dx: (size - dw) / 2 + this.ox * k, dy: (size - dh) / 2 + this.oy * k, dw, dh };
-  }
-
-  draw() {
-    const ctx = this.canvas.getContext("2d");
-    const { dx, dy, dw, dh } = this.geometry(this.size);
-    ctx.fillStyle = "#fff";
-    ctx.fillRect(0, 0, this.size, this.size);
-    ctx.drawImage(this.img, dx, dy, dw, dh);
-  }
-
-  export(size = 768) {
-    if (!this.img) return null;
-    const c = document.createElement("canvas");
-    c.width = c.height = size;
-    const ctx = c.getContext("2d");
-    const { dx, dy, dw, dh } = this.geometry(size);
-    ctx.fillStyle = "#fff";
-    ctx.fillRect(0, 0, size, size);
-    ctx.drawImage(this.img, dx, dy, dw, dh);
-    return c.toDataURL("image/jpeg", 0.88);
-  }
-}
-
 function loadFile(file) {
   return new Promise((resolve, reject) => {
     if (!file.type.startsWith("image/")) return reject(new Error("That file isn't a photo."));
@@ -224,8 +143,6 @@ function addPersonSlot({ hero = false, name = "", relation = "" } = {}) {
     <div class="cropper"><div class="placeholder"><span class="emoji" aria-hidden="true">${hero ? "🧒" : "🙂"}</span>Add a photo</div></div>
     <div class="photo-actions">
       <label class="btn btn-sm btn-white file-btn">📷 ${hero ? "Choose photo" : "Photo"}<input type="file" accept="image/*" id="${id}" aria-label="Choose photo"></label>
-      <label class="visually-hidden" for="${id}-zoom">Zoom</label>
-      <input type="range" id="${id}-zoom" min="1" max="3" step="0.01" value="1" disabled>
     </div>
     ${
       hero
@@ -237,21 +154,25 @@ function addPersonSlot({ hero = false, name = "", relation = "" } = {}) {
     }`;
   $("#people").append(el);
 
-  const person = { key, hero, cropper: new Cropper(el.querySelector(".cropper"), () => {}), el };
-  const zoom = el.querySelector('input[type="range"]');
+  const personName = el.querySelector(".js-name");
+  const person = {
+    key,
+    hero,
+    cropper: new HeadshotPicker(el.querySelector(".cropper"), {
+      name: hero ? () => heroName() : () => personName?.value.trim() || "this person",
+    }),
+    el,
+  };
   el.querySelector('input[type="file"]').addEventListener("change", async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     try {
-      person.cropper.setImage(await loadFile(file));
-      zoom.disabled = false;
-      zoom.value = "1";
+      await person.cropper.setImage(await loadFile(file));
       $("#photo-error").hidden = true;
     } catch (err) {
       showPhotoError(err.message);
     }
   });
-  zoom.addEventListener("input", () => person.cropper.setZoom(Number(zoom.value)));
   el.querySelector(".remove")?.addEventListener("click", () => {
     el.remove();
     state.people = state.people.filter((p) => p !== person);
@@ -467,12 +388,11 @@ async function resume(id) {
   $("#page-count").value = String(book.pages || pricing.pages.included);
   const toImg = (src) => new Promise((r) => { const i = new Image(); i.onload = () => r(i); i.src = src; });
   const heroSlot = state.people.find((p) => p.hero);
-  heroSlot.cropper.setImage(await toImg(book.heroPhoto));
+  heroSlot.cropper.setHeadshot(book.heroPhoto);
   for (const p of book.people) {
     const slot = addPersonSlot({ name: p.name, relation: p.relation });
-    slot.cropper.setImage(await toImg(p.photo));
+    slot.cropper.setHeadshot(p.photo);
   }
-  for (const p of state.people) p.el.querySelector('input[type="range"]').disabled = false;
   $("#consent").checked = true;
   state.book = book;
   state.aiKey = illustrationKey(collectBook());

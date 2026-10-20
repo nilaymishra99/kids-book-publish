@@ -6,6 +6,7 @@ import { renderBook } from "./comic.js";
 import { illustrate } from "./builder.js";
 import { bookPages, bookPrice, bundlePrice } from "./story-model.js";
 import { saveBook } from "./store.js";
+import { HeadshotPicker } from "./headshots.js";
 import { turnTo, openReader } from "./reader.js";
 
 setupNav();
@@ -53,27 +54,16 @@ document.querySelectorAll('input[name="pronoun"]').forEach((r) =>
   r.addEventListener("change", () => (state.pronoun = document.querySelector('input[name="pronoun"]:checked').value))
 );
 
-function squarePhoto(img, size = 768) {
-  const c = document.createElement("canvas");
-  c.width = c.height = size;
-  const ctx = c.getContext("2d");
-  const side = Math.min(img.naturalWidth, img.naturalHeight);
-  ctx.fillStyle = "#fff";
-  ctx.fillRect(0, 0, size, size);
-  ctx.drawImage(img, (img.naturalWidth - side) / 2, (img.naturalHeight - side) / 2, side, side, 0, 0, size, size);
-  return c.toDataURL("image/jpeg", 0.88);
-}
+const headshot = new HeadshotPicker($("#headshot"), {
+  name: () => state.name || "your child",
+  onChange: (dataUrl) => (state.photo = dataUrl),
+});
 
 $("#photo").addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file || !file.type.startsWith("image/")) return;
   const img = new Image();
-  img.onload = () => {
-    state.photo = squarePhoto(img);
-    const preview = $("#photo-preview");
-    preview.src = state.photo;
-    preview.hidden = false;
-  };
+  img.onload = () => headshot.setImage(img);
   img.src = URL.createObjectURL(file);
 });
 
