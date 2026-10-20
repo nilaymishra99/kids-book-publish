@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create Your Comic — Little Legends</title>
+  <meta name="description" content="Build a personalised comic book starring your child and family in five easy steps.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦸</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="/"><span aria-hidden="true">🦸</span> Little <span>Legends</span></a>
+      <a href="/#faq" style="font-weight:800;color:var(--ink)">Need help?</a>
+    </div>
+  </header>
+
+  <main id="main" class="wizard">
+    <div class="container">
+      <ol class="progress" id="progress" aria-label="Steps">
+        <li>1. Story</li><li>2. Your hero</li><li>3. Photos</li><li>4. Preview</li><li>5. Order</li>
+      </ol>
+
+      <!-- Step 1: story -->
+      <section class="step" data-step="0" aria-labelledby="s1-title">
+        <h1 id="s1-title">Choose an adventure</h1>
+        <div class="filters" id="pick-filters" role="group" aria-label="Filter by age" style="justify-content:flex-start"></div>
+        <div class="grid grid-3" id="pick-grid" style="margin-bottom:28px"></div>
+        <div class="step-nav"><a class="btn btn-white" href="/">← Home</a><button class="btn btn-red" data-next>Next: your hero →</button></div>
+      </section>
+
+      <!-- Step 2: hero details -->
+      <section class="step" data-step="1" hidden aria-labelledby="s2-title">
+        <h1 id="s2-title">Tell us about your hero</h1>
+        <form class="card" id="hero-form" novalidate>
+          <div class="two-col">
+            <div class="field">
+              <label for="hero-name">Child's first name</label>
+              <input type="text" id="hero-name" maxlength="20" autocomplete="off" required placeholder="e.g. Aarav">
+              <span class="hint">This is how the story will call them.</span>
+            </div>
+            <div class="field">
+              <label for="hero-age">Age</label>
+              <select id="hero-age"></select>
+            </div>
+          </div>
+          <fieldset class="field">
+            <legend>How should the story talk about them?</legend>
+            <div class="radio-row">
+              <label class="radio-tile"><input type="radio" name="pronoun" value="she"><span>She / her</span></label>
+              <label class="radio-tile"><input type="radio" name="pronoun" value="he"><span>He / him</span></label>
+              <label class="radio-tile"><input type="radio" name="pronoun" value="they" checked><span>They / them</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="field" id="style-field">
+            <legend>Art style</legend>
+            <div class="radio-row">
+              <label class="radio-tile"><input type="radio" name="style" value="comic" checked><span>💥 Classic comic</span></label>
+              <label class="radio-tile"><input type="radio" name="style" value="manga"><span>🌸 Cute manga</span></label>
+              <label class="radio-tile"><input type="radio" name="style" value="watercolor"><span>🎨 Watercolour</span></label>
+              <label class="radio-tile"><input type="radio" name="style" value="cartoon3d"><span>🧸 3D cartoon</span></label>
+            </div>
+          </fieldset>
+          <p class="notice" id="photo-mode-note" hidden>✨ Your book will be made in <strong>photo-comic</strong> style: your real photos become comic-style portraits inside illustrated scenes.</p>
+          <div class="field">
+            <label for="dedication">Dedication message <span class="hint">(optional)</span></label>
+            <textarea id="dedication" maxlength="240" placeholder="Happy 5th birthday, our little astronaut! Love, Mumma &amp; Papa"></textarea>
+          </div>
+        </form>
+        <div class="step-nav"><button class="btn btn-white" data-back>← Back</button><button class="btn btn-red" data-next>Next: photos →</button></div>
+      </section>
+
+      <!-- Step 3: photos -->
+      <section class="step" data-step="2" hidden aria-labelledby="s3-title">
+        <h1 id="s3-title">Add photos</h1>
+        <p>Use clear, front-facing photos — one person each. Drag to move, use the slider to zoom so the face fills the circle.</p>
+        <div class="people" id="people"></div>
+        <p><button class="btn btn-white" id="add-person" type="button">＋ Add a family member <span id="slots-left"></span></button></p>
+        <div class="card" style="box-shadow:var(--shadow-sm)">
+          <label class="check"><input type="checkbox" id="consent"> I'm the child's parent or guardian, and everyone pictured (or their guardian) is happy for their photo to be used to make this book. I've read the <a href="/privacy" target="_blank" rel="noopener">privacy promise</a>.</label>
+        </div>
+        <p class="notice error" id="photo-error" hidden role="alert"></p>
+        <div class="step-nav" style="margin-top:20px"><button class="btn btn-white" data-back>← Back</button><button class="btn btn-red" data-next>Create my preview ✨</button></div>
+      </section>
+
+      <!-- Step 4: preview -->
+      <section class="step" data-step="3" hidden aria-labelledby="s4-title">
+        <h1 id="s4-title">Your comic preview</h1>
+        <div class="generating" id="generating" hidden>
+          <div class="emoji" aria-hidden="true">🎨</div>
+          <h2 id="gen-status" aria-live="polite">Warming up the crayons…</h2>
+          <div class="progress-bar" aria-hidden="true"><div id="gen-bar"></div></div>
+          <p class="hint">This can take a few minutes. Please keep this page open.</p>
+        </div>
+        <p class="notice" id="gen-note" hidden></p>
+        <div class="viewer" id="viewer" hidden>
+          <div class="viewer-stage"><img id="viewer-img" alt=""></div>
+          <div class="viewer-controls">
+            <button class="btn btn-sm btn-white" id="prev-page" aria-label="Previous page">◀</button>
+            <span id="page-count" aria-live="polite"></span>
+            <button class="btn btn-sm btn-white" id="next-page" aria-label="Next page">▶</button>
+          </div>
+          <div class="thumbs" id="thumbs"></div>
+        </div>
+        <div class="step-nav" style="margin-top:24px"><button class="btn btn-white" data-back>← Change details</button><button class="btn btn-red" data-next id="to-order" disabled>I love it — order →</button></div>
+      </section>
+
+      <!-- Step 5: order -->
+      <section class="step" data-step="4" hidden aria-labelledby="s5-title">
+        <h1 id="s5-title">Choose your format</h1>
+        <div class="grid grid-3" id="format-grid" style="margin-bottom:12px"></div>
+        <p class="order-summary" id="order-summary"></p>
+        <p class="notice error" id="checkout-error" hidden role="alert"></p>
+        <div class="step-nav"><button class="btn btn-white" data-back>← Back to preview</button><button class="btn btn-red" id="checkout-btn">Checkout securely 🔒</button></div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="/js/create.js"></script>
+</body>
+</html>

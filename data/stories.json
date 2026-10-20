@@ -1,0 +1,1616 @@
+{
+  "_comment": "Story catalog. Placeholders: {hero} = child's name; {c1}..{c5} = family members in upload order ({c1} falls back to the story's sidekick when no family photo was added); {family} = everyone added, as a list; {their}/{them}/{Their} = hero pronouns. Captions may only use {hero}, {c1}, {family} and pronouns; speech lines and cast entries for c2..c5 are dropped automatically when that person wasn't added. 'scene' is the illustration brief sent to the image model (never shown to readers). 'category' must be one of the ids in 'categories' (used for the catalogue's theme filter).",
+  "ageGroups": [
+    {
+      "id": "0-2",
+      "name": "Tiny Tots",
+      "ages": "0–2 years",
+      "emoji": "🍼",
+      "blurb": "One big picture per page, a few warm words, lots of familiar faces."
+    },
+    {
+      "id": "3-5",
+      "name": "Little Explorers",
+      "ages": "3–5 years",
+      "emoji": "🧸",
+      "blurb": "Short read-aloud adventures with two comic panels per page."
+    },
+    {
+      "id": "6-8",
+      "name": "Young Heroes",
+      "ages": "6–8 years",
+      "emoji": "🦸",
+      "blurb": "Real comic layouts, speech bubbles and a proper adventure plot."
+    },
+    {
+      "id": "9-10",
+      "name": "Super Readers",
+      "ages": "9–10 years",
+      "emoji": "📚",
+      "blurb": "Longer stories with twists, puzzles and more to read on every page."
+    }
+  ],
+  "categories": [
+    {
+      "id": "family",
+      "name": "Love & Family",
+      "emoji": "💕"
+    },
+    {
+      "id": "imagination",
+      "name": "Imagination",
+      "emoji": "🌈"
+    },
+    {
+      "id": "adventure",
+      "name": "Adventure",
+      "emoji": "🗺️"
+    },
+    {
+      "id": "learning",
+      "name": "Learning & Growth",
+      "emoji": "🧠"
+    },
+    {
+      "id": "festivals",
+      "name": "Festivals & Culture",
+      "emoji": "🪔"
+    }
+  ],
+  "stories": [
+    {
+      "id": "big-day",
+      "title": "{hero}'s Big Day",
+      "ageGroup": "0-2",
+      "theme": "Everyday",
+      "category": "family",
+      "emoji": "☀️",
+      "blurb": "From wake-up cuddles to bedtime kisses — a gentle day with the people who love your little one most.",
+      "palette": [
+        "#ffd166",
+        "#ff9f68"
+      ],
+      "sidekick": {
+        "name": "Teddy",
+        "emoji": "🧸",
+        "desc": "a soft brown teddy bear"
+      },
+      "panels": [
+        {
+          "scene": "a cosy sunny bedroom in the morning, the child waking up and stretching in a cot",
+          "bg": [
+            "#fff1c1",
+            "#ffd166"
+          ],
+          "props": [
+            "☀️",
+            "🛏️",
+            "🐦"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "Good morning, {hero}!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Yawn!"
+            }
+          ]
+        },
+        {
+          "scene": "a bright kitchen, the child at breakfast with a smiling family member",
+          "bg": [
+            "#ffe5d0",
+            "#ffb38a"
+          ],
+          "props": [
+            "🥣",
+            "🍌",
+            "🥛"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "Breakfast with {c1}. Yum, yum!",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "One more bite!"
+            }
+          ]
+        },
+        {
+          "scene": "a sunny park with green grass, a swing and ducks by a pond",
+          "bg": [
+            "#d4f5d0",
+            "#8fd694"
+          ],
+          "props": [
+            "🌳",
+            "🦆",
+            "🌼"
+          ],
+          "cast": [
+            "hero",
+            "c1",
+            "c2"
+          ],
+          "caption": "Off to the park! Wheee!",
+          "speech": [
+            {
+              "who": "c2",
+              "text": "Look at the ducks!"
+            }
+          ]
+        },
+        {
+          "scene": "a bath with lots of bubbles and a rubber duck",
+          "bg": [
+            "#d6f0ff",
+            "#8ecdf5"
+          ],
+          "props": [
+            "🛁",
+            "🫧",
+            "🐤"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "Splish, splash, bubble bath!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Bubbles!"
+            }
+          ]
+        },
+        {
+          "scene": "a warm living room, the whole family hugging together on a sofa",
+          "bg": [
+            "#ffe0ec",
+            "#ffa8c5"
+          ],
+          "props": [
+            "🛋️",
+            "💕",
+            "🧸"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "Big hugs from {family}.",
+          "speech": []
+        },
+        {
+          "scene": "a quiet night bedroom with a moon outside the window, the child sleeping peacefully",
+          "bg": [
+            "#3a3d7c",
+            "#1d1f4f"
+          ],
+          "props": [
+            "🌙",
+            "⭐",
+            "💤"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "Goodnight, {hero}. Sweet dreams!",
+          "speech": []
+        }
+      ]
+    },
+    {
+      "id": "who-loves",
+      "title": "Who Loves {hero}?",
+      "ageGroup": "0-2",
+      "theme": "Family",
+      "category": "family",
+      "emoji": "💕",
+      "blurb": "A peek-a-boo style book where every page reveals someone special. Perfect for showing off up to five family members.",
+      "palette": [
+        "#ffafcc",
+        "#cdb4db"
+      ],
+      "sidekick": {
+        "name": "Puppy",
+        "emoji": "🐶",
+        "desc": "a fluffy little puppy"
+      },
+      "panels": [
+        {
+          "scene": "the child peeking out from behind a soft blanket, playful",
+          "bg": [
+            "#ffe5ec",
+            "#ffafcc"
+          ],
+          "props": [
+            "💗",
+            "🎈"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "Who loves {hero}? Let's find out!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Peek-a-boo!"
+            }
+          ]
+        },
+        {
+          "scene": "a family member lifting the child up high in a sunny garden, both laughing",
+          "bg": [
+            "#fff3b0",
+            "#ffd670"
+          ],
+          "props": [
+            "🌻",
+            "☀️"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "{c1} loves {hero}!",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "Up, up, up!"
+            }
+          ]
+        },
+        {
+          "scene": "a family member reading a picture book to the child",
+          "bg": [
+            "#d8f3dc",
+            "#95d5b2"
+          ],
+          "props": [
+            "📖",
+            "🌈"
+          ],
+          "cast": [
+            "hero",
+            "c2"
+          ],
+          "caption": "Everyone loves story time.",
+          "speech": [
+            {
+              "who": "c2",
+              "text": "I love you, little one!"
+            }
+          ]
+        },
+        {
+          "scene": "a family member playing with blocks with the child on a rug",
+          "bg": [
+            "#cde7ff",
+            "#90c2ff"
+          ],
+          "props": [
+            "🧱",
+            "🚂"
+          ],
+          "cast": [
+            "hero",
+            "c3"
+          ],
+          "caption": "Build it up... and BOOM!",
+          "speech": [
+            {
+              "who": "c3",
+              "text": "Tower time!"
+            }
+          ]
+        },
+        {
+          "scene": "family members dancing with the child in a living room with music notes",
+          "bg": [
+            "#e7d7ff",
+            "#c3a6ff"
+          ],
+          "props": [
+            "🎵",
+            "🎶",
+            "🥁"
+          ],
+          "cast": [
+            "hero",
+            "c4",
+            "c5"
+          ],
+          "caption": "Dance, dance, dance!",
+          "speech": [
+            {
+              "who": "c4",
+              "text": "Clap your hands!"
+            },
+            {
+              "who": "c5",
+              "text": "Twirl!"
+            }
+          ]
+        },
+        {
+          "scene": "the whole family together in a big group hug, hearts floating around",
+          "bg": [
+            "#ffd6e0",
+            "#ff8fab"
+          ],
+          "props": [
+            "💖",
+            "💞",
+            "🏠"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "So many people love {hero}. Hooray!",
+          "speech": []
+        }
+      ]
+    },
+    {
+      "id": "missing-moon",
+      "title": "{hero} and the Missing Moon",
+      "ageGroup": "3-5",
+      "theme": "Space",
+      "category": "imagination",
+      "emoji": "🚀",
+      "blurb": "The moon has vanished from the night sky! Only one brave astronaut can find it and bring it home.",
+      "palette": [
+        "#3a0ca3",
+        "#7209b7"
+      ],
+      "sidekick": {
+        "name": "Zippy",
+        "emoji": "🤖",
+        "desc": "a small friendly silver robot with round blue eyes"
+      },
+      "panels": [
+        {
+          "scene": "a child's bedroom at night, looking out of a window at a dark sky with stars but no moon",
+          "bg": [
+            "#240046",
+            "#3c096c"
+          ],
+          "props": [
+            "🪟",
+            "⭐",
+            "✨"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "One night, {hero} looked up at the sky. Something was missing!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Where did the moon go?"
+            }
+          ]
+        },
+        {
+          "scene": "a cardboard-box rocket in a back garden transforming into a real shiny rocket, a friend beside the child",
+          "bg": [
+            "#3a0ca3",
+            "#4361ee"
+          ],
+          "props": [
+            "🚀",
+            "📦",
+            "🔧"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "{hero} and {c1} built a rocket from a very big box.",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "Helmets on! Let's go!"
+            }
+          ]
+        },
+        {
+          "scene": "a small rocket blasting off into space past clouds and stars",
+          "bg": [
+            "#03045e",
+            "#0077b6"
+          ],
+          "props": [
+            "🚀",
+            "☁️",
+            "🌟"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "3... 2... 1... BLAST OFF!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Whoooosh!"
+            }
+          ]
+        },
+        {
+          "scene": "a ringed planet with friendly smiling aliens waving at the astronaut child",
+          "bg": [
+            "#5a189a",
+            "#9d4edd"
+          ],
+          "props": [
+            "🪐",
+            "👽",
+            "🛸"
+          ],
+          "cast": [
+            "hero",
+            "c2"
+          ],
+          "caption": "They met some friendly aliens on Planet Wobble.",
+          "speech": [
+            {
+              "who": "c2",
+              "text": "Have you seen the moon?"
+            }
+          ]
+        },
+        {
+          "scene": "the moon hiding behind a big fluffy space cloud, looking shy and sad",
+          "bg": [
+            "#22223b",
+            "#4a4e69"
+          ],
+          "props": [
+            "🌝",
+            "☁️",
+            "💧"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "At last they found the moon, hiding and feeling shy.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Don't be sad, Moon. We need your light!"
+            }
+          ]
+        },
+        {
+          "scene": "the child hugging the glowing moon in space, stars sparkling all around",
+          "bg": [
+            "#3c096c",
+            "#7b2cbf"
+          ],
+          "props": [
+            "🌕",
+            "💛",
+            "✨"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "{hero} gave the moon a great big hug. The moon began to glow!",
+          "speech": [
+            {
+              "who": "c3",
+              "text": "Look how bright it is!"
+            }
+          ]
+        },
+        {
+          "scene": "the rocket flying home with the full moon shining back in the night sky over a house",
+          "bg": [
+            "#10002b",
+            "#240046"
+          ],
+          "props": [
+            "🏠",
+            "🌕",
+            "🚀"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "Back home, the moon shone brighter than ever — just for {hero}.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Goodnight, Moon!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dino-picnic",
+      "title": "{hero}'s Dino Picnic",
+      "ageGroup": "3-5",
+      "theme": "Dinosaurs",
+      "category": "imagination",
+      "emoji": "🦕",
+      "blurb": "A picnic basket, a magic gate and a valley full of friendly dinosaurs who've never tasted a sandwich.",
+      "palette": [
+        "#2d6a4f",
+        "#95d5b2"
+      ],
+      "sidekick": {
+        "name": "Rexy",
+        "emoji": "🦖",
+        "desc": "a small, cheerful green T-rex"
+      },
+      "panels": [
+        {
+          "scene": "a family packing a picnic basket in a sunny kitchen",
+          "bg": [
+            "#fefae0",
+            "#e9edc9"
+          ],
+          "props": [
+            "🧺",
+            "🥪",
+            "🍎"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "{hero} packed the biggest picnic ever.",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "That's a LOT of sandwiches!"
+            }
+          ]
+        },
+        {
+          "scene": "a mysterious glowing gate covered in vines at the end of a garden",
+          "bg": [
+            "#b7e4c7",
+            "#52b788"
+          ],
+          "props": [
+            "🚪",
+            "🌿",
+            "✨"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "At the end of the garden, a gate began to glow.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Ooh! What's in there?"
+            }
+          ]
+        },
+        {
+          "scene": "a lush prehistoric valley with volcanoes far away and friendly long-necked dinosaurs",
+          "bg": [
+            "#95d5b2",
+            "#40916c"
+          ],
+          "props": [
+            "🦕",
+            "🌋",
+            "🌴"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "Dino Valley! A long-necked dinosaur said hello.",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "Hello, big friend!"
+            }
+          ]
+        },
+        {
+          "scene": "a baby triceratops sniffing a picnic sandwich curiously",
+          "bg": [
+            "#d8f3dc",
+            "#74c69d"
+          ],
+          "props": [
+            "🥪",
+            "🦴",
+            "🌼"
+          ],
+          "cast": [
+            "hero",
+            "c2"
+          ],
+          "caption": "A baby dino had never seen a sandwich before.",
+          "speech": [
+            {
+              "who": "c2",
+              "text": "Go on, have a bite!"
+            }
+          ]
+        },
+        {
+          "scene": "children and dinosaurs having a big picnic on a checkered blanket",
+          "bg": [
+            "#ffe8d6",
+            "#ffb4a2"
+          ],
+          "props": [
+            "🧺",
+            "🍉",
+            "🦖"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "Soon everyone was sharing the picnic — dinos too!",
+          "speech": [
+            {
+              "who": "c3",
+              "text": "Pass the mangoes, please!"
+            }
+          ]
+        },
+        {
+          "scene": "the child waving goodbye to the dinosaurs at the glowing gate at sunset",
+          "bg": [
+            "#ffb703",
+            "#fb8500"
+          ],
+          "props": [
+            "🌅",
+            "👋",
+            "🦕"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "Time to go home. {hero} promised to come back next Sunday.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Bye, dinos! Save me a seat!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "festival-lights",
+      "title": "{hero} and the Festival of Lights",
+      "ageGroup": "3-5",
+      "theme": "Festivals",
+      "category": "festivals",
+      "emoji": "🪔",
+      "blurb": "The diyas won't light on festival night! {hero} sets off on a glowing adventure to bring the sparkle back.",
+      "palette": [
+        "#f48c06",
+        "#9d0208"
+      ],
+      "sidekick": {
+        "name": "Mithu",
+        "emoji": "🦜",
+        "desc": "a chatty green parrot"
+      },
+      "panels": [
+        {
+          "scene": "a home decorated with rangoli and marigold garlands on festival evening, family getting ready",
+          "bg": [
+            "#ffba08",
+            "#f48c06"
+          ],
+          "props": [
+            "🪔",
+            "🌼",
+            "🎨"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "It was festival night! {hero} drew the brightest rangoli.",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "Beautiful! Now let's light the diyas."
+            }
+          ]
+        },
+        {
+          "scene": "clay diya lamps that will not light, a puzzled child holding a matchless lamp",
+          "bg": [
+            "#370617",
+            "#6a040f"
+          ],
+          "props": [
+            "🪔",
+            "❓",
+            "🌑"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "But the diyas would not light. Not even one!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Oh no! Where did the sparkle go?"
+            }
+          ]
+        },
+        {
+          "scene": "a glowing firefly guiding a child and a companion down a lantern-lit street",
+          "bg": [
+            "#03071e",
+            "#370617"
+          ],
+          "props": [
+            "✨",
+            "🏮",
+            "🌙"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "A tiny firefly blinked: 'Follow me!'",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "Let's go!"
+            }
+          ]
+        },
+        {
+          "scene": "neighbours sharing sweets and smiling at their doorsteps, laddoos and jalebis",
+          "bg": [
+            "#ffd60a",
+            "#ffc300"
+          ],
+          "props": [
+            "🍬",
+            "🍯",
+            "😊"
+          ],
+          "cast": [
+            "hero",
+            "c2"
+          ],
+          "caption": "Every time {hero} shared a sweet and a smile, a little light appeared.",
+          "speech": [
+            {
+              "who": "c2",
+              "text": "Happy festival!"
+            }
+          ]
+        },
+        {
+          "scene": "the child carrying a jar full of glowing lights back home",
+          "bg": [
+            "#e85d04",
+            "#dc2f02"
+          ],
+          "props": [
+            "🫙",
+            "✨",
+            "💛"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "Soon {hero} had a whole jar full of sparkle!",
+          "speech": [
+            {
+              "who": "c3",
+              "text": "You did it!"
+            }
+          ]
+        },
+        {
+          "scene": "a house glowing with hundreds of diyas and fireworks in the sky, the family celebrating together",
+          "bg": [
+            "#9d0208",
+            "#d00000"
+          ],
+          "props": [
+            "🎆",
+            "🪔",
+            "🎇"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "Every diya glowed. The best light of all was kindness — and {hero} had lots!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Happy Festival of Lights!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "under-the-sea",
+      "title": "Captain {hero} Under the Sea",
+      "ageGroup": "6-8",
+      "theme": "Ocean",
+      "category": "adventure",
+      "emoji": "🐙",
+      "blurb": "A yellow submarine, a lost baby whale and a coral reef full of surprises. Dive in, Captain!",
+      "palette": [
+        "#0077b6",
+        "#00b4d8"
+      ],
+      "sidekick": {
+        "name": "Bubbles",
+        "emoji": "🐬",
+        "desc": "a playful bottlenose dolphin"
+      },
+      "panels": [
+        {
+          "scene": "a harbour with a shiny yellow mini submarine, the child wearing a captain's hat",
+          "bg": [
+            "#90e0ef",
+            "#48cae4"
+          ],
+          "props": [
+            "⚓",
+            "🟡",
+            "🌊"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "Captain {hero} had a brand new submarine and a very important mission.",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "Captain, a baby whale is lost!"
+            },
+            {
+              "who": "hero",
+              "text": "Then we dive. Full speed ahead!"
+            }
+          ]
+        },
+        {
+          "scene": "the submarine diving down through blue water with schools of fish",
+          "bg": [
+            "#0096c7",
+            "#0077b6"
+          ],
+          "props": [
+            "🐟",
+            "🐠",
+            "🫧"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "Down, down, down they went, past a thousand silver fish.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Sonar on! Listen for whale songs."
+            }
+          ]
+        },
+        {
+          "scene": "a colourful coral reef with a grumpy octopus guarding a cave",
+          "bg": [
+            "#ff8fab",
+            "#00b4d8"
+          ],
+          "props": [
+            "🐙",
+            "🪸",
+            "🐚"
+          ],
+          "cast": [
+            "hero",
+            "c2"
+          ],
+          "caption": "A grumpy octopus blocked the way.",
+          "speech": [
+            {
+              "who": "c2",
+              "text": "Maybe he just needs a friend?"
+            },
+            {
+              "who": "hero",
+              "text": "Hi! I'm {hero}. Can you help us?"
+            }
+          ]
+        },
+        {
+          "scene": "the octopus smiling and pointing eight arms towards a deep trench",
+          "bg": [
+            "#023e8a",
+            "#0077b6"
+          ],
+          "props": [
+            "🐙",
+            "➡️",
+            "🌀"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "The octopus smiled and pointed eight arms at once. That way!",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "Kindness works every time."
+            }
+          ]
+        },
+        {
+          "scene": "a baby whale tangled in an old fishing net in the deep sea, glowing jellyfish around",
+          "bg": [
+            "#03045e",
+            "#023e8a"
+          ],
+          "props": [
+            "🐋",
+            "🪼",
+            "🕸️"
+          ],
+          "cast": [
+            "hero",
+            "c3"
+          ],
+          "caption": "There it was — the baby whale, tangled in an old net.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Robot arm, gently now..."
+            },
+            {
+              "who": "c3",
+              "text": "Almost free!"
+            }
+          ]
+        },
+        {
+          "scene": "a mother whale and the baby whale reunited, the submarine beside them",
+          "bg": [
+            "#0077b6",
+            "#00b4d8"
+          ],
+          "props": [
+            "🐳",
+            "🐋",
+            "💙"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "Mama Whale sang the happiest song the ocean had ever heard.",
+          "speech": [
+            {
+              "who": "c4",
+              "text": "Three cheers for Captain {hero}!"
+            }
+          ]
+        },
+        {
+          "scene": "the submarine surfacing at sunset with dolphins jumping around it",
+          "bg": [
+            "#ffb703",
+            "#fb8500"
+          ],
+          "props": [
+            "🌅",
+            "🐬",
+            "⚓"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "Mission complete. And the ocean was a little cleaner, too.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Same time tomorrow, crew?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "super-hero",
+      "title": "Super {hero} Saves the Day",
+      "ageGroup": "6-8",
+      "theme": "Superheroes",
+      "category": "adventure",
+      "emoji": "🦸",
+      "blurb": "When the city's colours start disappearing, a brand-new superhero (with a very familiar face) answers the call.",
+      "palette": [
+        "#e63946",
+        "#1d3557"
+      ],
+      "sidekick": {
+        "name": "Captain Whiskers",
+        "emoji": "🐱",
+        "desc": "a brave orange cat wearing a tiny cape"
+      },
+      "panels": [
+        {
+          "scene": "a city skyline where the buildings are slowly turning grey, people looking worried",
+          "bg": [
+            "#adb5bd",
+            "#6c757d"
+          ],
+          "props": [
+            "🏙️",
+            "🌫️",
+            "😟"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "Something strange was happening. The colours of the city were fading away!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "This looks like a job for... me!"
+            }
+          ]
+        },
+        {
+          "scene": "the child spinning into a superhero costume with a cape and mask in a burst of light",
+          "bg": [
+            "#e63946",
+            "#ffb703"
+          ],
+          "props": [
+            "⚡",
+            "💥",
+            "🦸"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "With a spin and a flash, {hero} became SUPER {hero}!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Cape? Check. Mask? Check!"
+            }
+          ]
+        },
+        {
+          "scene": "a superhero sidekick appearing on a rooftop ready for action",
+          "bg": [
+            "#457b9d",
+            "#1d3557"
+          ],
+          "props": [
+            "🏢",
+            "🌆",
+            "⭐"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "Every hero needs a partner. {c1} was ready.",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "I've found the clue! Follow the grey trail!"
+            }
+          ]
+        },
+        {
+          "scene": "a silly villain with a giant vacuum machine sucking colour out of a rainbow",
+          "bg": [
+            "#6c757d",
+            "#343a40"
+          ],
+          "props": [
+            "🌈",
+            "🌀",
+            "😈"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "It was Doctor Dull and his Colour-Sucker 3000!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Stop right there, Doctor Dull!"
+            }
+          ]
+        },
+        {
+          "scene": "family members helping, holding paint buckets and brushes, ready to help the superhero",
+          "bg": [
+            "#2a9d8f",
+            "#264653"
+          ],
+          "props": [
+            "🪣",
+            "🖌️",
+            "🎨"
+          ],
+          "cast": [
+            "hero",
+            "c2",
+            "c3"
+          ],
+          "caption": "{hero} had a plan — and some very helpful family.",
+          "speech": [
+            {
+              "who": "c2",
+              "text": "Paint brigade, reporting for duty!"
+            },
+            {
+              "who": "c3",
+              "text": "Let's make it messy!"
+            }
+          ]
+        },
+        {
+          "scene": "the colour machine exploding into a giant harmless rainbow burst over the city",
+          "bg": [
+            "#ff006e",
+            "#8338ec"
+          ],
+          "props": [
+            "💥",
+            "🌈",
+            "🎆"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "{hero} flipped the switch to REVERSE. KA-BLOOEY!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Colours, come home!"
+            }
+          ]
+        },
+        {
+          "scene": "a colourful city celebrating the hero, confetti, the villain now smiling and painting too",
+          "bg": [
+            "#ffbe0b",
+            "#fb5607"
+          ],
+          "props": [
+            "🎉",
+            "🏆",
+            "🎊"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "The city was brighter than ever. Even Doctor Dull wanted to paint!",
+          "speech": [
+            {
+              "who": "c4",
+              "text": "Our hero!"
+            },
+            {
+              "who": "hero",
+              "text": "Just doing my job!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "time-backpack",
+      "title": "{hero} and the Time-Travel Backpack",
+      "ageGroup": "9-10",
+      "theme": "Time travel",
+      "category": "learning",
+      "emoji": "⏳",
+      "blurb": "A dusty backpack from the attic has a dial that says 'WHEN?'. Pyramids, castles and a robot future — and a puzzle to solve in each.",
+      "palette": [
+        "#6d597a",
+        "#e56b6f"
+      ],
+      "sidekick": {
+        "name": "Tock",
+        "emoji": "🦉",
+        "desc": "a wise owl wearing tiny round glasses"
+      },
+      "panels": [
+        {
+          "scene": "a dusty attic with old trunks and a glowing backpack with a brass dial",
+          "bg": [
+            "#b08968",
+            "#7f5539"
+          ],
+          "props": [
+            "🎒",
+            "🕰️",
+            "📦"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "While exploring the attic, {hero} found a backpack with a strange brass dial. It said: WHEN?",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "Don't touch that dial!"
+            },
+            {
+              "who": "hero",
+              "text": "Too late..."
+            }
+          ]
+        },
+        {
+          "scene": "ancient Egypt, pyramids under construction, a puzzled builder holding a broken measuring rope",
+          "bg": [
+            "#f4a261",
+            "#e9c46a"
+          ],
+          "props": [
+            "🔺",
+            "🐪",
+            "☀️"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "WHOOSH! Egypt, 4,500 years ago. The builders couldn't make their corners square.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Tie knots to make a 3-4-5 triangle — perfect right angle every time!"
+            }
+          ]
+        },
+        {
+          "scene": "a medieval castle with a drawbridge stuck halfway, knights scratching their heads",
+          "bg": [
+            "#8d99ae",
+            "#2b2d42"
+          ],
+          "props": [
+            "🏰",
+            "⚔️",
+            "🐉"
+          ],
+          "cast": [
+            "hero",
+            "c2"
+          ],
+          "caption": "WHOOSH! A castle, 800 years ago. The drawbridge was stuck.",
+          "speech": [
+            {
+              "who": "c2",
+              "text": "It's too heavy to lift!"
+            },
+            {
+              "who": "hero",
+              "text": "Then we need a pulley. Less pull, same lift."
+            }
+          ]
+        },
+        {
+          "scene": "a futuristic city with flying cars and a sad robot with a flickering screen",
+          "bg": [
+            "#4cc9f0",
+            "#7209b7"
+          ],
+          "props": [
+            "🤖",
+            "🛸",
+            "🌐"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "WHOOSH! The year 2300. A robot had forgotten how to be kind.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Kindness isn't code. You just say: 'How can I help?'"
+            }
+          ]
+        },
+        {
+          "scene": "the backpack dial sparking and spinning wildly, time swirling around the child",
+          "bg": [
+            "#3a0ca3",
+            "#f72585"
+          ],
+          "props": [
+            "🌀",
+            "⚡",
+            "⏳"
+          ],
+          "cast": [
+            "hero",
+            "c3"
+          ],
+          "caption": "Then the dial began spinning out of control!",
+          "speech": [
+            {
+              "who": "c3",
+              "text": "Which way is home?!"
+            },
+            {
+              "who": "hero",
+              "text": "Today's date... and our address. Hold on!"
+            }
+          ]
+        },
+        {
+          "scene": "the child back home at the dinner table telling the family about the adventure, family listening amazed",
+          "bg": [
+            "#ffcdb2",
+            "#e5989b"
+          ],
+          "props": [
+            "🍲",
+            "🏠",
+            "🕯️"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "Home in time for dinner. Nobody believed a word of it... until they saw the sand in {their} shoes.",
+          "speech": [
+            {
+              "who": "c4",
+              "text": "Is that... pyramid sand?"
+            }
+          ]
+        },
+        {
+          "scene": "the backpack quietly glowing on the shelf at night, the dial now pointing to a new symbol",
+          "bg": [
+            "#22223b",
+            "#4a4e69"
+          ],
+          "props": [
+            "🎒",
+            "✨",
+            "❔"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "That night, the dial clicked by itself to a brand new word: WHERE?",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "To be continued..."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "science-fair",
+      "title": "{hero} vs. the Runaway Robot",
+      "ageGroup": "9-10",
+      "theme": "Science",
+      "category": "learning",
+      "emoji": "🔬",
+      "blurb": "{hero}'s science-fair robot is a bit too clever — and now it's loose in the school. Time to think like an engineer.",
+      "palette": [
+        "#06d6a0",
+        "#118ab2"
+      ],
+      "sidekick": {
+        "name": "Byte",
+        "emoji": "🐕‍🦺",
+        "desc": "a clever little robot dog with antenna ears"
+      },
+      "panels": [
+        {
+          "scene": "a messy workshop table covered with wires, gears and a half-built robot, the child wearing safety goggles",
+          "bg": [
+            "#caf0f8",
+            "#90e0ef"
+          ],
+          "props": [
+            "⚙️",
+            "🔧",
+            "💡"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "The science fair was tomorrow, and {hero}'s robot, BOLT, was nearly finished.",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "Does it actually work?"
+            },
+            {
+              "who": "hero",
+              "text": "Only one way to find out!"
+            }
+          ]
+        },
+        {
+          "scene": "a school hall science fair, a cheerful robot zooming away on wheels, papers flying",
+          "bg": [
+            "#ffd166",
+            "#ef476f"
+          ],
+          "props": [
+            "🤖",
+            "📄",
+            "💨"
+          ],
+          "cast": [
+            "hero"
+          ],
+          "caption": "At the fair, BOLT switched on... and zoomed straight out of the door!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "BOLT! Come back!"
+            }
+          ]
+        },
+        {
+          "scene": "a school corridor with tracks of footprints, the child studying them with a magnifying glass",
+          "bg": [
+            "#118ab2",
+            "#073b4c"
+          ],
+          "props": [
+            "🔍",
+            "👣",
+            "📋"
+          ],
+          "cast": [
+            "hero",
+            "c2"
+          ],
+          "caption": "Engineers don't panic. They collect data.",
+          "speech": [
+            {
+              "who": "c2",
+              "text": "The tracks turn left at every corner."
+            },
+            {
+              "who": "hero",
+              "text": "Its sensor's stuck! It always follows the left wall."
+            }
+          ]
+        },
+        {
+          "scene": "the robot in the school kitchen spinning plates and causing silly chaos",
+          "bg": [
+            "#ffadad",
+            "#ffd6a5"
+          ],
+          "props": [
+            "🍽️",
+            "🥄",
+            "🌀"
+          ],
+          "cast": [
+            "hero",
+            "c1"
+          ],
+          "caption": "Follow the left wall... straight into the school kitchen!",
+          "speech": [
+            {
+              "who": "c1",
+              "text": "Is it... making pancakes?"
+            }
+          ]
+        },
+        {
+          "scene": "the child holding a big magnet on a string to attract the robot, teacher and family watching",
+          "bg": [
+            "#06d6a0",
+            "#1b9aaa"
+          ],
+          "props": [
+            "🧲",
+            "🤖",
+            "✨"
+          ],
+          "cast": [
+            "hero",
+            "c3"
+          ],
+          "caption": "{hero} built a trap from a magnet, a mop and a string.",
+          "speech": [
+            {
+              "who": "c3",
+              "text": "Will that work?"
+            },
+            {
+              "who": "hero",
+              "text": "BOLT's chassis is steel. Physics never lets you down!"
+            }
+          ]
+        },
+        {
+          "scene": "the robot calmly back on the science fair table, the child explaining the bug to judges",
+          "bg": [
+            "#e0fbfc",
+            "#98c1d9"
+          ],
+          "props": [
+            "📊",
+            "🧑‍🔬",
+            "🤖"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "{hero} fixed the sensor and explained everything to the judges — even the mistake.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "A bug isn't a failure. It's data!"
+            }
+          ]
+        },
+        {
+          "scene": "the child holding a big gold first-prize trophy with the robot waving, family cheering",
+          "bg": [
+            "#ffd60a",
+            "#ffc300"
+          ],
+          "props": [
+            "🏆",
+            "🥇",
+            "🎉"
+          ],
+          "cast": [
+            "hero",
+            "family"
+          ],
+          "caption": "First prize! And BOLT got a medal for 'Most Enthusiastic Robot'.",
+          "speech": [
+            {
+              "who": "c4",
+              "text": "Our little engineer!"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

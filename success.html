@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thank You! — Little Legends</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦸</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="/"><span aria-hidden="true">🦸</span> Little <span>Legends</span></a>
+    </div>
+  </header>
+
+  <main id="main" class="wizard">
+    <div class="container" style="text-align:center">
+      <div id="loading" class="generating"><div class="emoji" aria-hidden="true">📦</div><h1>Checking your order…</h1></div>
+
+      <div id="done" hidden>
+        <h1>🎉 Hooray! <span id="done-title"></span></h1>
+        <p id="done-sub" style="font-size:1.15rem"></p>
+        <p class="notice" id="upload-status" hidden aria-live="polite"></p>
+        <p style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:24px 0">
+          <button class="btn btn-red" id="download">⬇️ Download PDF</button>
+          <a class="btn btn-white" href="/create">Make another comic</a>
+        </p>
+        <p class="hint">On the print screen choose <strong>“Save as PDF”</strong> as the printer.</p>
+        <div class="viewer" style="margin-top:24px">
+          <div class="thumbs" id="pages" style="flex-wrap:wrap;justify-content:center"></div>
+        </div>
+      </div>
+
+      <div id="problem" hidden>
+        <h1>Hmm, something's not right</h1>
+        <p class="notice error" id="problem-msg"></p>
+        <p><a class="btn btn-white" href="/">Back to home</a></p>
+      </div>
+    </div>
+  </main>
+
+  <div class="print-pages" id="print-pages"></div>
+  <script type="module" src="/js/success.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Little Legends — Personalised Comic Books Starring Your Child</title>
+  <meta name="description" content="Upload a photo of your child and up to five family members, and we turn them into the heroes of their very own comic book. Stories for ages 0–10, delivered as a PDF or printed book.">
+  <meta property="og:title" content="Little Legends — Your child is the hero of their own comic book">
+  <meta property="og:description" content="Personalised comic books for ages 0–10, made from your family photos.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦸</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="/"><span aria-hidden="true">🦸</span> Little <span>Legends</span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menu">☰</button>
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="#stories">Stories</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-sm btn-red" href="/create">Create a comic</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <div>
+          <h1>Your child is the <span class="pop">hero</span> of their very own comic book!</h1>
+          <p class="hero-sub">Upload a photo of your little one — plus up to five family members, friends or even the family pet — and we'll turn them into the stars of a real comic adventure, written for their age.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-red" href="/create">Create your comic ✨</a>
+            <a class="btn btn-white" href="#stories">Browse stories</a>
+          </div>
+          <ul class="trust-row">
+            <li>👀 Free preview before you pay</li>
+            <li>👨‍👩‍👧‍👦 Up to 6 people in one book</li>
+            <li>🔒 Photos never sold or shared</li>
+          </ul>
+        </div>
+        <div class="mock-comic" role="img" aria-label="Example comic page: a child in a rocket, meeting an alien, and hugging the moon">
+          <div class="mock-panel wide" style="background:linear-gradient(135deg,#3a0ca3,#7209b7)">
+            <span class="mock-caption">One night, Aarav looked up at the sky…</span>
+            <span class="mock-bubble" style="right:12%;top:30%">Where did the moon go?!</span>
+            <span aria-hidden="true">🚀</span>
+          </div>
+          <div class="mock-panel" style="background:linear-gradient(135deg,#5a189a,#9d4edd)">
+            <span class="mock-bubble" style="left:8px;top:8px">Hello, alien!</span>
+            <span aria-hidden="true">👽</span>
+          </div>
+          <div class="mock-panel" style="background:linear-gradient(135deg,#ffd166,#ff9f68)">
+            <span class="mock-bubble" style="right:8px;top:8px">Found it!</span>
+            <span aria-hidden="true">🌕</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ages" aria-labelledby="ages-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="ages-title">Stories that grow with your child</h2>
+          <p>Every story is written for a specific age — from a few warm words per page for babies to twisty adventures for confident readers.</p>
+        </div>
+        <div class="grid grid-4" id="age-cards"></div>
+      </div>
+    </section>
+
+    <section class="section" id="stories" aria-labelledby="stories-title" style="background:var(--muted-bg);border-block:3px solid var(--line)">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="stories-title">Pick an adventure</h2>
+          <p>Space, dinosaurs, festivals, superheroes and more. Every story has room for your child plus their favourite people.</p>
+        </div>
+        <div class="filters" id="story-filters" role="group" aria-label="Filter by age"></div>
+        <div class="filters" id="theme-filters" role="group" aria-label="Filter by theme"></div>
+        <div class="grid grid-3" id="story-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="how-title">How it works</h2>
+          <p>About five minutes from start to finished preview.</p>
+        </div>
+        <div class="grid grid-4 steps">
+          <div class="card step-card"><div class="emoji" aria-hidden="true">📖</div><h3>Choose a story</h3><p>Pick by age group and theme.</p></div>
+          <div class="card step-card"><div class="emoji" aria-hidden="true">📸</div><h3>Add photos</h3><p>Your child, plus up to five family members, friends or pets — each with their name.</p></div>
+          <div class="card step-card"><div class="emoji" aria-hidden="true">🎨</div><h3>See the preview</h3><p>We illustrate every panel and show you the whole book — free.</p></div>
+          <div class="card step-card"><div class="emoji" aria-hidden="true">🎁</div><h3>Get your book</h3><p>Download the PDF instantly, or we print and ship it to your door.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="why-title" style="padding-top:0">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="why-title">More ways to make it theirs</h2>
+        </div>
+        <div class="grid grid-3">
+          <div class="feature"><div class="emoji" aria-hidden="true">👨‍👩‍👧‍👦</div><div><h3>The whole gang</h3><p>Mum, Dad, siblings, grandparents, cousins, best friends or the dog — up to five companions alongside your hero.</p></div></div>
+          <div class="feature"><div class="emoji" aria-hidden="true">🖌️</div><div><h3>Four art styles</h3><p>Classic comic, cute manga, soft watercolour or 3D cartoon.</p></div></div>
+          <div class="feature"><div class="emoji" aria-hidden="true">💬</div><div><h3>Real comic layouts</h3><p>Panels, captions and speech bubbles — laid out for the age you pick.</p></div></div>
+          <div class="feature"><div class="emoji" aria-hidden="true">💌</div><div><h3>Personal dedication</h3><p>Add your own message on the first page — perfect for birthdays.</p></div></div>
+          <div class="feature"><div class="emoji" aria-hidden="true">🧒</div><div><h3>Name &amp; pronouns</h3><p>The story speaks about your child the way your family does.</p></div></div>
+          <div class="feature"><div class="emoji" aria-hidden="true">📦</div><div><h3>Digital or print</h3><p>Instant PDF, glossy softcover or a keepsake hardcover.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing" aria-labelledby="pricing-title" style="background:var(--muted-bg);border-block:3px solid var(--line)">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="pricing-title">Simple pricing</h2>
+          <p>Preview your whole book for free. Pay only when you love it.</p>
+        </div>
+        <div class="grid grid-3" id="price-grid"></div>
+      </div>
+    </section>
+
+    <section class="section safety" aria-labelledby="safety-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="safety-title">Your family's photos are safe with us</h2>
+          <p>We're parents too. Here's exactly what happens to the photos you upload.</p>
+        </div>
+        <div class="grid grid-3">
+          <div class="card"><h3>🔒 Used once, for your book</h3><p>Photos are only used to illustrate your book. We never sell them, share them, or use them to train AI.</p></div>
+          <div class="card"><h3>📱 Kept on your device</h3><p>Your preview lives in your own browser. We don't keep a copy of your photos on our servers.</p></div>
+          <div class="card"><h3>🗑️ Gone after printing</h3><p>For printed books we store only the finished pages, and delete them within 30 days of shipping.</p></div>
+        </div>
+        <p style="text-align:center;margin-top:28px"><a href="/privacy" style="color:var(--yellow);font-weight:800">Read our full privacy promise →</a></p>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head"><h2 id="faq-title">Questions parents ask</h2></div>
+        <div class="faq">
+          <details><summary>What kind of photo works best?</summary><p>A clear, well-lit, front-facing photo where the face fills most of the picture. No sunglasses or hats, and one person per photo. You can zoom and position each photo before we use it.</p></details>
+          <details><summary>Who can be in the book?</summary><p>Your child is always the hero. You can add up to five more people — parents, siblings, grandparents, cousins, friends — or a pet. If you don't add anyone, the story's own sidekick keeps your child company.</p></details>
+          <details><summary>Which age group should I choose?</summary><p>Tiny Tots (0–2) has one big picture and a few words per page. Little Explorers (3–5) are short read-aloud adventures. Young Heroes (6–8) and Super Readers (9–10) are full comic layouts with more to read.</p></details>
+          <details><summary>Can I see the book before paying?</summary><p>Yes — you see every single page as a watermarked preview first. The watermark disappears as soon as you order.</p></details>
+          <details><summary>How long does delivery take?</summary><p>Digital comics are ready the moment you pay. Printed books ship within 5–7 working days.</p></details>
+          <details><summary>Is it okay to upload photos of my children?</summary><p>Only upload photos you have the right to use — you'll be asked to confirm you're the parent or guardian and that everyone pictured is happy to appear. See our privacy promise for exactly how photos are handled.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-band">
+      <div class="container">
+        <h2>Ready to make a legend?</h2>
+        <p style="font-weight:700;font-size:1.15rem">It takes about five minutes — and the preview is free.</p>
+        <a class="btn" href="/create">Start creating ✨</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div><a href="/privacy">Privacy</a><a href="mailto:hello@example.com">Contact</a></div>
+      <div>© <span id="year"></span> Little Legends. Made with ❤️ for little readers.</div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/home.js"></script>
+</body>
+</html>

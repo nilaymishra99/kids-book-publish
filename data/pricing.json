@@ -1,0 +1,32 @@
+{
+  "_comment": "Single source of truth for prices — the checkout API charges from this file, never from anything the browser sends. 'price' is in whole currency units (e.g. rupees); Stripe gets it multiplied by 100.",
+  "currency": "inr",
+  "symbol": "₹",
+  "shippingCountries": ["IN"],
+  "formats": [
+    {
+      "id": "digital",
+      "name": "Digital comic",
+      "price": 699,
+      "print": false,
+      "badge": "",
+      "features": ["Print-ready PDF download", "Read on any phone or tablet", "Ready instantly after payment"]
+    },
+    {
+      "id": "softcover",
+      "name": "Softcover comic",
+      "price": 1499,
+      "print": true,
+      "badge": "Most popular",
+      "features": ["Glossy 8×8 in softcover", "Digital PDF included", "Ships in 5–7 working days"]
+    },
+    {
+      "id": "hardcover",
+      "name": "Premium hardcover",
+      "price": 2299,
+      "print": true,
+      "badge": "Best gift",
+      "features": ["Thick, durable 8×8 in hardcover", "Gift-wrap & dedication page", "Digital PDF included"]
+    }
+  ]
+}
