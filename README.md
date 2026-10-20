@@ -88,6 +88,19 @@ flow works end to end.
    consent for under-18s); if you sell to the US/EU, COPPA/GDPR apply as well.
 6. **Prices**: edit `data/pricing.json` (currency, amounts, shipping countries).
 
+## AI providers
+
+- **Pictures and face finding:** Google Gemini (`GEMINI_API_KEY`). Default image
+  model `gemini-3.1-flash-image`, about $0.06–0.08 per picture at the time of
+  writing. The older 2.5 image model is past Google's shutdown date.
+- **Stories:** Anthropic Claude (`ANTHROPIC_API_KEY`). Each book gets its own
+  story, written for the child's name, age, pronouns and family. The server
+  checks the page count, text length and who may appear before anything is shown.
+- **OpenAI:** optional alternative for pictures (`IMAGE_PROVIDER=openai`).
+
+Model ids are set with environment variables, so you can change them in Vercel
+without a code change. Check current prices and model ids before launch.
+
 ## Headshots
 
 Each uploaded photo is checked for faces before anything else happens:

@@ -26,24 +26,53 @@ async function post(body) {
   }
 }
 
+// Asks the story writer for this book's own story. Stored on the book as
+// book.title and book.storyPages. Returns true when it worked.
+export async function writeStory(book) {
+  try {
+    const res = await fetch("/api/write-story", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        storyId: book.storyId,
+        pageCount: book.pages,
+        hero: book.hero,
+        people: book.people.map(({ slot, name, relation }) => ({ slot, name, relation })),
+      }),
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    book.title = data.title;
+    book.storyPages = data.pages;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // Fills book.characters (cartoon sheets) and book.ai (full pages).
 // Returns the number of pages that could not be drawn.
 export async function illustrate(book, story, onProgress = () => {}) {
   book.characters = book.characters || {};
   book.ai = book.ai || {};
-  const pages = bookPages(story, book.pages);
-  const pageKeys = ["cover", ...pages.map((_, i) => i)];
-  const people = book.people.map(({ slot, name, relation }) => ({ slot, name, relation }));
-  const total = 1 + 1 + book.people.length + pageKeys.length;
+  const total = 1 + 1 + 1 + book.people.length + (book.pages + 1);
   let done = 0;
   const tick = () => onProgress(++done, total);
   onProgress(0, total);
+
+  // 0. The story for this book (falls back to the template story if writing fails).
+  if (!book.storyPages) await writeStory(book);
+  tick();
+
+  const pages = book.storyPages || bookPages(story, book.pages);
+  const pageKeys = ["cover", ...pages.map((_, i) => i)];
+  const people = book.people.map(({ slot, name, relation }) => ({ slot, name, relation }));
 
   // 1. Sidekick sheet (no photo needed).
   book.characters.sk = await post({ mode: "sidekick", storyId: story.id });
   tick();
 
-  // 2. Cartoon sheet for the child, and for each family member, from their photo.
+  // 2. Cartoon sheet for the child, and for each family member, from their headshot.
   const sources = [{ slot: "hero", name: book.hero.name, photo: book.heroPhoto }, ...book.people.map((p) => ({ slot: p.slot, name: p.name, relation: p.relation, photo: p.photo }))];
   for (const src of sources) {
     book.characters[src.slot] = await post({
@@ -75,9 +104,12 @@ export async function illustrate(book, story, onProgress = () => {}) {
         storyId: story.id,
         panel: key,
         pageCount: book.pages,
+        title: book.title,
         hero: book.hero,
         cast: people,
         characters: sheetsFor(key),
+        // Written pages carry their own text; template pages are looked up by number.
+        page: book.storyPages && key !== "cover" ? book.storyPages[key] : undefined,
       });
       if (image) book.ai[key] = image;
       tick();

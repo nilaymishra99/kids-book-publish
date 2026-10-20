@@ -3,13 +3,14 @@
 // (fractions of the image width and height) and a short, neutral description
 // to tell people apart. It never names anyone.
 //
-// Required env var: OPENAI_API_KEY. Optional: DETECT_MODEL (default gpt-4.1-mini),
+// Uses Gemini (GEMINI_API_KEY). Optional: DETECT_MODEL (default gemini-2.5-flash),
 // DETECT_HOURLY_LIMIT (default 200 per IP).
 //
 // The photo is not stored. If the key isn't set, the client falls back to the
 // browser's face detector or the centre of the photo.
 
 const { readJsonBody, clientIp, rateLimited } = require("./_lib");
+const { imageReady, looksAtPhoto } = require("./_providers");
 
 const DATA_URL_RE = /^data:image\/(jpeg|png|webp);base64,([A-Za-z0-9+/=]+)$/;
 const MAX_BYTES = 4 * 1024 * 1024;
@@ -45,8 +46,7 @@ module.exports = async function handler(req, res) {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "Method not allowed" });
   }
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) return res.status(503).json({ error: "Automatic face finding isn't switched on." });
+  if (!imageReady()) return res.status(503).json({ error: "Automatic face finding isn't switched on." });
   if (rateLimited(`detect:${clientIp(req)}`, Number(process.env.DETECT_HOURLY_LIMIT) || 200, 60 * 60 * 1000)) {
     return res.status(429).json({ error: "Too many photos checked. Please try again in an hour." });
   }
@@ -57,36 +57,12 @@ module.exports = async function handler(req, res) {
   if (Buffer.byteLength(match[2], "base64") > MAX_BYTES) return res.status(413).json({ error: "That photo is too large." });
 
   try {
-    const apiRes = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: process.env.DETECT_MODEL || "gpt-4.1-mini",
-        response_format: { type: "json_object" },
-        max_tokens: 800,
-        messages: [
-          { role: "system", content: SYSTEM },
-          {
-            role: "user",
-            content: [
-              { type: "text", text: "Find every human face in this photo." },
-              { type: "image_url", image_url: { url: body.photo, detail: "high" } },
-            ],
-          },
-        ],
-      }),
+    const parsed = await looksAtPhoto({
+      system: SYSTEM,
+      question: "Find every human face in this photo.",
+      photo: { type: `image/${match[1]}`, buf: Buffer.from(match[2], "base64") },
     });
-    const data = await apiRes.json().catch(() => ({}));
-    if (!apiRes.ok) {
-      console.error("Face finding error:", apiRes.status, JSON.stringify(data?.error || data).slice(0, 300));
-      return res.status(502).json({ error: "We couldn't check that photo. Please try again." });
-    }
-    let parsed = {};
-    try {
-      parsed = JSON.parse(data?.choices?.[0]?.message?.content || "{}");
-    } catch {
-      parsed = {};
-    }
+    if (parsed === null) return res.status(502).json({ error: "We couldn't check that photo. Please try again." });
     return res.status(200).json({ faces: cleanFaces(parsed.people) });
   } catch (err) {
     console.error("Face finding failed:", err);

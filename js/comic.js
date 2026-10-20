@@ -415,7 +415,7 @@ function drawCoverPage(ctx, book, story, assets, brand) {
   ctx.fillRect(0, 0, PAGE, PAGE);
   halftone(ctx, 0, 0, PAGE, PAGE, 34, 7, "rgba(255,255,255,0.14)");
 
-  const title = fillText(story.title, book, story);
+  const title = book.title || fillText(story.title, book, story);
   const { size, lines } = fitTitle(ctx, title, PAGE - 180, 170, 2);
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
@@ -566,7 +566,7 @@ export async function renderBook(book, story, { watermark: wm = false, brand = "
     pages.push(page.canvas.toDataURL("image/jpeg", quality)); // no watermark: nothing to protect
   }
 
-  bookPages(story, book.pages).forEach((panel, i) => {
+  (book.storyPages || bookPages(story, book.pages)).forEach((panel, i) => {
     page = newPage();
     if (assets.ai[i]) {
       drawCover(page.ctx, assets.ai[i], 0, 0, PAGE, PAGE);
