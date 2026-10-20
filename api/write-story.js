@@ -77,13 +77,20 @@ module.exports = async function handler(req, res) {
   ].join("\n");
 
   try {
-    const drafted = await writesJson({ system: CRAFT, user, maxTokens: 8000 });
-    const raw = Array.isArray(drafted?.pages) ? drafted.pages : [];
-    const pages = raw.map((p) => sanitizePage(p, allowed)).filter(Boolean);
-    if (pages.length !== pageCount) {
-      return res.status(502).json({ error: "The story writer didn't finish the story. Please try again." });
+    // One retry: the writer occasionally returns the wrong number of pages.
+    let result = null;
+    for (let attempt = 0; attempt < 2 && !result; attempt++) {
+      const drafted = await writesJson({ system: CRAFT, user, maxTokens: 8000 });
+      const raw = Array.isArray(drafted?.pages) ? drafted.pages : [];
+      const pages = raw.map((p) => sanitizePage(p, allowed)).filter(Boolean);
+      if (pages.length === pageCount) {
+        result = { title: clean(drafted.title, 80) || story.title.replace("{hero}", heroName), pages };
+      } else {
+        console.error(`Story attempt ${attempt + 1}: got ${pages.length} valid pages, wanted ${pageCount}`);
+      }
     }
-    return res.status(200).json({ title: clean(drafted.title, 80) || story.title.replace("{hero}", heroName), pages });
+    if (!result) return res.status(502).json({ error: "The story writer didn't finish the story. Please try again." });
+    return res.status(200).json(result);
   } catch (err) {
     console.error("Story writing failed:", err);
     return res.status(500).json({ error: "Couldn't write the story right now." });
