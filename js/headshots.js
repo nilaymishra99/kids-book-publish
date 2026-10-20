@@ -141,14 +141,15 @@ export class HeadshotPicker {
 
   render(state, { note = false } = {}) {
     const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-    const name = (typeof this.name === "function" ? this.name() : this.name) || "this child";
+    // Read the name only when a state needs it, so it is never read before the page has set it up.
+    const nameText = () => (typeof this.name === "function" ? this.name() : this.name) || "this child";
     let html = "";
     if (state === "empty") html = `<div class="placeholder"><span class="emoji" aria-hidden="true">🙂</span>Add a photo</div>`;
     if (state === "loading") html = `<div class="placeholder"><span class="emoji" aria-hidden="true">🔍</span>Finding faces…</div>`;
     if (state === "none") html = `<div class="placeholder"><span class="emoji" aria-hidden="true">🤔</span>We couldn't find a face in that photo. Please try a clearer, front-facing photo.</div>`;
     if (state === "choose") {
       html = `<div class="headshot-choose">
-        <p class="headshot-title">We found ${this.faces.length} people. Which one is ${esc(name)}?</p>
+        <p class="headshot-title">We found ${this.faces.length} people. Which one is ${esc(nameText())}?</p>
         <div class="headshot-grid">${this.faces
           .map(
             (f, i) => `<button type="button" class="headshot-option" data-face="${i}" aria-label="Use person ${i + 1}: ${esc(f.description)}">
@@ -159,7 +160,7 @@ export class HeadshotPicker {
     }
     if (state === "chosen") {
       html = `<div class="headshot-result">
-        <img class="headshot-avatar" src="${this.headshot}" alt="Headshot of ${esc(name)}">
+        <img class="headshot-avatar" src="${this.headshot}" alt="Headshot of ${esc(nameText())}">
         ${note ? `<p class="hint">Automatic face finding isn't available here, so we used the centre of the photo. Check the headshot looks right.</p>` : ""}
         ${this.faces.length > 1 ? `<button type="button" class="btn btn-sm btn-white" data-again="1">Choose someone else</button>` : ""}
       </div>`;
