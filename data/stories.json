@@ -1,33 +1,33 @@
 {
-  "_comment": "Story catalog. Placeholders: {hero} = child's name; {c1}..{c5} = family members in upload order ({c1} falls back to the story's sidekick when no family photo was added); {family} = everyone added, as a list; {their}/{them}/{Their} = hero pronouns. Captions may only use {hero}, {c1}, {family} and pronouns; speech lines and cast entries for c2..c5 are dropped automatically when that person wasn't added. 'scene' is the illustration brief sent to the image model (never shown to readers). 'category' must be one of the ids in 'categories' (used for the catalogue's theme filter).",
+  "_comment": "Story library. Every story has intro (2 pages) + middle (24 pages) + finale (2 pages). A book of N pages (15-30, see pricing.json) uses intro + middle[:N-4] + finale. Captions may use {hero}, {family}, {their}, {them}, {Their}. Speech 'who' may be hero, sk (the sidekick) or c1..c5 (a family member in that slot). 'cast' lists who is drawn on the page: hero, sk, family, or c1..c5. 'scene' is the illustration brief sent to the image model; never ask for text in it. 'category' must be an id in 'categories'; 'interests' are used by the bundle wizard.",
   "ageGroups": [
     {
       "id": "0-2",
       "name": "Tiny Tots",
       "ages": "0–2 years",
       "emoji": "🍼",
-      "blurb": "One big picture per page, a few warm words, lots of familiar faces."
+      "blurb": "A big picture and a few warm words on every page, full of familiar faces."
     },
     {
       "id": "3-5",
       "name": "Little Explorers",
       "ages": "3–5 years",
       "emoji": "🧸",
-      "blurb": "Short read-aloud adventures with two comic panels per page."
+      "blurb": "Short read-aloud adventures with one picture and a few lines per page."
     },
     {
       "id": "6-8",
       "name": "Young Heroes",
       "ages": "6–8 years",
       "emoji": "🦸",
-      "blurb": "Real comic layouts, speech bubbles and a proper adventure plot."
+      "blurb": "Comic-style pages with speech bubbles and a proper adventure plot."
     },
     {
       "id": "9-10",
       "name": "Super Readers",
       "ages": "9–10 years",
       "emoji": "📚",
-      "blurb": "Longer stories with twists, puzzles and more to read on every page."
+      "blurb": "Longer stories with twists, mysteries and more to read on every page."
     }
   ],
   "categories": [
@@ -57,1872 +57,3015 @@
       "emoji": "🪔"
     }
   ],
+  "interests": [
+    "Space",
+    "Animals",
+    "Magic",
+    "Nature",
+    "Dragons",
+    "Festivals",
+    "Sport & Adventure",
+    "Ocean",
+    "Robots & Science",
+    "School & Friends",
+    "Mystery",
+    "Adventure"
+  ],
   "stories": [
     {
-      "id": "big-day",
-      "title": "{hero}'s Big Day",
+      "id": "bedtime-bear",
+      "title": "{hero} and Barnaby's Bedtime",
       "ageGroup": "0-2",
-      "theme": "Everyday",
+      "theme": "Bedtime",
       "category": "family",
-      "emoji": "☀️",
-      "blurb": "From wake-up cuddles to bedtime kisses — a gentle day with the people who love your little one most.",
+      "emoji": "🧸",
+      "blurb": "Barnaby the patchwork bear has lost his yawn. Can {hero} help him find it before the moon goes to sleep?",
+      "interests": [
+        "Animals",
+        "Magic"
+      ],
       "palette": [
-        "#ffd166",
-        "#ff9f68"
+        "#a9c7ea",
+        "#f7e7a1"
       ],
       "sidekick": {
-        "name": "Teddy",
+        "name": "Barnaby",
         "emoji": "🧸",
-        "desc": "a soft brown teddy bear"
+        "desc": "a soft patchwork bear with one floppy ear"
       },
-      "panels": [
+      "intro": [
         {
-          "scene": "a cosy sunny bedroom in the morning, the child waking up and stretching in a cot",
-          "bg": [
-            "#fff1c1",
-            "#ffd166"
-          ],
-          "props": [
-            "☀️",
-            "🛏️",
-            "🐦"
-          ],
-          "cast": [
-            "hero"
-          ],
-          "caption": "Good morning, {hero}!",
+          "scene": "a cosy bedroom at dusk, a patchwork bear sitting on a cot, yawning, soft blue light",
+          "caption": "Barnaby the bear was very, very sleepy.",
           "speech": [
             {
-              "who": "hero",
-              "text": "Yawn!"
+              "who": "sk",
+              "text": "Yaaawn... where is my yawn?"
             }
-          ]
-        },
-        {
-          "scene": "a bright kitchen, the child at breakfast with a smiling family member",
-          "bg": [
-            "#ffe5d0",
-            "#ffb38a"
-          ],
-          "props": [
-            "🥣",
-            "🍌",
-            "🥛"
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "Breakfast with {c1}. Yum, yum!",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "One more bite!"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "a sunny park with green grass, a swing and ducks by a pond",
-          "bg": [
-            "#d4f5d0",
-            "#8fd694"
-          ],
-          "props": [
-            "🌳",
-            "🦆",
-            "🌼"
-          ],
-          "cast": [
-            "hero",
-            "c1",
-            "c2"
-          ],
-          "caption": "Off to the park! Wheee!",
-          "speech": [
-            {
-              "who": "c2",
-              "text": "Look at the ducks!"
-            }
-          ]
-        },
-        {
-          "scene": "a bath with lots of bubbles and a rubber duck",
-          "bg": [
-            "#d6f0ff",
-            "#8ecdf5"
-          ],
-          "props": [
-            "🛁",
-            "🫧",
-            "🐤"
-          ],
-          "cast": [
-            "hero"
-          ],
-          "caption": "Splish, splash, bubble bath!",
+          "scene": "a child in pyjamas hugging the patchwork bear beside a window with a big round moon",
+          "caption": "{hero} gave Barnaby a hug. Let's find your yawn!",
           "speech": [
             {
               "who": "hero",
-              "text": "Bubbles!"
+              "text": "Shh... let's look."
             }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        }
+      ],
+      "middle": [
+        {
+          "scene": "under a bed, a fluffy slipper and a dusty sock peeking out",
+          "caption": "Under the bed... a sleepy sock!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Not my yawn."
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
           ]
         },
         {
-          "scene": "a warm living room, the whole family hugging together on a sofa",
-          "bg": [
-            "#ffe0ec",
-            "#ffa8c5"
+          "scene": "behind the curtains, a friendly dust bunny waving",
+          "caption": "Behind the curtains... a dust bunny!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Hello! Not my yawn, sorry."
+            }
           ],
-          "props": [
-            "🛋️",
-            "💕",
-            "🧸"
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a toy box with a rattle, a teddy and a wooden train",
+          "caption": "In the toy box... a rattle that goes rattle!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a bathtub full of bubbles and a rubber duck",
+          "caption": "In the bath... bubbles go pop! No yawn here.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a warm kitchen with a cup of milk steaming on the table",
+          "caption": "In the kitchen... a warm cup of milk.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a garden at dusk, a snail on a leaf",
+          "caption": "In the garden... a very slow snail.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Hello, snail!"
+            }
           ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a cat curled up asleep on a cushion, purring",
+          "caption": "On a cushion... a cat, purring softly.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a garden gate with a wind chime, the sky turning deep blue",
+          "caption": "Out past the gate, the sky turned deep blue.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a hill at night with the big round moon shining above",
+          "caption": "On the hill, the moon glowed like a lantern.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the moon with a huge round mouth, yawning",
+          "caption": "The moon gave a huge, big yawn!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Oh! That was a yawn!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a tiny silver yawn floating up like a bubble from the moon",
+          "caption": "Look! A tiny silver yawn floated up into the sky.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the bear stretching up on tiptoes, reaching for the silver yawn",
+          "caption": "Barnaby stretched up on his tiptoes...",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Almost, almost!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child and bear sharing a warm bowl of soup by the fire",
+          "caption": "Barnaby and {hero} had a little supper.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Mmm, yummy!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the bear and child looking up at the moon through the garden gate",
+          "caption": "They waved at the moon, and the moon waved back.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child jumping up high to catch the floating yawn",
+          "caption": "{hero} jumped up... and caught it!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Got it!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child holding a glowing silver yawn in cupped hands",
+          "caption": "Careful, careful. The yawn glowed softly.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child walking gently down the hill with the bear",
+          "caption": "Down the hill they went, very gently.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child carrying the bear back up the stairs to bed",
+          "caption": "Back up the stairs and into bed.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the bear snuggled under a blanket, the child tucking him in",
+          "caption": "Barnaby snuggled under the blanket.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the bear's mouth opening wide, the silver yawn sliding in",
+          "caption": "Then... Barnaby's mouth opened wide.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Yaaawn..."
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the bear's eyes closing, the moon glowing through the window",
+          "caption": "Barnaby's eyes began to close.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child yawning too, sleepy and happy",
+          "caption": "{hero} yawned too. What a good yawn!",
+          "speech": [],
+          "cast": [
+            "hero"
+          ]
+        },
+        {
+          "scene": "the moon smiling down, stars twinkling",
+          "caption": "The moon smiled. The stars twinkled.",
+          "speech": [],
+          "cast": [
+            "hero"
+          ]
+        },
+        {
+          "scene": "family tiptoeing in to kiss the sleepy child goodnight",
+          "caption": "{family} tiptoed in for goodnight kisses.",
+          "speech": [],
           "cast": [
             "hero",
             "family"
-          ],
-          "caption": "Big hugs from {family}.",
-          "speech": []
+          ]
         },
         {
-          "scene": "a quiet night bedroom with a moon outside the window, the child sleeping peacefully",
-          "bg": [
-            "#3a3d7c",
-            "#1d1f4f"
-          ],
-          "props": [
-            "🌙",
-            "⭐",
-            "💤"
+          "scene": "a tiny night light glowing in a quiet room",
+          "caption": "A little light glowed in the room.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the window with the moon peeking in, the bear and child asleep",
+          "caption": "Everyone was asleep. Shh.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        }
+      ],
+      "finale": [
+        {
+          "scene": "the bedroom at night, the child and the bear asleep under a soft quilt",
+          "caption": "Snuggled in bed, {hero} and Barnaby slept all night long.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the moon outside the window, smiling, with a yawn of its own",
+          "caption": "Goodnight, {hero}. Goodnight, Barnaby. Goodnight, moon.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Goodnight!"
+            }
           ],
           "cast": [
-            "hero"
-          ],
-          "caption": "Goodnight, {hero}. Sweet dreams!",
-          "speech": []
+            "hero",
+            "sk"
+          ]
         }
       ]
     },
     {
-      "id": "who-loves",
-      "title": "Who Loves {hero}?",
+      "id": "rainbow-puddles",
+      "title": "{hero} and Ploppy's Rainbow Puddles",
       "ageGroup": "0-2",
-      "theme": "Family",
-      "category": "family",
-      "emoji": "💕",
-      "blurb": "A peek-a-boo style book where every page reveals someone special. Perfect for showing off up to five family members.",
+      "theme": "Colours",
+      "category": "learning",
+      "emoji": "🐸",
+      "blurb": "After the rain, every puddle in the garden is grey. Ploppy the frog needs a helper to paint them all the colours of the rainbow.",
+      "interests": [
+        "Animals",
+        "Nature"
+      ],
       "palette": [
-        "#ffafcc",
-        "#cdb4db"
+        "#b8e0c4",
+        "#ffd6a5"
       ],
       "sidekick": {
-        "name": "Puppy",
-        "emoji": "🐶",
-        "desc": "a fluffy little puppy"
+        "name": "Ploppy",
+        "emoji": "🐸",
+        "desc": "a bright green frog in a yellow raincoat"
       },
-      "panels": [
+      "intro": [
         {
-          "scene": "the child peeking out from behind a soft blanket, playful",
-          "bg": [
-            "#ffe5ec",
-            "#ffafcc"
-          ],
-          "props": [
-            "💗",
-            "🎈"
+          "scene": "a garden after the rain, grey puddles everywhere, a green frog in a yellow raincoat",
+          "caption": "The rain had stopped. The puddles were all grey.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Ribbit... so grey!"
+            }
           ],
           "cast": [
-            "hero"
-          ],
-          "caption": "Who loves {hero}? Let's find out!",
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a child in wellies beside the frog, holding a paintbrush",
+          "caption": "{hero} had a big paintbrush. Let's add some colour!",
           "speech": [
             {
               "who": "hero",
-              "text": "Peek-a-boo!"
+              "text": "Red first!"
             }
-          ]
-        },
-        {
-          "scene": "a family member lifting the child up high in a sunny garden, both laughing",
-          "bg": [
-            "#fff3b0",
-            "#ffd670"
-          ],
-          "props": [
-            "🌻",
-            "☀️"
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "{c1} loves {hero}!",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "Up, up, up!"
-            }
+            "sk"
+          ]
+        }
+      ],
+      "middle": [
+        {
+          "scene": "a red paint pot and a grey puddle",
+          "caption": "Red, red, red! Splash in the red paint.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
           ]
         },
         {
-          "scene": "a family member reading a picture book to the child",
-          "bg": [
-            "#d8f3dc",
-            "#95d5b2"
-          ],
-          "props": [
-            "📖",
-            "🌈"
+          "scene": "the puddle turning bright red with ripples",
+          "caption": "The first puddle is red!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Ribbit! Red!"
+            }
           ],
           "cast": [
             "hero",
-            "c2"
-          ],
-          "caption": "Everyone loves story time.",
-          "speech": [
-            {
-              "who": "c2",
-              "text": "I love you, little one!"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "a family member playing with blocks with the child on a rug",
-          "bg": [
-            "#cde7ff",
-            "#90c2ff"
-          ],
-          "props": [
-            "🧱",
-            "🚂"
+          "scene": "a bouncing red ball rolling into the red puddle",
+          "caption": "A red ball goes plop!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a red apple on a tree, close to the red puddle",
+          "caption": "Red apples are red, too.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "an orange paint pot and a grey puddle",
+          "caption": "Next, orange! Orange like a sunset.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the puddle turning orange, a carrot in the garden",
+          "caption": "Orange, like a carrot.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Crunch!"
+            }
           ],
           "cast": [
             "hero",
-            "c3"
-          ],
-          "caption": "Build it up... and BOOM!",
-          "speech": [
-            {
-              "who": "c3",
-              "text": "Tower time!"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "family members dancing with the child in a living room with music notes",
-          "bg": [
-            "#e7d7ff",
-            "#c3a6ff"
-          ],
-          "props": [
-            "🎵",
-            "🎶",
-            "🥁"
+          "scene": "an orange butterfly fluttering over the orange puddle",
+          "caption": "An orange butterfly came to look.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a yellow paint pot and a grey puddle",
+          "caption": "Yellow next! Yellow like the sun.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the puddle turning yellow, a duck splashing in it",
+          "caption": "A yellow puddle! Quack, quack!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a yellow sunflower standing tall in the garden",
+          "caption": "Yellow flowers are happy flowers.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a green paint pot and a grey puddle",
+          "caption": "Green! Green like the grass.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the puddle turning green with a frog jumping in",
+          "caption": "Ploppy jumped in: plop! Green!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Ploppy plop!"
+            }
           ],
           "cast": [
             "hero",
-            "c4",
-            "c5"
-          ],
-          "caption": "Dance, dance, dance!",
-          "speech": [
-            {
-              "who": "c4",
-              "text": "Clap your hands!"
-            },
-            {
-              "who": "c5",
-              "text": "Twirl!"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "the whole family together in a big group hug, hearts floating around",
-          "bg": [
-            "#ffd6e0",
-            "#ff8fab"
+          "scene": "the frog and child stepping over a row of coloured puddles",
+          "caption": "Hop, hop, hop, over the colours!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Hop, hop!"
+            }
           ],
-          "props": [
-            "💖",
-            "💞",
-            "🏠"
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child and frog both drawing a big rainbow in the mud",
+          "caption": "Then they drew a rainbow in the mud.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Look, a rainbow!"
+            }
           ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a snail sliding along green grass",
+          "caption": "Green grass, and a slow snail.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a blue paint pot and a grey puddle",
+          "caption": "Blue next, like the sky!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the puddle turning blue, a little fish swimming in it",
+          "caption": "A blue puddle with a tiny fish!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a blue balloon floating above the puddle",
+          "caption": "Blue balloons float up high.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a purple paint pot and a grey puddle",
+          "caption": "The last colour: purple!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the puddle turning purple, a shiny purple grape on the grass",
+          "caption": "Purple, like grapes.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Yum, grapes!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the whole garden full of coloured puddles, a rainbow of colours",
+          "caption": "All the puddles were coloured now!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child and the frog counting the puddles on their fingers",
+          "caption": "One, two, three... six puddles!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Six colours!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a rainbow arching over the garden after the rain",
+          "caption": "Look up! A rainbow!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child and frog jumping together in a bright puddle",
+          "caption": "Splash, splash, jump!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Ribbit!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "family cheering from the garden step",
+          "caption": "{family} came out to see the colours.",
+          "speech": [],
           "cast": [
             "hero",
             "family"
+          ]
+        },
+        {
+          "scene": "the frog and child sitting by the coloured garden",
+          "caption": "The garden was the happiest it had ever been.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        }
+      ],
+      "finale": [
+        {
+          "scene": "a sunny garden full of coloured puddles reflecting the rainbow",
+          "caption": "The garden shone like a rainbow.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a sleepy child and frog waving goodnight under the rainbow",
+          "caption": "Goodnight, {hero}. Goodnight, Ploppy!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Ribbit, goodnight!"
+            }
           ],
-          "caption": "So many people love {hero}. Hooray!",
-          "speech": []
+          "cast": [
+            "hero",
+            "sk"
+          ]
         }
       ]
     },
     {
-      "id": "missing-moon",
-      "title": "{hero} and the Missing Moon",
+      "id": "moon-garden",
+      "title": "{hero} and the Moon Garden",
       "ageGroup": "3-5",
       "theme": "Space",
       "category": "imagination",
-      "emoji": "🚀",
-      "blurb": "The moon has vanished from the night sky! Only one brave astronaut can find it and bring it home.",
+      "emoji": "🌙",
+      "blurb": "Every night the Moon Garden opens its silver flowers. Tonight one is missing, and only {hero} and the wise owl can find it.",
+      "interests": [
+        "Space",
+        "Magic"
+      ],
       "palette": [
         "#3a0ca3",
         "#7209b7"
       ],
       "sidekick": {
-        "name": "Zippy",
-        "emoji": "🤖",
-        "desc": "a small friendly silver robot with round blue eyes"
+        "name": "Professor Hoo",
+        "emoji": "🦉",
+        "desc": "a wise owl in round spectacles who grows moonflowers"
       },
-      "panels": [
+      "intro": [
         {
-          "scene": "a child's bedroom at night, looking out of a window at a dark sky with stars but no moon",
-          "bg": [
-            "#240046",
-            "#3c096c"
+          "scene": "a moonlit garden with silver flowers closed up tight, a night sky full of stars",
+          "caption": "Every night the Moon Garden opens its silver flowers.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Tonight, one flower is missing!"
+            }
           ],
-          "props": [
-            "🪟",
-            "⭐",
-            "✨"
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a child in pyjamas and wellies beside a wise owl wearing round spectacles",
+          "caption": "Professor Hoo needed a helper. {hero} said yes!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "I'll find it!"
+            }
           ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        }
+      ],
+      "middle": [
+        {
+          "scene": "a garden gate made of twisted vines with a glowing keyhole",
+          "caption": "They walked through the vine gate.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a path of mossy stepping stones across a shimmering stream",
+          "caption": "Across the stream on mossy stones.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a crowd of glowing fireflies lighting a path through the grass",
+          "caption": "Fireflies lit the way with twinkles.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Follow the sparkles!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a tree with a round door in its trunk, a sleepy squirrel at the window",
+          "caption": "A tree with a door. Knock, knock!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Who goes there?"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a sleepy squirrel rubbing its eyes",
+          "caption": "The squirrel had seen a silver flower roll away.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a silver flower rolling down a hill, a trail of petals behind",
+          "caption": "The missing flower had rolled down the hill!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a bridge made of rainbows over a dark valley",
+          "caption": "They crossed a bridge made of rainbows.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a grumpy cloud sitting in the middle of the path",
+          "caption": "A grumpy cloud sat in the way.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Grr, I'm too puffy to move!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child offering the cloud a warm cup of cocoa",
+          "caption": "{hero} offered the cloud a warm drink.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Would you like a hug?"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the cloud smiling and drifting aside, sunbeams streaming out",
+          "caption": "The cloud smiled and drifted aside.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the owl tapping a ladder of stars reaching up to the sky",
+          "caption": "A ladder of stars reached up to the sky.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Climb up!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child climbing the star ladder, owl flying alongside",
+          "caption": "Up, up, up the star ladder they climbed.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the owl and child resting on a branch, looking at the night sky",
+          "caption": "They rested on a branch to catch their breath.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Brave work, explorer."
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a shooting star streaking across the sky above the garden",
+          "caption": "A shooting star zipped past, making a wish.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "I wish for a sunny day!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a hilltop with a moon-moth dancing around a silver lantern",
+          "caption": "At the top, a moon-moth danced.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the moon-moth pointing towards a dark, empty corner of the sky",
+          "caption": "The moth pointed at a dark, empty corner.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "The flower is hiding there!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child reaching into the dark sky to pull out a silver flower",
+          "caption": "{hero} reached into the dark corner...",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Gotcha!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the silver flower shining in the child's hands",
+          "caption": "The silver flower glowed in {hero}'s hands.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the owl and child flying carefully down the star ladder",
+          "caption": "Down the star ladder they went, carefully.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the rainbow bridge glowing softly over the garden",
+          "caption": "Back over the rainbow bridge.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the owl looking very proud with spectacles glinting",
+          "caption": "Professor Hoo beamed.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "You are a true explorer!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child placing the flower into the empty spot in the garden",
+          "caption": "{hero} put the flower back in its place.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the garden lighting up, every flower opening like a silver star",
+          "caption": "One by one, the flowers opened.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the owl hooting happily from a branch",
+          "caption": "Hoooo! The Moon Garden was whole again.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Hoooo!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the moon glowing brightly, sending a silver beam down to the garden",
+          "caption": "The moon glowed brighter than ever.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child waving goodnight from the garden gate, owl beside them",
+          "caption": "Time for bed. Goodnight, Moon Garden!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        }
+      ],
+      "finale": [
+        {
+          "scene": "the child tucked up in bed, dreaming of silver flowers",
+          "caption": "{hero} fell asleep, dreaming of silver flowers.",
+          "speech": [],
           "cast": [
             "hero"
-          ],
-          "caption": "One night, {hero} looked up at the sky. Something was missing!",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "Where did the moon go?"
-            }
           ]
         },
         {
-          "scene": "a cardboard-box rocket in a back garden transforming into a real shiny rocket, a friend beside the child",
-          "bg": [
-            "#3a0ca3",
-            "#4361ee"
-          ],
-          "props": [
-            "🚀",
-            "📦",
-            "🔧"
+          "scene": "the owl and the moon both smiling over a garden of stars",
+          "caption": "Goodnight, {hero}! Goodnight, Moon!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Hoo-hoo, goodnight!"
+            }
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "{hero} and {c1} built a rocket from a very big box.",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "Helmets on! Let's go!"
-            }
-          ]
-        },
-        {
-          "scene": "a small rocket blasting off into space past clouds and stars",
-          "bg": [
-            "#03045e",
-            "#0077b6"
-          ],
-          "props": [
-            "🚀",
-            "☁️",
-            "🌟"
-          ],
-          "cast": [
-            "hero",
-            "c1"
-          ],
-          "caption": "3... 2... 1... BLAST OFF!",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "Whoooosh!"
-            }
-          ]
-        },
-        {
-          "scene": "a ringed planet with friendly smiling aliens waving at the astronaut child",
-          "bg": [
-            "#5a189a",
-            "#9d4edd"
-          ],
-          "props": [
-            "🪐",
-            "👽",
-            "🛸"
-          ],
-          "cast": [
-            "hero",
-            "c2"
-          ],
-          "caption": "They met some friendly aliens on Planet Wobble.",
-          "speech": [
-            {
-              "who": "c2",
-              "text": "Have you seen the moon?"
-            }
-          ]
-        },
-        {
-          "scene": "the moon hiding behind a big fluffy space cloud, looking shy and sad",
-          "bg": [
-            "#22223b",
-            "#4a4e69"
-          ],
-          "props": [
-            "🌝",
-            "☁️",
-            "💧"
-          ],
-          "cast": [
-            "hero",
-            "c1"
-          ],
-          "caption": "At last they found the moon, hiding and feeling shy.",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "Don't be sad, Moon. We need your light!"
-            }
-          ]
-        },
-        {
-          "scene": "the child hugging the glowing moon in space, stars sparkling all around",
-          "bg": [
-            "#3c096c",
-            "#7b2cbf"
-          ],
-          "props": [
-            "🌕",
-            "💛",
-            "✨"
-          ],
-          "cast": [
-            "hero",
-            "family"
-          ],
-          "caption": "{hero} gave the moon a great big hug. The moon began to glow!",
-          "speech": [
-            {
-              "who": "c3",
-              "text": "Look how bright it is!"
-            }
-          ]
-        },
-        {
-          "scene": "the rocket flying home with the full moon shining back in the night sky over a house",
-          "bg": [
-            "#10002b",
-            "#240046"
-          ],
-          "props": [
-            "🏠",
-            "🌕",
-            "🚀"
-          ],
-          "cast": [
-            "hero"
-          ],
-          "caption": "Back home, the moon shone brighter than ever — just for {hero}.",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "Goodnight, Moon!"
-            }
+            "sk"
           ]
         }
       ]
     },
     {
-      "id": "dino-picnic",
-      "title": "{hero}'s Dino Picnic",
+      "id": "dragon-rainbows",
+      "title": "{hero} and the Dragon Who Hiccupped Rainbows",
       "ageGroup": "3-5",
-      "theme": "Dinosaurs",
+      "theme": "Dragons",
       "category": "imagination",
-      "emoji": "🦕",
-      "blurb": "A picnic basket, a magic gate and a valley full of friendly dinosaurs who've never tasted a sandwich.",
+      "emoji": "🐉",
+      "blurb": "Mango the little dragon hiccups rainbows whenever he is hungry, surprised or silly. To cure his hiccups, {hero} must climb the mountain to find the wise tortoise.",
+      "interests": [
+        "Magic",
+        "Animals"
+      ],
       "palette": [
-        "#2d6a4f",
-        "#95d5b2"
+        "#7bdff2",
+        "#b2f7ef"
       ],
       "sidekick": {
-        "name": "Rexy",
-        "emoji": "🦖",
-        "desc": "a small, cheerful green T-rex"
+        "name": "Mango",
+        "emoji": "🐉",
+        "desc": "a small green dragon who hiccups rainbows"
       },
-      "panels": [
+      "intro": [
         {
-          "scene": "a family packing a picnic basket in a sunny kitchen",
-          "bg": [
-            "#fefae0",
-            "#e9edc9"
-          ],
-          "props": [
-            "🧺",
-            "🥪",
-            "🍎"
+          "scene": "a grassy hill with a little green dragon sitting with hiccups, rainbows popping out",
+          "caption": "Mango the dragon had hiccups. Hic! A rainbow!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Hic! Hic!"
+            }
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "{hero} packed the biggest picnic ever.",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "That's a LOT of sandwiches!"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "a mysterious glowing gate covered in vines at the end of a garden",
-          "bg": [
-            "#b7e4c7",
-            "#52b788"
-          ],
-          "props": [
-            "🚪",
-            "🌿",
-            "✨"
-          ],
-          "cast": [
-            "hero"
-          ],
-          "caption": "At the end of the garden, a gate began to glow.",
+          "scene": "a child giggling beside the dragon while rainbows float up around them",
+          "caption": "{hero} giggled. Every hiccup made a rainbow!",
           "speech": [
             {
               "who": "hero",
-              "text": "Ooh! What's in there?"
+              "text": "Let's find a cure!"
             }
-          ]
-        },
-        {
-          "scene": "a lush prehistoric valley with volcanoes far away and friendly long-necked dinosaurs",
-          "bg": [
-            "#95d5b2",
-            "#40916c"
-          ],
-          "props": [
-            "🦕",
-            "🌋",
-            "🌴"
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "Dino Valley! A long-necked dinosaur said hello.",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "Hello, big friend!"
-            }
+            "sk"
+          ]
+        }
+      ],
+      "middle": [
+        {
+          "scene": "a rocky mountain path lined with wildflowers",
+          "caption": "They set off up the mountain path.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
           ]
         },
         {
-          "scene": "a baby triceratops sniffing a picnic sandwich curiously",
-          "bg": [
-            "#d8f3dc",
-            "#74c69d"
-          ],
-          "props": [
-            "🥪",
-            "🦴",
-            "🌼"
+          "scene": "a dragon hiccupping a rainbow that lands on a flower",
+          "caption": "Hic! A rainbow landed on a flower.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Oops!"
+            }
           ],
           "cast": [
             "hero",
-            "c2"
-          ],
-          "caption": "A baby dino had never seen a sandwich before.",
-          "speech": [
-            {
-              "who": "c2",
-              "text": "Go on, have a bite!"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "children and dinosaurs having a big picnic on a checkered blanket",
-          "bg": [
-            "#ffe8d6",
-            "#ffb4a2"
+          "scene": "a little bird sitting in a bush, looking lost",
+          "caption": "A little bird sat in a bush. Tweet?",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Are you lost?"
+            }
           ],
-          "props": [
-            "🧺",
-            "🍉",
-            "🦖"
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child building a rainbow bridge for the bird to fly along",
+          "caption": "{hero} used a rainbow bridge to guide the bird home.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the bird flying into its nest in a tall tree",
+          "caption": "The bird found its nest and chirped happily.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Hooray!"
+            }
           ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a wide cave at the top of the hill with a sleepy tortoise",
+          "caption": "At the top, a wise old tortoise was waiting.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the tortoise with a speech bubble containing a riddle",
+          "caption": "The tortoise asked a riddle: what has many colours but no paint?",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Think carefully!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child thinking hard with a finger on their chin",
+          "caption": "{hero} thought very hard.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child answering with a big smile, the tortoise nodding",
+          "caption": "{hero} answered: 'A rainbow!'",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "A rainbow!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the tortoise handing the dragon a cup of cool water",
+          "caption": "The tortoise gave Mango a cup of cool water.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the dragon sipping water, a small rainbow fizzing in the air",
+          "caption": "Sip, sip... hic!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the dragon sneezing a big fountain of colours",
+          "caption": "Mango sneezed a fountain of colours!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Achoo!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the dragon and child walking past a field of sleepy sheep",
+          "caption": "They tiptoed past some sleepy sheep.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Shh, don't wake them!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the dragon hiccupping a rainbow shaped like a heart",
+          "caption": "Hic! A heart-shaped rainbow!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Aww, that's lovely."
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a river cutting through the hills, a log stuck across it",
+          "caption": "On the way back, a log blocked the river.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child and the dragon pushing the log while a rainbow slide appears",
+          "caption": "Together they pushed. A rainbow slide appeared!",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Heave!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a group of baby ducks sliding down a rainbow into the river",
+          "caption": "Splash! The ducks slid down the rainbow.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the dragon laughing, his scales shining in the sun",
+          "caption": "Mango laughed and laughed.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Hee hee!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a village with houses and a market, the dragon peeking over the roofs",
+          "caption": "They passed a sleepy village.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a shopkeeper offering a bowl of ice cream to the dragon",
+          "caption": "The shopkeeper offered a very big ice cream.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Careful, Mango, no hiccups!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the dragon very carefully licking the ice cream, all quiet",
+          "caption": "Lick, lick... no hiccups!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the sun setting behind the hills, with a rainbow across the sky",
+          "caption": "The sun set behind a big rainbow.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child and dragon sitting together watching the sunset",
+          "caption": "They watched the sky turn pink and gold.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Pretty!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the dragon yawning, a tiny rainbow yawn floating away",
+          "caption": "Mango yawned. A tiny rainbow floated away.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the family waving from the garden gate as the child arrives home",
+          "caption": "{family} waved from the gate.",
+          "speech": [],
           "cast": [
             "hero",
             "family"
-          ],
-          "caption": "Soon everyone was sharing the picnic — dinos too!",
-          "speech": [
-            {
-              "who": "c3",
-              "text": "Pass the mangoes, please!"
-            }
           ]
         },
         {
-          "scene": "the child waving goodbye to the dinosaurs at the glowing gate at sunset",
-          "bg": [
-            "#ffb703",
-            "#fb8500"
-          ],
-          "props": [
-            "🌅",
-            "👋",
-            "🦕"
-          ],
+          "scene": "the child and dragon walking together through a field of flowers",
+          "caption": "They walked home through the flowers.",
+          "speech": [],
           "cast": [
-            "hero"
-          ],
-          "caption": "Time to go home. {hero} promised to come back next Sunday.",
+            "hero",
+            "sk"
+          ]
+        }
+      ],
+      "finale": [
+        {
+          "scene": "a quiet night sky with a faint rainbow above a cosy house",
+          "caption": "That night, the sky had one small rainbow.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child and dragon waving goodnight from a window",
+          "caption": "Goodnight, {hero}! Goodnight, Mango!",
           "speech": [
             {
-              "who": "hero",
-              "text": "Bye, dinos! Save me a seat!"
+              "who": "sk",
+              "text": "Hic... goodnight!"
             }
+          ],
+          "cast": [
+            "hero",
+            "sk"
           ]
         }
       ]
     },
     {
-      "id": "festival-lights",
-      "title": "{hero} and the Festival of Lights",
-      "ageGroup": "3-5",
-      "theme": "Festivals",
+      "id": "sky-kite-race",
+      "title": "The Sky-Kite Race of {hero}",
+      "ageGroup": "6-8",
+      "theme": "Festival",
       "category": "festivals",
-      "emoji": "🪔",
-      "blurb": "The diyas won't light on festival night! {hero} sets off on a glowing adventure to bring the sparkle back.",
+      "emoji": "🪁",
+      "blurb": "The Sky-Kite Race is tomorrow, but the wind has vanished! {hero} and the fox kite-maker Zara must find the Wind Bottle in the Whispering Woods.",
+      "interests": [
+        "Festivals",
+        "Sport & Adventure"
+      ],
       "palette": [
-        "#f48c06",
-        "#9d0208"
+        "#ffb703",
+        "#fb8500"
       ],
       "sidekick": {
-        "name": "Mithu",
-        "emoji": "🦜",
-        "desc": "a chatty green parrot"
+        "name": "Zara",
+        "emoji": "🦊",
+        "desc": "a clever fox kite-maker who builds kites from old maps"
       },
-      "panels": [
+      "intro": [
         {
-          "scene": "a home decorated with rangoli and marigold garlands on festival evening, family getting ready",
-          "bg": [
-            "#ffba08",
-            "#f48c06"
-          ],
-          "props": [
-            "🪔",
-            "🌼",
-            "🎨"
+          "scene": "a hilltop town decorated with bunting, huge kites waiting, and not a breath of wind",
+          "caption": "Tomorrow was the Sky-Kite Race. But the wind had vanished!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Without wind, no kite can fly."
+            }
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "It was festival night! {hero} drew the brightest rangoli.",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "Beautiful! Now let's light the diyas."
-            }
+            "sk"
           ]
         },
         {
-          "scene": "clay diya lamps that will not light, a puzzled child holding a matchless lamp",
-          "bg": [
-            "#370617",
-            "#6a040f"
-          ],
-          "props": [
-            "🪔",
-            "❓",
-            "🌑"
-          ],
-          "cast": [
-            "hero"
-          ],
-          "caption": "But the diyas would not light. Not even one!",
+          "scene": "a child holding a paper kite beside a clever fox kite-maker with goggles",
+          "caption": "{hero} had an idea. 'Where did the wind go?'",
           "speech": [
             {
               "who": "hero",
-              "text": "Oh no! Where did the sparkle go?"
+              "text": "Let's find it!"
             }
-          ]
-        },
-        {
-          "scene": "a glowing firefly guiding a child and a companion down a lantern-lit street",
-          "bg": [
-            "#03071e",
-            "#370617"
-          ],
-          "props": [
-            "✨",
-            "🏮",
-            "🌙"
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "A tiny firefly blinked: 'Follow me!'",
+            "sk"
+          ]
+        }
+      ],
+      "middle": [
+        {
+          "scene": "a map spread on a table with a route marked through a dark forest",
+          "caption": "Zara unrolled an old map. 'The wind is kept in the Whispering Woods.'",
           "speech": [
             {
-              "who": "c1",
-              "text": "Let's go!"
+              "who": "sk",
+              "text": "It's in a Wind Bottle!"
             }
-          ]
-        },
-        {
-          "scene": "neighbours sharing sweets and smiling at their doorsteps, laddoos and jalebis",
-          "bg": [
-            "#ffd60a",
-            "#ffc300"
-          ],
-          "props": [
-            "🍬",
-            "🍯",
-            "😊"
           ],
           "cast": [
             "hero",
-            "c2"
-          ],
-          "caption": "Every time {hero} shared a sweet and a smile, a little light appeared.",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a path into the woods, tall trees whispering in the breeze",
+          "caption": "Into the Whispering Woods they went.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "trees with faces that whisper riddles",
+          "caption": "The trees whispered: 'Find the way by listening.'",
           "speech": [
             {
-              "who": "c2",
-              "text": "Happy festival!"
+              "who": "sk",
+              "text": "Listen carefully!"
             }
-          ]
-        },
-        {
-          "scene": "the child carrying a jar full of glowing lights back home",
-          "bg": [
-            "#e85d04",
-            "#dc2f02"
-          ],
-          "props": [
-            "🫙",
-            "✨",
-            "💛"
           ],
           "cast": [
             "hero",
-            "family"
-          ],
-          "caption": "Soon {hero} had a whole jar full of sparkle!",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a stream with a rickety bridge and a crow guard",
+          "caption": "A rickety bridge, and a grumpy crow.",
           "speech": [
             {
-              "who": "c3",
-              "text": "You did it!"
+              "who": "sk",
+              "text": "Pay the crow a riddle!"
             }
-          ]
-        },
-        {
-          "scene": "a house glowing with hundreds of diyas and fireworks in the sky, the family celebrating together",
-          "bg": [
-            "#9d0208",
-            "#d00000"
-          ],
-          "props": [
-            "🎆",
-            "🪔",
-            "🎇"
           ],
           "cast": [
             "hero",
-            "family"
-          ],
-          "caption": "Every diya glowed. The best light of all was kindness — and {hero} had lots!",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a crow with a shiny hat, looking down its beak",
+          "caption": "'Answer me this,' said the crow. 'What gets wetter as it dries?'",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child thinking, with a puzzled frown",
+          "caption": "{hero} thought: a towel!",
           "speech": [
             {
               "who": "hero",
-              "text": "Happy Festival of Lights!"
+              "text": "A towel!"
             }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the crow laughing and stepping aside to let them cross",
+          "caption": "'Clever!' laughed the crow, and stepped aside.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a huge spider web across the path, glistening",
+          "caption": "Next, a giant web blocked the way.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Careful, don't tear it!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child carefully lifting a thread of the web to pass",
+          "caption": "{hero} lifted the threads one by one.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a secret clearing with a rope bridge over a deep gorge",
+          "caption": "A secret clearing and a rope bridge.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the rope bridge swaying, the fox steadying it with one paw",
+          "caption": "The bridge swayed. Zara held it steady.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Step, don't rush!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a stone cottage in the woods with a wooden sign reading Wind Keeper",
+          "caption": "At the end, a cottage: Wind Keeper.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the fox and child climbing a tall tree to reach a lost ribbon",
+          "caption": "Zara climbed the tree to reach a lost kite ribbon.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Almost there!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child catching the ribbon as a gust of wind blows it down",
+          "caption": "{hero} caught the ribbon as it floated down.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Got it!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "an old owl keeper with a bottle full of swirling wind",
+          "caption": "The Wind Keeper held up a glowing bottle of wind.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "This is the Wind Bottle!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the keeper explaining, a child listening with wide eyes",
+          "caption": "'Wind is only lent,' said the Keeper. 'Return it when you're done.'",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child promising, with a hand on heart",
+          "caption": "{hero} promised to bring it back.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "I promise!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the bottle gently opening, a breeze puffing out",
+          "caption": "The bottle opened with a puff of breeze.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the wind lifting their hair and twirling leaves",
+          "caption": "The wind twirled and danced.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a flock of crows watching, and a fox on a fast run towards town",
+          "caption": "But on the way back, a flock of crows swooped down!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Crows! Hold on!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child running with the wind bottle tucked safely under one arm",
+          "caption": "They ran, as fast as they could.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the crows chasing, and the fox leading the child around a tree",
+          "caption": "Zara led the way around the big oak.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "This way!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the crows giving up, flapping away with their hats",
+          "caption": "The crows gave up and flapped away.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the town square with kites ready, families waiting",
+          "caption": "They reached the hill, just in time.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child pouring the wind gently over the kites",
+          "caption": "{hero} opened the bottle over the hill.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Fly, kites, fly!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "hundreds of kites lifting into the sky",
+          "caption": "The kites soared higher and higher.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        }
+      ],
+      "finale": [
+        {
+          "scene": "the race starting, colourful kites rushing across the blue sky",
+          "caption": "The race began! Kites zoomed across the sky.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Go, go, go!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child and fox kite-maker sharing a prize ribbon at sunset",
+          "caption": "{hero} and Zara shared the prize: a ribbon for teamwork.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "We did it together!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
           ]
         }
       ]
     },
     {
-      "id": "under-the-sea",
-      "title": "Captain {hero} Under the Sea",
+      "id": "clockwork-whale",
+      "title": "{hero} and the Clockwork Whale",
       "ageGroup": "6-8",
       "theme": "Ocean",
       "category": "adventure",
-      "emoji": "🐙",
-      "blurb": "A yellow submarine, a lost baby whale and a coral reef full of surprises. Dive in, Captain!",
+      "emoji": "🐋",
+      "blurb": "Tock, the brass clockwork whale, has run down in the middle of the ocean. Captain Marlow the otter needs a sharp young sailor to find the lost key.",
+      "interests": [
+        "Ocean",
+        "Robots & Science",
+        "Animals"
+      ],
       "palette": [
-        "#0077b6",
-        "#00b4d8"
+        "#0096c7",
+        "#90e0ef"
       ],
       "sidekick": {
-        "name": "Bubbles",
-        "emoji": "🐬",
-        "desc": "a playful bottlenose dolphin"
+        "name": "Captain Marlow",
+        "emoji": "🦦",
+        "desc": "a brave otter captain with a brass telescope"
       },
-      "panels": [
+      "intro": [
         {
-          "scene": "a harbour with a shiny yellow mini submarine, the child wearing a captain's hat",
-          "bg": [
-            "#90e0ef",
-            "#48cae4"
-          ],
-          "props": [
-            "⚓",
-            "🟡",
-            "🌊"
+          "scene": "a harbour at sunrise, a small boat, and a brass whale floating silently on the waves",
+          "caption": "Out in the middle of the ocean, the brass whale Tock had stopped.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Tock needs his key, and fast!"
+            }
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "Captain {hero} had a brand new submarine and a very important mission.",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "Captain, a baby whale is lost!"
-            },
-            {
-              "who": "hero",
-              "text": "Then we dive. Full speed ahead!"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "the submarine diving down through blue water with schools of fish",
-          "bg": [
-            "#0096c7",
-            "#0077b6"
-          ],
-          "props": [
-            "🐟",
-            "🐠",
-            "🫧"
-          ],
-          "cast": [
-            "hero",
-            "c1"
-          ],
-          "caption": "Down, down, down they went, past a thousand silver fish.",
+          "scene": "a child in a sailor's cap climbing aboard a small boat beside an otter captain",
+          "caption": "Captain Marlow handed {hero} a brass telescope. 'Ready, first mate?'",
           "speech": [
             {
               "who": "hero",
-              "text": "Sonar on! Listen for whale songs."
+              "text": "Ready!"
             }
-          ]
-        },
-        {
-          "scene": "a colourful coral reef with a grumpy octopus guarding a cave",
-          "bg": [
-            "#ff8fab",
-            "#00b4d8"
-          ],
-          "props": [
-            "🐙",
-            "🪸",
-            "🐚"
           ],
           "cast": [
             "hero",
-            "c2"
-          ],
-          "caption": "A grumpy octopus blocked the way.",
-          "speech": [
-            {
-              "who": "c2",
-              "text": "Maybe he just needs a friend?"
-            },
-            {
-              "who": "hero",
-              "text": "Hi! I'm {hero}. Can you help us?"
-            }
+            "sk"
+          ]
+        }
+      ],
+      "middle": [
+        {
+          "scene": "the boat sailing past a lighthouse, gulls wheeling overhead",
+          "caption": "They sailed past the lighthouse.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
           ]
         },
         {
-          "scene": "the octopus smiling and pointing eight arms towards a deep trench",
-          "bg": [
-            "#023e8a",
-            "#0077b6"
-          ],
-          "props": [
-            "🐙",
-            "➡️",
-            "🌀"
-          ],
+          "scene": "the sea turning deep blue, schools of silver fish swimming below",
+          "caption": "Beneath the waves, silver fish darted by.",
+          "speech": [],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "The octopus smiled and pointed eight arms at once. That way!",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "Kindness works every time."
-            }
+            "sk"
           ]
         },
         {
-          "scene": "a baby whale tangled in an old fishing net in the deep sea, glowing jellyfish around",
-          "bg": [
-            "#03045e",
-            "#023e8a"
-          ],
-          "props": [
-            "🐋",
-            "🪼",
-            "🕸️"
-          ],
-          "cast": [
-            "hero",
-            "c3"
-          ],
-          "caption": "There it was — the baby whale, tangled in an old net.",
+          "scene": "a diving bell lowered into the sea with the child peering out",
+          "caption": "{hero} climbed into the diving bell.",
           "speech": [
             {
               "who": "hero",
-              "text": "Robot arm, gently now..."
-            },
-            {
-              "who": "c3",
-              "text": "Almost free!"
+              "text": "Let's dive!"
             }
-          ]
-        },
-        {
-          "scene": "a mother whale and the baby whale reunited, the submarine beside them",
-          "bg": [
-            "#0077b6",
-            "#00b4d8"
-          ],
-          "props": [
-            "🐳",
-            "🐋",
-            "💙"
           ],
           "cast": [
             "hero",
-            "family"
-          ],
-          "caption": "Mama Whale sang the happiest song the ocean had ever heard.",
-          "speech": [
-            {
-              "who": "c4",
-              "text": "Three cheers for Captain {hero}!"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "the submarine surfacing at sunset with dolphins jumping around it",
-          "bg": [
-            "#ffb703",
-            "#fb8500"
-          ],
-          "props": [
-            "🌅",
-            "🐬",
-            "⚓"
+          "scene": "a bright coral reef with a pufferfish puffing up",
+          "caption": "A coral reef glowed with colour.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Keep away from that puffer!"
+            }
           ],
           "cast": [
-            "hero"
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a sea turtle with a shell covered in tiny stars",
+          "caption": "A sea turtle drifted by.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Have you seen a brass key?"
+            }
           ],
-          "caption": "Mission complete. And the ocean was a little cleaner, too.",
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the turtle pointing a flipper towards a shipwreck",
+          "caption": "'Try the old shipwreck,' said the turtle.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a shipwreck covered in seaweed, a curious octopus peeking out",
+          "caption": "The shipwreck was full of treasure and seaweed.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Hello, octopus!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the octopus holding up a tangled fishing net",
+          "caption": "The octopus pointed at a tangled net.",
           "speech": [
             {
               "who": "hero",
-              "text": "Same time tomorrow, crew?"
+              "text": "Let's untangle it!"
             }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child carefully untangling the net with the octopus helping",
+          "caption": "Together, they untangled the net, one knot at a time.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a grateful octopus waving with all eight arms",
+          "caption": "The octopus waved all eight arms.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Thank you!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "an old brass key glinting in the sand under a broken mast",
+          "caption": "Then a glint! A brass key in the sand.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "The key!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child holding the key as the diving bell rises",
+          "caption": "Up they went, with the key safe in {hero}'s hand.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the otter captain and child sharing a biscuit on the boat deck",
+          "caption": "Captain Marlow shared a biscuit on deck.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Sailors need energy!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a shoal of glowing jellyfish lighting up the dark water",
+          "caption": "Glowing jellyfish lit up the dark water.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Beautiful!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a school of dolphins escorting the boat home",
+          "caption": "Dolphins leapt alongside the boat.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Our escort!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a storm cloud forming on the horizon, waves rising",
+          "caption": "But a storm was brewing on the horizon.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Hold tight!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the boat rocking in the waves, the child holding the ropes",
+          "caption": "The boat rocked. {hero} held the ropes steady.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a lighthouse beam cutting through the storm, guiding the boat",
+          "caption": "The lighthouse beam showed the way home.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a bolt of lightning in the distance, the otter captain at the wheel",
+          "caption": "The captain steered straight through the waves.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Steady as she goes!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the storm passing, the sky turning gold",
+          "caption": "Then the storm drifted away.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a rainbow arching over the calm sea",
+          "caption": "A rainbow shone over the calm water.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child and captain looking at a map, pointing at the whale's location",
+          "caption": "Marlow unrolled the map. 'Tock is just ahead!'",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Almost there!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the brass whale with a rusty tail, hopeful eyes",
+          "caption": "There was Tock, still and sad.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Tock, we've found your key!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child fitting the key into a keyhole on the whale's side",
+          "caption": "{hero} turned the key in Tock's side.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "One, two, three!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the brass whale's gears whirring, bubbles bursting from its blowhole",
+          "caption": "Whirr, click, whirr! Tock's gears began to turn.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the whale swimming in a big happy circle, the child waving from the boat",
+          "caption": "Tock swam a happy circle. Whoosh!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "He's back!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        }
+      ],
+      "finale": [
+        {
+          "scene": "the whale and the boat sailing side by side into the sunset",
+          "caption": "Tock and the boat sailed home together into the sunset.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "What a voyage!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child, the otter captain and the brass whale at the harbour",
+          "caption": "Captain Marlow made {hero} a real sailor's badge.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Welcome aboard, first mate!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
           ]
         }
       ]
     },
     {
-      "id": "super-hero",
-      "title": "Super {hero} Saves the Day",
-      "ageGroup": "6-8",
-      "theme": "Superheroes",
-      "category": "adventure",
-      "emoji": "🦸",
-      "blurb": "When the city's colours start disappearing, a brand-new superhero (with a very familiar face) answers the call.",
-      "palette": [
-        "#e63946",
-        "#1d3557"
-      ],
-      "sidekick": {
-        "name": "Captain Whiskers",
-        "emoji": "🐱",
-        "desc": "a brave orange cat wearing a tiny cape"
-      },
-      "panels": [
-        {
-          "scene": "a city skyline where the buildings are slowly turning grey, people looking worried",
-          "bg": [
-            "#adb5bd",
-            "#6c757d"
-          ],
-          "props": [
-            "🏙️",
-            "🌫️",
-            "😟"
-          ],
-          "cast": [
-            "hero"
-          ],
-          "caption": "Something strange was happening. The colours of the city were fading away!",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "This looks like a job for... me!"
-            }
-          ]
-        },
-        {
-          "scene": "the child spinning into a superhero costume with a cape and mask in a burst of light",
-          "bg": [
-            "#e63946",
-            "#ffb703"
-          ],
-          "props": [
-            "⚡",
-            "💥",
-            "🦸"
-          ],
-          "cast": [
-            "hero"
-          ],
-          "caption": "With a spin and a flash, {hero} became SUPER {hero}!",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "Cape? Check. Mask? Check!"
-            }
-          ]
-        },
-        {
-          "scene": "a superhero sidekick appearing on a rooftop ready for action",
-          "bg": [
-            "#457b9d",
-            "#1d3557"
-          ],
-          "props": [
-            "🏢",
-            "🌆",
-            "⭐"
-          ],
-          "cast": [
-            "hero",
-            "c1"
-          ],
-          "caption": "Every hero needs a partner. {c1} was ready.",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "I've found the clue! Follow the grey trail!"
-            }
-          ]
-        },
-        {
-          "scene": "a silly villain with a giant vacuum machine sucking colour out of a rainbow",
-          "bg": [
-            "#6c757d",
-            "#343a40"
-          ],
-          "props": [
-            "🌈",
-            "🌀",
-            "😈"
-          ],
-          "cast": [
-            "hero",
-            "c1"
-          ],
-          "caption": "It was Doctor Dull and his Colour-Sucker 3000!",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "Stop right there, Doctor Dull!"
-            }
-          ]
-        },
-        {
-          "scene": "family members helping, holding paint buckets and brushes, ready to help the superhero",
-          "bg": [
-            "#2a9d8f",
-            "#264653"
-          ],
-          "props": [
-            "🪣",
-            "🖌️",
-            "🎨"
-          ],
-          "cast": [
-            "hero",
-            "c2",
-            "c3"
-          ],
-          "caption": "{hero} had a plan — and some very helpful family.",
-          "speech": [
-            {
-              "who": "c2",
-              "text": "Paint brigade, reporting for duty!"
-            },
-            {
-              "who": "c3",
-              "text": "Let's make it messy!"
-            }
-          ]
-        },
-        {
-          "scene": "the colour machine exploding into a giant harmless rainbow burst over the city",
-          "bg": [
-            "#ff006e",
-            "#8338ec"
-          ],
-          "props": [
-            "💥",
-            "🌈",
-            "🎆"
-          ],
-          "cast": [
-            "hero"
-          ],
-          "caption": "{hero} flipped the switch to REVERSE. KA-BLOOEY!",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "Colours, come home!"
-            }
-          ]
-        },
-        {
-          "scene": "a colourful city celebrating the hero, confetti, the villain now smiling and painting too",
-          "bg": [
-            "#ffbe0b",
-            "#fb5607"
-          ],
-          "props": [
-            "🎉",
-            "🏆",
-            "🎊"
-          ],
-          "cast": [
-            "hero",
-            "family"
-          ],
-          "caption": "The city was brighter than ever. Even Doctor Dull wanted to paint!",
-          "speech": [
-            {
-              "who": "c4",
-              "text": "Our hero!"
-            },
-            {
-              "who": "hero",
-              "text": "Just doing my job!"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "time-backpack",
-      "title": "{hero} and the Time-Travel Backpack",
+      "id": "cinder-lighthouse",
+      "title": "The Secret of Cinder Lighthouse",
       "ageGroup": "9-10",
-      "theme": "Time travel",
-      "category": "learning",
-      "emoji": "⏳",
-      "blurb": "A dusty backpack from the attic has a dial that says 'WHEN?'. Pyramids, castles and a robot future — and a puzzle to solve in each.",
+      "theme": "Mystery",
+      "category": "adventure",
+      "emoji": "🕵️",
+      "blurb": "The lamp at Cinder Lighthouse has vanished the night before the town's big vote on whether to close it. {hero}, junior detective, teams up with Inspector Gull to solve the case.",
+      "interests": [
+        "Mystery",
+        "Ocean",
+        "Adventure"
+      ],
       "palette": [
-        "#6d597a",
-        "#e56b6f"
+        "#264653",
+        "#e9c46a"
       ],
       "sidekick": {
-        "name": "Tock",
-        "emoji": "🦉",
-        "desc": "a wise owl wearing tiny round glasses"
+        "name": "Inspector Gull",
+        "emoji": "🐦",
+        "desc": "a seagull detective in a tweed hat, with a magnifying glass"
       },
-      "panels": [
+      "intro": [
         {
-          "scene": "a dusty attic with old trunks and a glowing backpack with a brass dial",
-          "bg": [
-            "#b08968",
-            "#7f5539"
-          ],
-          "props": [
-            "🎒",
-            "🕰️",
-            "📦"
+          "scene": "a foggy seaside town at dusk, a lighthouse with a dark, empty lantern room",
+          "caption": "The lamp at Cinder Lighthouse had vanished in the night.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Lighthouses don't lose their lamps. Someone took it."
+            }
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "While exploring the attic, {hero} found a backpack with a strange brass dial. It said: WHEN?",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "Don't touch that dial!"
-            },
-            {
-              "who": "hero",
-              "text": "Too late..."
-            }
+            "sk"
           ]
         },
         {
-          "scene": "ancient Egypt, pyramids under construction, a puzzled builder holding a broken measuring rope",
-          "bg": [
-            "#f4a261",
-            "#e9c46a"
-          ],
-          "props": [
-            "🔺",
-            "🐪",
-            "☀️"
+          "scene": "a junior detective with a notebook beside a seagull in a tweed hat",
+          "caption": "{hero}, junior detective, had a notebook and a plan.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Let's start with the clues!"
+            }
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "WHOOSH! Egypt, 4,500 years ago. The builders couldn't make their corners square.",
+            "sk"
+          ]
+        }
+      ],
+      "middle": [
+        {
+          "scene": "the lighthouse keeper's cottage with a sign: Closing Next Week",
+          "caption": "The keeper's cottage had a notice: 'Lighthouse to close.'",
           "speech": [
             {
-              "who": "hero",
-              "text": "Tie knots to make a 3-4-5 triangle — perfect right angle every time!"
+              "who": "sk",
+              "text": "Motive number one."
             }
-          ]
-        },
-        {
-          "scene": "a medieval castle with a drawbridge stuck halfway, knights scratching their heads",
-          "bg": [
-            "#8d99ae",
-            "#2b2d42"
-          ],
-          "props": [
-            "🏰",
-            "⚔️",
-            "🐉"
           ],
           "cast": [
             "hero",
-            "c2"
-          ],
-          "caption": "WHOOSH! A castle, 800 years ago. The drawbridge was stuck.",
-          "speech": [
-            {
-              "who": "c2",
-              "text": "It's too heavy to lift!"
-            },
-            {
-              "who": "hero",
-              "text": "Then we need a pulley. Less pull, same lift."
-            }
+            "sk"
           ]
         },
         {
-          "scene": "a futuristic city with flying cars and a sad robot with a flickering screen",
-          "bg": [
-            "#4cc9f0",
-            "#7209b7"
-          ],
-          "props": [
-            "🤖",
-            "🛸",
-            "🌐"
+          "scene": "a town hall full of worried residents holding signs",
+          "caption": "At the town hall, the vote was tomorrow.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a mayor in a big chair with a clipboard, looking stern",
+          "caption": "The mayor was firm: the lighthouse would close.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Suspect number one: the mayor."
+            }
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "WHOOSH! The year 2300. A robot had forgotten how to be kind.",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "Kindness isn't code. You just say: 'How can I help?'"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "the backpack dial sparking and spinning wildly, time swirling around the child",
-          "bg": [
-            "#3a0ca3",
-            "#f72585"
-          ],
-          "props": [
-            "🌀",
-            "⚡",
-            "⏳"
+          "scene": "the child asking the mayor a question while the mayor waves them off",
+          "caption": "{hero} asked the mayor where she was last night.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Where were you at midnight?"
+            }
           ],
           "cast": [
             "hero",
-            "c3"
-          ],
-          "caption": "Then the dial began spinning out of control!",
-          "speech": [
-            {
-              "who": "c3",
-              "text": "Which way is home?!"
-            },
-            {
-              "who": "hero",
-              "text": "Today's date... and our address. Hold on!"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "the child back home at the dinner table telling the family about the adventure, family listening amazed",
-          "bg": [
-            "#ffcdb2",
-            "#e5989b"
+          "scene": "the mayor at a dinner party in a photo on the wall, with an alibi",
+          "caption": "The mayor had an alibi: a dinner, with photos.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Alibi checked. Next!"
+            }
           ],
-          "props": [
-            "🍲",
-            "🏠",
-            "🕯️"
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "footprints in sand leading from the lighthouse to the rocks",
+          "caption": "Footprints led from the lighthouse to the rocks.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Small feet. Someone young."
+            }
           ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a fisherman mending nets, looking nervous",
+          "caption": "A fisherman was mending nets nearby.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Did you see anyone last night?"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the fisherman shaking his head with a shifty look",
+          "caption": "'Only the wind,' he said, not quite meeting their eyes.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a sticky note on a fish crate with the words 'Lamp: warm' written on it",
+          "caption": "A sticky note on a crate: 'Lamp, keep it warm.'",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Keep it warm? Interesting."
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a bakery with a warm oven, a girl in an apron hiding something behind her back",
+          "caption": "At the bakery, a girl quickly hid something behind her back.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "What's that?"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the girl revealing a lantern wrapped in a towel, glowing softly",
+          "caption": "The lantern glowed softly under the towel!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the girl explaining with a sad smile, the keeper's granddaughter",
+          "caption": "'I'm Ada,' she said. 'I took it. I didn't want the light to go out.'",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "A brave, if risky, move."
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "Ada and the detective examining an old crate in a dark storeroom",
+          "caption": "They searched the dusty storeroom for more clues.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Every clue matters."
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a torn photo of the lighthouse keeper with his granddaughter",
+          "caption": "A torn photo showed the keeper with Ada as a little girl.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "She was protecting his light!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "Ada and the detective sitting together on the harbour wall",
+          "caption": "Ada explained the plan to save the lighthouse.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the lighthouse keeper's old logbook open on a desk, with children's drawings",
+          "caption": "The keeper's logbook was full of drawings by local children.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "The town loves this lighthouse!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a poster being drawn by children, showing the lighthouse at night",
+          "caption": "The children were making posters to save it.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child and the detective walking to the town hall with a box of posters",
+          "caption": "{hero} and Inspector Gull marched to the town hall.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Time to present the evidence!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the mayor looking at the children's drawings with surprise",
+          "caption": "The mayor studied the drawings in silence.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child reading out a petition with a hundred signatures",
+          "caption": "{hero} read the petition: 'Keep our light on.'",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "This is what the town wants."
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the mayor smiling, pinning a badge to Ada's apron",
+          "caption": "The mayor smiled. 'The light stays on.'",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the lighthouse lamp being carried back up the tower steps",
+          "caption": "Ada carried the lamp home to the tower.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the lamp lit at the top of the tower, beams sweeping over the sea",
+          "caption": "The lamp lit up the whole coast.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Case closed!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child writing in a notebook, the case neatly filed",
+          "caption": "{hero} wrote the final entry in the notebook.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the lighthouse glowing across the bay, the town celebrating",
+          "caption": "The town gathered to celebrate.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "family cheering on the harbour as the lighthouse glows",
+          "caption": "{family} cheered on the harbour.",
+          "speech": [],
           "cast": [
             "hero",
             "family"
-          ],
-          "caption": "Home in time for dinner. Nobody believed a word of it... until they saw the sand in {their} shoes.",
-          "speech": [
-            {
-              "who": "c4",
-              "text": "Is that... pyramid sand?"
-            }
+          ]
+        }
+      ],
+      "finale": [
+        {
+          "scene": "the lighthouse on a calm night, one bright beam across the sea",
+          "caption": "That night, Cinder Lighthouse shone brighter than ever.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
           ]
         },
         {
-          "scene": "the backpack quietly glowing on the shelf at night, the dial now pointing to a new symbol",
-          "bg": [
-            "#22223b",
-            "#4a4e69"
-          ],
-          "props": [
-            "🎒",
-            "✨",
-            "❔"
-          ],
-          "cast": [
-            "hero"
-          ],
-          "caption": "That night, the dial clicked by itself to a brand new word: WHERE?",
+          "scene": "the detective tipping its hat in a window of a seaside cottage",
+          "caption": "'Well done, junior detective,' said Inspector Gull.",
           "speech": [
             {
-              "who": "hero",
-              "text": "To be continued..."
+              "who": "sk",
+              "text": "Well done, {hero}!"
             }
+          ],
+          "cast": [
+            "hero",
+            "sk"
           ]
         }
       ]
     },
     {
-      "id": "science-fair",
-      "title": "{hero} vs. the Runaway Robot",
+      "id": "inventors-club",
+      "title": "{hero}'s Robot Inventors' Club",
       "ageGroup": "9-10",
       "theme": "Science",
       "category": "learning",
-      "emoji": "🔬",
-      "blurb": "{hero}'s science-fair robot is a bit too clever — and now it's loose in the school. Time to think like an engineer.",
+      "emoji": "🤖",
+      "blurb": "{hero} and the Inventors' Club build a robot from spare parts for the school science fair. When it runs off, the team must invent a clever way to bring it back.",
+      "interests": [
+        "Robots & Science",
+        "School & Friends"
+      ],
       "palette": [
         "#06d6a0",
         "#118ab2"
       ],
       "sidekick": {
-        "name": "Byte",
-        "emoji": "🐕‍🦺",
-        "desc": "a clever little robot dog with antenna ears"
+        "name": "Sprocket",
+        "emoji": "🤖",
+        "desc": "a friendly robot built from old tins, with a spinning antenna"
       },
-      "panels": [
+      "intro": [
         {
-          "scene": "a messy workshop table covered with wires, gears and a half-built robot, the child wearing safety goggles",
-          "bg": [
-            "#caf0f8",
-            "#90e0ef"
-          ],
-          "props": [
-            "⚙️",
-            "🔧",
-            "💡"
+          "scene": "a messy school workshop with wires, gears, tin cans and a half-built robot",
+          "caption": "The Inventors' Club had one week to build a robot for the science fair.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Beep! Hello! I am Sprocket!"
+            }
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "The science fair was tomorrow, and {hero}'s robot, BOLT, was nearly finished.",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "Does it actually work?"
-            },
-            {
-              "who": "hero",
-              "text": "Only one way to find out!"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "a school hall science fair, a cheerful robot zooming away on wheels, papers flying",
-          "bg": [
-            "#ffd166",
-            "#ef476f"
-          ],
-          "props": [
-            "🤖",
-            "📄",
-            "💨"
-          ],
-          "cast": [
-            "hero"
-          ],
-          "caption": "At the fair, BOLT switched on... and zoomed straight out of the door!",
+          "scene": "a child wearing safety goggles beside a team of young inventors",
+          "caption": "{hero} was the club's team leader. 'Let's test Sprocket!'",
           "speech": [
             {
               "who": "hero",
-              "text": "BOLT! Come back!"
+              "text": "Ready, Sprocket?"
             }
-          ]
-        },
-        {
-          "scene": "a school corridor with tracks of footprints, the child studying them with a magnifying glass",
-          "bg": [
-            "#118ab2",
-            "#073b4c"
-          ],
-          "props": [
-            "🔍",
-            "👣",
-            "📋"
           ],
           "cast": [
             "hero",
-            "c2"
-          ],
-          "caption": "Engineers don't panic. They collect data.",
-          "speech": [
-            {
-              "who": "c2",
-              "text": "The tracks turn left at every corner."
-            },
-            {
-              "who": "hero",
-              "text": "Its sensor's stuck! It always follows the left wall."
-            }
-          ]
-        },
-        {
-          "scene": "the robot in the school kitchen spinning plates and causing silly chaos",
-          "bg": [
-            "#ffadad",
-            "#ffd6a5"
-          ],
-          "props": [
-            "🍽️",
-            "🥄",
-            "🌀"
-          ],
-          "cast": [
-            "hero",
-            "c1"
-          ],
-          "caption": "Follow the left wall... straight into the school kitchen!",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "Is it... making pancakes?"
-            }
-          ]
-        },
-        {
-          "scene": "the child holding a big magnet on a string to attract the robot, teacher and family watching",
-          "bg": [
-            "#06d6a0",
-            "#1b9aaa"
-          ],
-          "props": [
-            "🧲",
-            "🤖",
-            "✨"
-          ],
-          "cast": [
-            "hero",
-            "c3"
-          ],
-          "caption": "{hero} built a trap from a magnet, a mop and a string.",
-          "speech": [
-            {
-              "who": "c3",
-              "text": "Will that work?"
-            },
-            {
-              "who": "hero",
-              "text": "BOLT's chassis is steel. Physics never lets you down!"
-            }
-          ]
-        },
-        {
-          "scene": "the robot calmly back on the science fair table, the child explaining the bug to judges",
-          "bg": [
-            "#e0fbfc",
-            "#98c1d9"
-          ],
-          "props": [
-            "📊",
-            "🧑‍🔬",
-            "🤖"
-          ],
-          "cast": [
-            "hero",
-            "family"
-          ],
-          "caption": "{hero} fixed the sensor and explained everything to the judges — even the mistake.",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "A bug isn't a failure. It's data!"
-            }
-          ]
-        },
-        {
-          "scene": "the child holding a big gold first-prize trophy with the robot waving, family cheering",
-          "bg": [
-            "#ffd60a",
-            "#ffc300"
-          ],
-          "props": [
-            "🏆",
-            "🥇",
-            "🎉"
-          ],
-          "cast": [
-            "hero",
-            "family"
-          ],
-          "caption": "First prize! And BOLT got a medal for 'Most Enthusiastic Robot'.",
-          "speech": [
-            {
-              "who": "c4",
-              "text": "Our little engineer!"
-            }
+            "sk"
           ]
         }
-      ]
-    },
-    {
-      "id": "first-day-school",
-      "title": "{hero}'s First Day at School",
-      "ageGroup": "3-5",
-      "theme": "School",
-      "category": "learning",
-      "emoji": "🎒",
-      "blurb": "Backpack on, tummy full of butterflies. A new school, new friends and a very big hug at home-time.",
-      "palette": [
-        "#8fb8de",
-        "#f7e7a1"
       ],
-      "sidekick": {
-        "name": "Bella",
-        "emoji": "🐰",
-        "desc": "a cheerful bunny with a red school bag"
-      },
-      "panels": [
+      "middle": [
         {
-          "scene": "a bedroom in the morning, a small child looking at a new school bag hanging on the door",
-          "bg": [
-            "#fdebd0",
-            "#f5cba7"
-          ],
-          "props": [
-            "🎒",
-            "☀️",
-            "🌅"
-          ],
+          "scene": "the robot's wheels spinning on a workbench, sparks flying",
+          "caption": "Sprocket's wheels whirred. Sparks flew!",
+          "speech": [],
           "cast": [
-            "hero"
-          ],
-          "caption": "Today is the big day! {hero} is starting school.",
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child adjusting a sensor with a small screwdriver",
+          "caption": "{hero} tuned the sensor with a tiny screwdriver.",
           "speech": [
             {
               "who": "hero",
-              "text": "Will I like it there?"
+              "text": "Let's try walking in a line."
             }
-          ]
-        },
-        {
-          "scene": "a family walking hand in hand to a school gate with bright colourful banners",
-          "bg": [
-            "#d6eaf8",
-            "#85c1e9"
-          ],
-          "props": [
-            "🏫",
-            "🌈",
-            "🎈"
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "{c1} walked with {hero} all the way to the gate.",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the robot rolling in a straight line across the room",
+          "caption": "Sprocket rolled straight. Hooray!",
           "speech": [
             {
-              "who": "c1",
-              "text": "I'll be right here at home-time!"
+              "who": "sk",
+              "text": "Beep! Straight line!"
             }
-          ]
-        },
-        {
-          "scene": "a classroom with a friendly teacher and children sitting on colourful mats",
-          "bg": [
-            "#d5f5e3",
-            "#82e0aa"
-          ],
-          "props": [
-            "📚",
-            "🎨",
-            "🧩"
           ],
           "cast": [
             "hero",
-            "c2"
-          ],
-          "caption": "Inside, the teacher smiled and waved hello.",
-          "speech": [
-            {
-              "who": "c2",
-              "text": "Would you like to sit next to me?"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "a child painting a big colourful sunflower at an easel beside a new friend",
-          "bg": [
-            "#fadbd8",
-            "#f1948a"
-          ],
-          "props": [
-            "🖌️",
-            "🌻",
-            "🦋"
-          ],
-          "cast": [
-            "hero",
-            "c2"
-          ],
-          "caption": "{hero} painted a sunflower and made a new friend.",
+          "scene": "the robot turning, then zooming off out the door",
+          "caption": "But at the next corner, Sprocket zoomed off!",
           "speech": [
             {
               "who": "hero",
-              "text": "Your painting is beautiful!"
+              "text": "Sprocket! Come back!"
             }
-          ]
-        },
-        {
-          "scene": "a playground at lunchtime with children on swings and slides, bright sunshine",
-          "bg": [
-            "#fcf3cf",
-            "#f7dc6f"
-          ],
-          "props": [
-            "🛝",
-            "⚽",
-            "☀️"
           ],
           "cast": [
             "hero",
-            "c3"
-          ],
-          "caption": "At lunchtime, {hero} played with everyone.",
-          "speech": [
-            {
-              "who": "c3",
-              "text": "Want to play tag?"
-            }
+            "sk"
           ]
         },
         {
-          "scene": "a family hugging at the school gate at home-time, the child waving a painting",
-          "bg": [
-            "#fdf2e9",
-            "#f5b041"
+          "scene": "a school corridor with a trail of footprints and dropped screws",
+          "caption": "The team followed a trail of dropped screws.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Trail found!"
+            }
           ],
-          "props": [
-            "🏠",
-            "🖼️",
-            "💛"
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the team studying a map of the school, marking the path",
+          "caption": "They drew a map of the school.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the robot stuck at a door, its wheels spinning on a rug",
+          "caption": "Sprocket was stuck on a rug, spinning in circles.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the team inspecting the robot, the child holding a torch",
+          "caption": "'Its sensor is dirty,' said {hero}.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Let's clean it up!"
+            }
           ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the team cleaning the sensor with a cloth",
+          "caption": "They cleaned the sensor carefully.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the robot now moving smoothly, avoiding a chair in its path",
+          "caption": "Sprocket avoided the chair perfectly!",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Beep! Obstacle avoided!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a whiteboard full of equations and a sketched robot design",
+          "caption": "The team scribbled equations on the whiteboard.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Math helps build better robots!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child demonstrating to the team how the robot's wheel turns",
+          "caption": "{hero} explained how the wheels turn the robot.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the team sketching a new design for a robot arm on a notepad",
+          "caption": "The team sketched a robot arm that could pick things up.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Let's add a claw!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the robot arm picking up a small block and placing it on a tower",
+          "caption": "The claw worked! It stacked the blocks neatly.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Beep! Stack complete!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the robot carrying a small cup of water without spilling",
+          "caption": "Sprocket carried a cup without spilling a drop.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Careful... careful..."
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the robot's antenna lighting up as it senses a friend",
+          "caption": "Sprocket's antenna flashed. A new friend!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "a friendly classmate, a girl with a pen behind her ear, joining the team",
+          "caption": "Priya from class joined the team with a new idea.",
+          "speech": [
+            {
+              "who": "hero",
+              "text": "Welcome to the club!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the team testing the robot with a teacher watching",
+          "caption": "The teacher watched as they tested Sprocket.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the robot rolling smoothly down a corridor, the team cheering",
+          "caption": "Sprocket rolled all the way down the corridor!",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the team fixing a loose wire, a small spark, and an annoyed robot",
+          "caption": "A loose wire! Sprocket sputtered.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Bzzt! Fixed!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the robot now displaying a little happy face on its screen",
+          "caption": "Sprocket's screen showed a happy face.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the team putting the robot on the science fair display table",
+          "caption": "On the day of the fair, Sprocket was ready.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "families and judges walking around the science fair hall",
+          "caption": "Judges and families came to see the inventions.",
+          "speech": [],
           "cast": [
             "hero",
             "family"
-          ],
-          "caption": "Home-time! Everyone wanted to hear about {hero}'s day.",
+          ]
+        },
+        {
+          "scene": "the child explaining to a judge, pointing at the robot's sensor",
+          "caption": "{hero} explained how the sensor worked.",
           "speech": [
             {
               "who": "hero",
-              "text": "I had the best day ever!"
+              "text": "We fixed a bug, which is data!"
             }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the robot performing a neat trick, drawing a circle on the table",
+          "caption": "Sprocket drew a perfect circle with a marker.",
+          "speech": [
+            {
+              "who": "sk",
+              "text": "Beep! Ta-da!"
+            }
+          ],
+          "cast": [
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the judge smiling and writing notes on a clipboard",
+          "caption": "The judge was impressed.",
+          "speech": [],
+          "cast": [
+            "hero",
+            "sk"
           ]
         }
-      ]
-    },
-    {
-      "id": "bike-ride",
-      "title": "{hero} Learns to Ride a Bike",
-      "ageGroup": "6-8",
-      "theme": "Growing Up",
-      "category": "adventure",
-      "emoji": "🚲",
-      "blurb": "Wobbly at first, then wind in the hair! A story about trying again, with a little help from family.",
-      "palette": [
-        "#f5b7b1",
-        "#aed6f1"
       ],
-      "sidekick": {
-        "name": "Sparky",
-        "emoji": "🐕",
-        "desc": "a bouncy golden puppy with a red ribbon"
-      },
-      "panels": [
+      "finale": [
         {
-          "scene": "a child looking at a shiny blue bicycle in the garden on a sunny day",
-          "bg": [
-            "#aed6f1",
-            "#5dade2"
-          ],
-          "props": [
-            "🚲",
-            "☀️",
-            "🌼"
-          ],
+          "scene": "the inventors' workshop at night, Sprocket charging on the bench",
+          "caption": "That night, Sprocket charged up for the next invention.",
+          "speech": [],
           "cast": [
-            "hero"
-          ],
-          "caption": "{hero} had a shiny new bike and a big plan.",
+            "hero",
+            "sk"
+          ]
+        },
+        {
+          "scene": "the child writing the next big idea in a notebook, the robot beside them",
+          "caption": "'Next project?' asked Priya. {hero} grinned.",
           "speech": [
             {
               "who": "hero",
-              "text": "Today I ride without training wheels!"
+              "text": "Let's build something bigger!"
             }
-          ]
-        },
-        {
-          "scene": "a parent steadying the back of a bicycle while the child pedals along a grassy path",
-          "bg": [
-            "#d5f5e3",
-            "#58d68d"
-          ],
-          "props": [
-            "🌳",
-            "🌿",
-            "🍃"
           ],
           "cast": [
             "hero",
-            "c1"
-          ],
-          "caption": "{c1} held on tight... for now.",
-          "speech": [
-            {
-              "who": "c1",
-              "text": "Pedal, and keep looking ahead!"
-            }
-          ]
-        },
-        {
-          "scene": "the child wobbling and falling gently onto the grass, a puppy running over to lick their face",
-          "bg": [
-            "#fdebd0",
-            "#eb984e"
-          ],
-          "props": [
-            "💫",
-            "🐾",
-            "😅"
-          ],
-          "cast": [
-            "hero",
-            "c2"
-          ],
-          "caption": "Wobble... oops! Falling down is part of learning.",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "Ouch, but I'm not giving up!"
-            }
-          ]
-        },
-        {
-          "scene": "the child dusting off their knees and smiling, with the puppy wagging its tail",
-          "bg": [
-            "#fcf3cf",
-            "#f4d03f"
-          ],
-          "props": [
-            "🐕",
-            "💪",
-            "⭐"
-          ],
-          "cast": [
-            "hero",
-            "c2"
-          ],
-          "caption": "{hero} tried again. And again.",
-          "speech": [
-            {
-              "who": "c2",
-              "text": "Woof! You're doing great!"
-            }
-          ]
-        },
-        {
-          "scene": "the child pedalling along a long path with steady arms while a parent runs behind, cheering",
-          "bg": [
-            "#d6eaf8",
-            "#3498db"
-          ],
-          "props": [
-            "🏁",
-            "🌬️",
-            "🌳"
-          ],
-          "cast": [
-            "hero",
-            "c1",
-            "c3"
-          ],
-          "caption": "Without even noticing, {hero} was riding on {their} own!",
-          "speech": [
-            {
-              "who": "c3",
-              "text": "Look at you go!"
-            }
-          ]
-        },
-        {
-          "scene": "the family cheering at the finish line as the child lifts the handlebars high",
-          "bg": [
-            "#fadbd8",
-            "#ff6b6b"
-          ],
-          "props": [
-            "🎉",
-            "🏆",
-            "🎈"
-          ],
-          "cast": [
-            "hero",
-            "family"
-          ],
-          "caption": "Hooray! {hero} rode all the way to the big tree.",
-          "speech": [
-            {
-              "who": "hero",
-              "text": "I did it!"
-            }
+            "sk"
           ]
         }
       ]

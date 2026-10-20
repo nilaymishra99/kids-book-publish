@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bundle Builder — Little Legends</title>
+  <meta name="description" content="Build a personalised comic book starring your child and family in five easy steps.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦸</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;700&family=Bangers&family=Nunito:wght@400;700;800;900&display=swap">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="/"><span class="logo-mark" aria-hidden="true">🦸</span> Little Legends</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menu">☰</button>
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="/#stories">Stories</a>
+        <a href="/#how">How it works</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#reviews">Reviews</a>
+        <a href="/bundle">Bundles</a>
+        <a href="/faq">FAQ</a>
+        <a class="btn btn-sm" href="/create">Create a comic</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wizard">
+    <div class="container">
+      <span class="eyebrow" style="display:inline-block;margin-bottom:10px">Bundle builder</span>
+      <h1 style="margin-bottom:6px">Answer a few questions and we'll pick the books</h1>
+      <p style="margin-bottom:28px">We choose the three best-matching stories for your child's age and interests, then make all three with your child in the lead.</p>
+      <ol class="progress" id="progress" aria-label="Steps">
+        <li>1. Your child</li><li>2. Interests</li><li>3. Format &amp; length</li><li>4. Your bundle</li>
+      </ol>
+
+      <section class="step" data-step="0" aria-labelledby="b1">
+        <h2 id="b1">Tell us about your child</h2>
+        <div class="card">
+          <div class="two-col">
+            <div class="field">
+              <label for="age">How old is your child?</label>
+              <select id="age"></select>
+            </div>
+            <div class="field">
+              <label for="name">What is their first name?</label>
+              <input type="text" id="name" maxlength="20" autocomplete="off" placeholder="e.g. Aarav">
+            </div>
+          </div>
+          <fieldset class="field">
+            <legend>How should the stories talk about them?</legend>
+            <div class="radio-row">
+              <label class="radio-tile"><input type="radio" name="pronoun" value="she"><span>She / her</span></label>
+              <label class="radio-tile"><input type="radio" name="pronoun" value="he"><span>He / him</span></label>
+              <label class="radio-tile"><input type="radio" name="pronoun" value="they" checked><span>They / them</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="photo">One clear photo of your child</label>
+            <input type="file" id="photo" accept="image/*">
+            <span class="hint">Front-facing, one person, face clearly visible.</span>
+          </div>
+          <img id="photo-preview" alt="" hidden style="width:160px;height:160px;object-fit:cover;border-radius:50%;border:2px solid var(--brand)">
+          <label class="check" style="margin-top:14px"><input type="checkbox" id="consent"> I'm the child's parent or guardian and I'm happy for this photo to be used to make the books. I've read the <a href="/privacy" target="_blank" rel="noopener">privacy policy</a>.</label>
+        </div>
+        <p class="notice error" id="err1" hidden role="alert"></p>
+        <div class="step-nav"><a class="btn btn-white" href="/">← Home</a><button class="btn" data-next>Next: interests →</button></div>
+      </section>
+
+      <section class="step" data-step="1" hidden aria-labelledby="b2">
+        <h2 id="b2">What does your child love?</h2>
+        <div class="card">
+          <div class="field">
+            <span class="field"><strong>Pick as many as you like</strong></span>
+            <div class="filters" id="interest-chips" role="group" aria-label="Interests" style="justify-content:flex-start"></div>
+          </div>
+          <fieldset class="field">
+            <legend>Art style</legend>
+            <div class="radio-row" id="style-row"></div>
+          </fieldset>
+        </div>
+        <div class="step-nav"><button class="btn btn-white" data-back>← Back</button><button class="btn" data-next>Next: format →</button></div>
+      </section>
+
+      <section class="step" data-step="2" hidden aria-labelledby="b3">
+        <h2 id="b3">Which format, and how long?</h2>
+        <div class="card">
+          <fieldset class="field">
+            <legend>Format for all three books</legend>
+            <div class="radio-row" id="format-row"></div>
+          </fieldset>
+          <div class="field">
+            <label for="pages">Pages in each book</label>
+            <select id="pages"></select>
+            <span class="hint" id="pages-hint"></span>
+          </div>
+        </div>
+        <div class="step-nav"><button class="btn btn-white" data-back>← Back</button><button class="btn" data-next>See my bundle →</button></div>
+      </section>
+
+      <section class="step" data-step="3" hidden aria-labelledby="b4">
+        <h2 id="b4">Your bundle</h2>
+        <div class="grid grid-3" id="bundle-list" style="margin-bottom:20px"></div>
+        <div class="card" style="text-align:center">
+          <p class="order-summary" id="bundle-price"></p>
+          <p class="hint" id="bundle-note"></p>
+          <button class="btn" id="make-bundle">Create my bundle ✨</button>
+        </div>
+        <div class="generating" id="bundle-generating" hidden>
+          <div class="emoji" aria-hidden="true">🎨</div>
+          <h2 id="bundle-status" aria-live="polite">Warming up the crayons…</h2>
+          <div class="progress-bar" aria-hidden="true"><div id="bundle-bar"></div></div>
+          <p class="hint">Making three books takes a few minutes. Please keep this page open.</p>
+        </div>
+        <div id="bundle-preview" hidden>
+          <div class="filters" id="book-tabs" role="tablist" style="margin:24px 0 12px"></div>
+          <div class="viewer">
+            <div class="viewer-stage"><img id="viewer-img" alt=""></div>
+            <div class="viewer-controls">
+              <button class="btn btn-sm btn-white" id="prev-page" aria-label="Previous page">◀</button>
+              <span id="page-count" aria-live="polite"></span>
+              <button class="btn btn-sm btn-white" id="next-page" aria-label="Next page">▶</button>
+            </div>
+          </div>
+          <p class="notice error" id="err4" hidden role="alert"></p>
+          <div class="step-nav" style="margin-top:24px"><button class="btn btn-white" data-back>← Change choices</button><button class="btn" id="checkout-bundle">Checkout bundle 🔒</button></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="/js/bundle.js"></script>
+</body>
+</html>

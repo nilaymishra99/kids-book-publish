@@ -275,3 +275,6 @@ fieldset { border: none; padding: 0; margin: 0 0 18px; }
   .print-pages { display: block; }
   .print-pages img { width: 8in; height: 8in; page-break-after: always; break-after: page; }
 }
+
+/* Book length and bundle wizard */
+.page-hint { font-size: 0.95rem; color: var(--brand-dark); }

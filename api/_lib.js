@@ -31,6 +31,33 @@ function siteOrigin(req) {
   return `${proto}://${host}`;
 }
 
+// Mirrors js/story-model.js — keep in step.
+const PAGE_LIMITS = { min: 15, max: 30 };
+
+function bookPages(story, pageCount) {
+  const n = Math.min(PAGE_LIMITS.max, Math.max(PAGE_LIMITS.min, Number(pageCount) || PAGE_LIMITS.min));
+  return [...story.intro, ...story.middle.slice(0, n - story.intro.length - story.finale.length), ...story.finale];
+}
+
+function resolveCast(page, people) {
+  const present = people.map((p) => p.slot);
+  const cast = ["hero"];
+  for (const slot of page.cast) {
+    if (slot === "family") cast.push(...present);
+    else if (slot === "sk" || slot === "hero" || present.includes(slot)) cast.push(slot);
+  }
+  return [...new Set(cast)];
+}
+
+function bookPrice(format, pageCount) {
+  const extra = Math.max(0, Number(pageCount) - pricing.pages.included);
+  return format.price + extra * pricing.pages.extraPagePrice;
+}
+
+function validPageCount(n) {
+  return Number.isInteger(n) && n >= PAGE_LIMITS.min && n <= PAGE_LIMITS.max;
+}
+
 function clientIp(req) {
   return (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "unknown";
 }
@@ -96,6 +123,11 @@ module.exports = {
   readJsonBody,
   findStory,
   findFormat,
+  bookPages,
+  resolveCast,
+  bookPrice,
+  validPageCount,
+  PAGE_LIMITS,
   siteOrigin,
   clientIp,
   rateLimited,

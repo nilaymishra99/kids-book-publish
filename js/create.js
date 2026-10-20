@@ -1,7 +1,9 @@
 // The five-step "create your comic" wizard.
 
 import { BRAND, loadData, loadConfig, storyCardHtml, formatPrice, esc, setupNav } from "./common.js";
-import { renderBook, aiPanelKeys, resolveCast } from "./comic.js";
+import { renderBook } from "./comic.js";
+import { illustrate } from "./builder.js";
+import { bookPrice } from "./story-model.js";
 import { saveBook, getBook } from "./store.js";
 
 setupNav();
@@ -308,6 +310,7 @@ function collectBook() {
     hero: { name: heroName(), age: Number($("#hero-age").value), pronoun: radio("pronoun") },
     style: config.ai ? radio("style") : "photo",
     dedication: $("#dedication").value.trim(),
+    pages: Number($("#page-count").value),
     heroPhoto: state.people.find((p) => p.hero).cropper.export(),
     people: companions.map((p, i) => ({
       slot: `c${i + 1}`,
@@ -322,67 +325,7 @@ function collectBook() {
 // Only things that change the pictures — renaming the hero or editing the
 // dedication re-renders text without paying for new illustrations.
 function illustrationKey(book) {
-  return JSON.stringify([book.storyId, book.style, book.hero.age, book.hero.pronoun, book.heroPhoto, book.people.map((p) => [p.relation, p.photo])]);
-}
-
-async function illustrate(book, story) {
-  const keys = aiPanelKeys(story);
-  let done = 0;
-  let failed = 0;
-  const status = $("#gen-status");
-  const bar = $("#gen-bar");
-  const tick = () => {
-    bar.style.width = `${Math.round((done / keys.length) * 100)}%`;
-    status.textContent = done < keys.length ? `Illustrating page ${done + 1} of ${keys.length}…` : "Putting the pages together…";
-  };
-  tick();
-
-  const photosFor = (key) => {
-    const slots = key === "cover" ? ["hero", ...book.people.map((p) => p.slot)] : resolveCast(story.panels[key], book);
-    const photos = {};
-    for (const slot of slots) {
-      if (slot === "hero") photos.hero = book.heroPhoto;
-      else {
-        const p = book.people.find((x) => x.slot === slot);
-        if (p) photos[slot] = p.photo;
-      }
-    }
-    return photos;
-  };
-
-  const queue = [...keys];
-  async function worker() {
-    while (queue.length) {
-      const key = queue.shift();
-      try {
-        const ctrl = new AbortController();
-        const timer = setTimeout(() => ctrl.abort(), 120000);
-        const res = await fetch("/api/generate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          signal: ctrl.signal,
-          body: JSON.stringify({
-            storyId: story.id,
-            panel: key,
-            style: book.style,
-            hero: book.hero,
-            cast: book.people.map(({ slot, name, relation }) => ({ slot, name, relation })),
-            photos: photosFor(key),
-          }),
-        });
-        clearTimeout(timer);
-        const data = await res.json().catch(() => ({}));
-        if (res.ok && data.image) book.ai[key] = data.image;
-        else failed++;
-      } catch {
-        failed++;
-      }
-      done++;
-      tick();
-    }
-  }
-  await Promise.all(Array.from({ length: AI_CONCURRENCY }, worker));
-  return failed;
+  return JSON.stringify([book.storyId, book.pages, book.style, book.hero.age, book.hero.pronoun, book.heroPhoto, book.people.map((p) => [p.relation, p.photo])]);
 }
 
 async function buildPreview() {
@@ -398,7 +341,10 @@ async function buildPreview() {
   const key = illustrationKey(fresh);
   if (state.book && state.aiKey === key) fresh.ai = state.book.ai;
   else if (config.ai) {
-    const failed = await illustrate(fresh, story);
+    const failed = await illustrate(fresh, story, (done, total) => {
+      $("#gen-bar").style.width = `${Math.round((done / total) * 100)}%`;
+      $("#gen-status").textContent = done < total ? `Illustrating page ${done + 1} of ${total}…` : "Putting the pages together…";
+    });
     if (failed) {
       const note = $("#gen-note");
       note.textContent = `${failed} illustration${failed > 1 ? "s" : ""} couldn't be drawn, so ${failed > 1 ? "those pages use" : "that page uses"} photo-comic style instead. Go back and press "Create my preview" again to retry.`;
@@ -458,14 +404,14 @@ function renderFormats() {
       <button type="button" class="card price-card format-pick" data-format="${f.id}" aria-pressed="${f.id === state.format}">
         ${f.badge ? `<span class="badge">${esc(f.badge)}</span>` : ""}
         <h3>${esc(f.name)}</h3>
-        <div class="price">${formatPrice(pricing, f.price)}</div>
+        <div class="price">${formatPrice(pricing, bookPrice(pricing, f.id, state.book.pages))}</div>
         <ul>${f.features.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
       </button>`
     )
     .join("");
   const f = pricing.formats.find((x) => x.id === state.format);
   const title = currentStory().title.replace("{hero}", state.book.hero.name);
-  $("#order-summary").textContent = `“${title}” · ${f.name} · ${formatPrice(pricing, f.price)}`;
+  $("#order-summary").textContent = `“${title}” · ${state.book.pages} pages · ${f.name} · ${formatPrice(pricing, bookPrice(pricing, f.id, state.book.pages))}`;
   const err = $("#checkout-error");
   if (config.checkout === "off") {
     err.textContent = "Ordering opens very soon! Your preview is saved in this browser — come back to this page to order it.";
@@ -491,7 +437,7 @@ $("#checkout-btn").addEventListener("click", async () => {
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ bookId: state.book.id, storyId: state.book.storyId, format: state.format, heroName: state.book.hero.name }),
+      body: JSON.stringify({ bookId: state.book.id, storyId: state.book.storyId, format: state.format, pages: state.book.pages, heroName: state.book.hero.name }),
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok || !data.url) throw new Error(data.error || "Couldn't start checkout. Please try again.");
@@ -516,6 +462,7 @@ async function resume(id) {
   const styleInput = document.querySelector(`input[name="style"][value="${book.style}"]`);
   if (styleInput) styleInput.checked = true;
   $("#dedication").value = book.dedication || "";
+  $("#page-count").value = String(book.pages || pricing.pages.included);
   const toImg = (src) => new Promise((r) => { const i = new Image(); i.onload = () => r(i); i.src = src; });
   const heroSlot = state.people.find((p) => p.hero);
   heroSlot.cropper.setImage(await toImg(book.heroPhoto));
@@ -529,6 +476,21 @@ async function resume(id) {
   state.aiKey = illustrationKey(collectBook());
   return true;
 }
+
+const pageSelect = $("#page-count");
+pageSelect.innerHTML = Array.from({ length: pricing.pages.max - pricing.pages.min + 1 }, (_, i) => {
+  const n = pricing.pages.min + i;
+  return `<option value="${n}" ${n === pricing.pages.included ? "selected" : ""}>${n} pages</option>`;
+}).join("");
+const updatePageHint = () => {
+  const n = Number(pageSelect.value);
+  const extra = Math.max(0, n - pricing.pages.included) * pricing.pages.extraPagePrice;
+  $("#page-hint").textContent = extra
+    ? `${n} pages: ${pricing.pages.included} included, plus ${formatPrice(pricing, extra)} for the extra ${n - pricing.pages.included}.`
+    : `${pricing.pages.included} pages included. Each extra page above ${pricing.pages.included} is ${formatPrice(pricing, pricing.pages.extraPagePrice)}.`;
+};
+pageSelect.addEventListener("change", updatePageHint);
+updatePageHint();
 
 addPersonSlot({ hero: true });
 renderPicker();

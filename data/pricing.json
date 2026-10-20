@@ -1,8 +1,18 @@
 {
-  "_comment": "Single source of truth for prices — the checkout API charges from this file, never from anything the browser sends. 'price' is in whole currency units (e.g. rupees); Stripe gets it multiplied by 100.",
+  "_comment": "Single source of truth for prices. The checkout API charges from this file, never from anything the browser sends. Prices are in whole rupees (Stripe gets them x100). A book has 15 pages included in the format price; each page above 15 costs extraPagePrice. Bundles get bundleDiscountPercent off the total of their books.",
   "currency": "inr",
   "symbol": "₹",
   "shippingCountries": ["IN"],
+  "pages": {
+    "min": 15,
+    "max": 30,
+    "included": 15,
+    "extraPagePrice": 200
+  },
+  "bundle": {
+    "books": 3,
+    "discountPercent": 20
+  },
   "formats": [
     {
       "id": "digital",

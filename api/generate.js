@@ -1,20 +1,19 @@
-// POST /api/generate — illustrates ONE comic panel (or the cover) with an AI
-// image model, using the uploaded family photos as likeness references.
+// POST /api/generate — illustrates ONE page (or the cover) with an AI image
+// model, using the uploaded family photos as likeness references.
 //
 // The prompt is built here from data/stories.json — the browser only sends a
-// story id + panel index, so this endpoint can't be used as a free
-// general-purpose image generator.
+// story id, a page number and the book length, so this endpoint can't be used
+// as a general image generator.
 //
 // Required env var: OPENAI_API_KEY
 // Optional: IMAGE_MODEL (default gpt-image-1), IMAGE_QUALITY (low|medium|high,
 //           default medium), IMAGE_INPUT_FIDELITY (default high; set to "" to
-//           omit for models that don't support it), GENERATE_HOURLY_LIMIT
-//           (panels per IP per hour, default 40)
+//           omit), GENERATE_HOURLY_LIMIT (requests per IP per hour, default 150)
 //
 // Photos are forwarded to the image provider for this one request and are not
 // stored anywhere by this function.
 
-const { readJsonBody, findStory, clientIp, rateLimited } = require("./_lib");
+const { readJsonBody, findStory, clientIp, rateLimited, bookPages, resolveCast, validPageCount, PAGE_LIMITS } = require("./_lib");
 
 const STYLES = {
   comic: "bright classic comic-book art for children, bold clean ink outlines, flat vivid colours, light halftone shading",
@@ -23,7 +22,7 @@ const STYLES = {
   cartoon3d: "modern 3D animated family-film style, soft studio lighting, rounded friendly shapes",
 };
 
-const SLOTS = ["hero", "c1", "c2", "c3", "c4", "c5"];
+const SLOTS = ["c1", "c2", "c3", "c4", "c5"];
 const PHOTO_RE = /^data:image\/(jpeg|png|webp);base64,([A-Za-z0-9+/=]+)$/;
 const MAX_PHOTO_BYTES = 1.5 * 1024 * 1024;
 
@@ -42,7 +41,7 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ error: "AI illustration isn't switched on yet." });
   }
 
-  const limit = Number(process.env.GENERATE_HOURLY_LIMIT) || 40;
+  const limit = Number(process.env.GENERATE_HOURLY_LIMIT) || 150;
   if (rateLimited(`gen:${clientIp(req)}`, limit, 60 * 60 * 1000)) {
     return res.status(429).json({ error: "Too many illustrations requested. Please try again in an hour." });
   }
@@ -53,9 +52,13 @@ module.exports = async function handler(req, res) {
   const story = findStory(body.storyId);
   if (!story) return res.status(400).json({ error: "Unknown story." });
 
+  const pageCount = body.pageCount === undefined ? PAGE_LIMITS.min : Number(body.pageCount);
+  if (!validPageCount(pageCount)) return res.status(400).json({ error: "Books have 15 to 30 pages." });
+
+  const pages = bookPages(story, pageCount);
   const isCover = body.panel === "cover";
-  const panel = isCover ? null : story.panels[Number(body.panel)];
-  if (!isCover && !panel) return res.status(400).json({ error: "Unknown panel." });
+  const page = isCover ? null : pages[Number(body.panel)];
+  if (!isCover && !page) return res.status(400).json({ error: "Unknown page." });
 
   const style = STYLES[body.style] || STYLES.comic;
   const hero = {
@@ -65,20 +68,15 @@ module.exports = async function handler(req, res) {
   };
   const people = {};
   for (const member of Array.isArray(body.cast) ? body.cast : []) {
-    if (SLOTS.includes(member?.slot) && member.slot !== "hero") {
+    if (SLOTS.includes(member?.slot)) {
       people[member.slot] = { name: clean(member.name, 40), relation: clean(member.relation, 30) };
     }
   }
+  const peopleList = Object.keys(people).map((slot) => ({ slot }));
 
-  // Resolve who appears in this panel — same rules as js/comic.js.
-  let cast = isCover ? ["hero", ...Object.keys(people)] : [];
-  if (!isCover) {
-    for (const slot of panel.cast) {
-      if (slot === "family") cast.push(...Object.keys(people));
-      else if (slot === "hero" || people[slot] || slot === "c1") cast.push(slot);
-    }
-  }
-  cast = [...new Set(cast)];
+  const cast = isCover
+    ? ["hero", "sk", ...Object.keys(people)]
+    : resolveCast(page, peopleList);
 
   const refs = [];
   const lines = [];
@@ -89,10 +87,12 @@ module.exports = async function handler(req, res) {
     if (slot === "hero") {
       const kid = hero.pronoun === "she" ? "girl" : hero.pronoun === "he" ? "boy" : "child";
       who = `${hero.name}, a ${hero.age}-year-old ${kid} (the main character)`;
+    } else if (slot === "sk") {
+      who = `${story.sidekick.name}, ${story.sidekick.desc}`;
     } else if (people[slot]) {
       who = `${people[slot].name || "a family member"}${people[slot].relation ? `, the child's ${people[slot].relation.toLowerCase()}` : ""}`;
     } else {
-      who = `${story.sidekick.name}, ${story.sidekick.desc}`;
+      continue;
     }
     if (match) {
       const buf = Buffer.from(match[2], "base64");
@@ -105,14 +105,14 @@ module.exports = async function handler(req, res) {
   }
 
   const scene = isCover
-    ? `the front cover of a comic book called "${story.title.replace("{hero}", hero.name)}": the main character in a heroic, joyful pose in a ${story.theme.toLowerCase()} setting, with the other characters around them. Leave empty space at the top for the title.`
-    : panel.scene;
+    ? `the front cover of a comic book called "${story.title.replace("{hero}", hero.name)}": the main character in a joyful pose in a ${story.theme.toLowerCase()} setting, with the other characters around them. Leave empty space at the top for the title.`
+    : page.scene;
 
   const prompt = [
-    `Illustrate a single panel for a personalised children's comic book (reader age ${hero.age}).`,
+    `Illustrate a single page for a personalised children's comic book (reader age ${hero.age}).`,
     `Art style: ${style}.`,
     `Scene: ${scene}.`,
-    `Characters in this panel:`,
+    `Characters in this picture:`,
     ...lines,
     `Turn every real person into a friendly cartoon character in this art style while keeping them clearly recognisable.`,
     `Wholesome, warm and age-appropriate. Everyone fully and modestly dressed. Do NOT draw any text, letters, captions or speech bubbles — they are added later.`,
@@ -156,13 +156,13 @@ module.exports = async function handler(req, res) {
       return res.status(502).json({
         error: blocked
           ? "The illustrator couldn't use one of these photos. Try a clearer, front-facing photo."
-          : "The illustrator is busy right now. We'll use photo-comic style for this panel.",
+          : "The illustrator is busy right now. We'll use photo-comic style for this page.",
       });
     }
 
     return res.status(200).json({ image: `data:image/jpeg;base64,${data.data[0].b64_json}` });
   } catch (err) {
     console.error("Generate failed:", err);
-    return res.status(500).json({ error: "Couldn't illustrate this panel right now." });
+    return res.status(500).json({ error: "Couldn't illustrate this page right now." });
   }
 };

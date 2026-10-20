@@ -26,4 +26,6 @@ async function run(mode, fn) {
 
 export const saveBook = (book) => run("readwrite", (s) => s.put(book));
 export const getBook = (id) => run("readonly", (s) => s.get(id));
+export const getBooksByBundle = (bundleId) =>
+  run("readonly", (s) => s.getAll()).then((books) => (books || []).filter((b) => b.bundleId === bundleId));
 export const deleteBook = (id) => run("readwrite", (s) => s.delete(id));

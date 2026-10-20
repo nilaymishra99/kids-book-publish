@@ -16,10 +16,11 @@ personal site, so you can move it to its own repo by copying the folder.
 | Feature | Where |
 |---|---|
 | Landing page: hero, age groups, story catalogue with filters, how it works, pricing, privacy, FAQ | `index.html`, `js/home.js` |
-| 9 stories, 4 age bands (0–2, 3–5, 6–8, 9–10), 59 comic panels | `data/stories.json` |
+| 8 stories with named characters, 4 age bands (0–2, 3–5, 6–8, 9–10), 15–30 pages each | `data/stories.json` |
 | 5-step creator: story → hero (name, age, pronouns, art style, dedication) → photos (hero + up to 5, with crop/zoom, consent) → full preview → format | `create.html`, `js/create.js` |
-| Comic renderer: cover, dedication, panel layouts per age, captions, speech bubbles, "The End" page, watermark | `js/comic.js` |
-| AI illustration of every panel from the photos (optional) | `api/generate.js` |
+| Comic renderer: cover, dedication, one illustrated page per story page, captions, speech bubbles, "The End" page, watermark | `js/comic.js` |
+| AI illustration of every page from the photos (optional) | `api/generate.js`, `js/builder.js` |
+| Bundle builder: age, interests, format and length → three matched books at a bundle price | `bundle.html`, `js/bundle.js` |
 | Stripe Checkout, prices from one JSON file, shipping address for print | `api/checkout.js`, `data/pricing.json` |
 | Success page: verifies payment, unlocks watermark-free book, PDF download, uploads print pages | `success.html`, `js/success.js`, `api/order.js`, `api/save-page.js` |
 | Order email to you on every sale | `api/stripe-webhook.js` |
@@ -87,24 +88,32 @@ flow works end to end.
    consent for under-18s); if you sell to the US/EU, COPPA/GDPR apply as well.
 6. **Prices**: edit `data/pricing.json` (currency, amounts, shipping countries).
 
-## Adding a story
+## Stories, page counts and bundles
 
-Add an object to `data/stories.json` and run `npm run check`. Rules (enforced
-by the check script):
+Each story in `data/stories.json` has three parts:
 
-- `ageGroup` is one of `0-2`, `3-5`, `6-8`, `9-10` — it sets the layout (1, 2
-  or 3 panels per page) and text size.
-- `{hero}` = child's name; `{c1}`…`{c5}` = family members in upload order;
-  `{family}` = everyone added; `{their}` / `{them}` / `{Their}` = pronouns.
-  Don't write a pronoun as the subject of a verb ("{they} is"), so the
-  grammar works for she/he/they.
-- **Captions** may only use `{hero}`, `{c1}`, `{family}` and pronouns. `{c1}`
-  becomes the story's `sidekick` when no family was added, so captions always
-  read correctly.
-- `cast` / `speech` entries for `c2`–`c5` are dropped automatically if that
-  person wasn't added. `"family"` in `cast` means everyone who was added.
-- `scene` is the brief for the image model — describe the picture, never ask
-  for text in it.
+- `intro`: 2 pages
+- `middle`: 26 pages (the adventure)
+- `finale`: 2 pages
+
+A book with N pages (15–30) uses `intro`, the first N−4 pages of `middle`, and
+`finale`, so every length has a complete beginning and ending. The shared rule
+lives in `js/story-model.js` and is mirrored in `api/_lib.js`; keep them in step.
+
+Rules (enforced by `npm run check`):
+
+- `ageGroup` is one of `0-2`, `3-5`, `6-8`, `9-10`. `category` must be a
+  `categories` id, and every value in `interests` must be in the `interests` list.
+- Each page has `scene` (the image brief), `caption`, `speech` and `cast`.
+  `cast` lists who is drawn: `hero`, `sk` (the sidekick), `family` (everyone
+  added) or `c1`–`c5`.
+- Captions may use `{hero}`, `{family}`, `{their}`, `{them}` and `{Their}`.
+  Speech may also use `{c2}`–`{c5}`. Speaker `who` may be `hero`, `sk`, or `c1`–`c5`.
+- `scene` describes the picture only. Never ask for text in it.
+
+Pricing lives in `data/pricing.json`. A book includes 15 pages in its format
+price, and each extra page costs ₹200. A bundle is three books, with
+`bundle.discountPercent` off the total. The server works out every price.
 
 ## Known limits of phase one
 

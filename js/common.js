@@ -46,7 +46,7 @@ export function storyCardHtml(story, ageGroups, { tag = "a", name = "" } = {}) {
       <div class="story-body">
         <h3>${storyTitleHtml(story, name)}</h3>
         <p>${esc(story.blurb.replace("{hero}", name || "your child"))}</p>
-        <span class="meta">${story.panels.length} comic panels · ${esc(age?.name || "")}</span>
+        <span class="meta">15–30 pages · ${esc(age?.name || "")}</span>
       </div>
     </${tag}>`;
 }

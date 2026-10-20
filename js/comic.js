@@ -8,6 +8,8 @@
 // always drawn here (never by the image model), so the text is crisp and
 // spelled correctly.
 
+import { bookPages, resolveCast } from "./story-model.js";
+
 const PAGE = 1600; // px — 8in square at 200dpi
 const MARGIN = 56;
 const GUTTER = 28;
@@ -18,9 +20,6 @@ const BODY = "Nunito, system-ui, sans-serif";
 
 const TEXT_SIZE = { "0-2": 60, "3-5": 46, "6-8": 38, "9-10": 34 };
 
-export function panelsPerPage(ageGroup) {
-  return { "0-2": 1, "3-5": 2 }[ageGroup] || 3;
-}
 
 // ---------- Story text & cast ----------
 
@@ -28,15 +27,7 @@ function presentSlots(book) {
   return book.people.map((p) => p.slot);
 }
 
-export function resolveCast(panel, book) {
-  const present = presentSlots(book);
-  const cast = [];
-  for (const slot of panel.cast) {
-    if (slot === "family") cast.push(...present);
-    else if (slot === "hero" || slot === "c1" || present.includes(slot)) cast.push(slot);
-  }
-  return [...new Set(cast)];
-}
+export { resolveCast };
 
 function listNames(names) {
   if (names.length <= 1) return names[0] || "";
@@ -59,7 +50,7 @@ export function fillText(text, book, story) {
 
 function speechFor(panel, book) {
   const present = presentSlots(book);
-  return panel.speech.filter((s) => s.who === "hero" || s.who === "c1" || present.includes(s.who));
+  return panel.speech.filter((s) => s.who === "hero" || s.who === "sk" || present.includes(s.who));
 }
 
 // ---------- Image helpers ----------
@@ -120,6 +111,7 @@ async function prepareAssets(book) {
 
 function personFor(slot, book, story, assets) {
   if (slot === "hero") return { name: book.hero.name, photo: assets.portraits.hero };
+  if (slot === "sk") return { name: story.sidekick.name, emoji: story.sidekick.emoji };
   const p = book.people.find((x) => x.slot === slot);
   if (p) return { name: p.name, photo: assets.portraits[slot] };
   return { name: story.sidekick.name, emoji: story.sidekick.emoji };
@@ -293,23 +285,9 @@ function pageFooter(ctx, n, brand) {
 
 // ---------- Panels & pages ----------
 
-function panelRects(count, perPage) {
-  const x = MARGIN;
-  const y = MARGIN;
-  const w = PAGE - MARGIN * 2;
-  const h = PAGE - MARGIN * 2 - FOOTER;
-  if (perPage === 1 || count === 1) return [{ x, y, w, h }];
-  if (perPage === 2 || count === 2) {
-    const ph = (h - GUTTER) / 2;
-    return [{ x, y, w, h: ph }, { x, y: y + ph + GUTTER, w, h: ph }];
-  }
-  const ph = (h - GUTTER) / 2;
-  const pw = (w - GUTTER) / 2;
-  return [
-    { x, y, w, h: ph },
-    { x, y: y + ph + GUTTER, w: pw, h: ph },
-    { x: x + pw + GUTTER, y: y + ph + GUTTER, w: pw, h: ph },
-  ];
+// Every story page is one full-page illustration with its own caption and speech.
+function pageRect() {
+  return { x: MARGIN, y: MARGIN, w: PAGE - MARGIN * 2, h: PAGE - MARGIN * 2 - FOOTER };
 }
 
 function drawPanel(ctx, rect, panel, index, book, story, assets) {
@@ -327,7 +305,7 @@ function drawPanel(ctx, rect, panel, index, book, story, assets) {
   if (ai) {
     drawCover(ctx, ai, x, y, w, h);
   } else {
-    const [top, bottom] = panel.bg || story.palette;
+    const [top, bottom] = [story.palette[index % 2], story.palette[(index + 1) % 2]];
     const grad = ctx.createLinearGradient(x, y, x, y + h);
     grad.addColorStop(0, top);
     grad.addColorStop(1, bottom);
@@ -336,12 +314,13 @@ function drawPanel(ctx, rect, panel, index, book, story, assets) {
     halftone(ctx, x, y, w, h, 24, 4, "rgba(255,255,255,0.16)");
 
     // Scenery props scattered across the upper half.
-    const propSize = Math.min(w, h) * (panel.props.length > 2 ? 0.2 : 0.24);
+    const props = panel.props || [];
+    const propSize = Math.min(w, h) * (props.length > 2 ? 0.2 : 0.24);
     ctx.font = `${Math.round(propSize)}px ${BODY}`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    panel.props.forEach((p, i) => {
-      const px = x + w * (0.12 + 0.76 * ((i + 0.5) / panel.props.length)) + (seeded(index * 7 + i) - 0.5) * w * 0.08;
+    props.forEach((p, i) => {
+      const px = x + w * (0.12 + 0.76 * ((i + 0.5) / props.length)) + (seeded(index * 7 + i) - 0.5) * w * 0.08;
       const py = y + h * (0.36 + seeded(index * 13 + i) * 0.14);
       ctx.save();
       ctx.translate(px, py);
@@ -555,9 +534,9 @@ function drawEndPage(ctx, book, story, assets, brand) {
   ctx.fillText(`Made with love by ${brand}`, PAGE / 2, PAGE - 90);
 }
 
-// Returns the panel keys to illustrate with AI, in reading order.
-export function aiPanelKeys(story) {
-  return ["cover", ...story.panels.map((_, i) => i)];
+// Keys to illustrate with AI, in reading order: the cover, then each story page.
+export function aiPanelKeys(story, pageCount) {
+  return ["cover", ...bookPages(story, pageCount).map((_, i) => i)];
 }
 
 /**
@@ -583,15 +562,12 @@ export async function renderBook(book, story, { watermark: wm = false, brand = "
     pages.push(page.canvas.toDataURL("image/jpeg", quality)); // no watermark: nothing to protect
   }
 
-  const per = panelsPerPage(story.ageGroup);
-  for (let i = 0, n = 1; i < story.panels.length; i += per, n++) {
+  bookPages(story, book.pages).forEach((panel, i) => {
     page = newPage();
-    const chunk = story.panels.slice(i, i + per);
-    const rects = panelRects(chunk.length, per);
-    chunk.forEach((panel, j) => drawPanel(page.ctx, rects[j], panel, i + j, book, story, assets));
-    pageFooter(page.ctx, n, brand);
+    drawPanel(page.ctx, pageRect(), panel, i, book, story, assets);
+    pageFooter(page.ctx, i + 1, brand);
     finish(page);
-  }
+  });
 
   page = newPage();
   drawEndPage(page.ctx, book, story, assets, brand);

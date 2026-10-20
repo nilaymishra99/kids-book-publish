@@ -35,20 +35,26 @@ module.exports = async function handler(req, res) {
   if (event.type !== "checkout.session.completed") return res.status(200).json({ ignored: true });
 
   const session = event.data.object;
-  const format = findFormat(session.metadata?.format);
-  const story = findStory(session.metadata?.storyId);
+  const m = session.metadata || {};
+  const format = findFormat(m.format);
+  const story = findStory(m.storyId);
+  const bundle = (m.bundleBooks || "").split(",").filter(Boolean).map((item) => {
+    const [bookId, storyId, pages] = item.split(":");
+    const st = findStory(storyId);
+    return `${st ? st.title.replace("{hero}", m.heroName || "") : storyId} (${pages} pages, ${bookId})`;
+  });
   const ship = session.collected_information?.shipping_details || session.shipping_details;
   const addr = ship?.address;
   const rows = [
     ["Order", session.id],
-    ["Book", story ? story.title.replace("{hero}", session.metadata?.heroName || "") : session.metadata?.storyId],
+    ["Book", bundle.length ? `Bundle: ${bundle.join("; ")}` : story ? `${story.title.replace("{hero}", m.heroName || "")} (${m.pages || "?"} pages)` : m.storyId],
     ["Format", format?.name || session.metadata?.format],
     ["Paid", `${pricing.symbol}${(session.amount_total || 0) / 100} (${session.payment_status})`],
     ["Customer", `${session.customer_details?.name || ""} <${session.customer_details?.email || ""}> ${session.customer_details?.phone || ""}`],
   ];
   if (format?.print && addr) {
     rows.push(["Ship to", [ship.name, addr.line1, addr.line2, addr.city, addr.state, addr.postal_code, addr.country].filter(Boolean).join(", ")]);
-    rows.push(["Pages", `Vercel Blob → orders/${session.id}/ (uploaded from the customer's browser after payment)`]);
+    rows.push(["Pages", `Vercel Blob → orders/${session.id}/<book id>/ (uploaded from the customer's browser after payment)`]);
   }
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -64,7 +70,7 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({
         from: process.env.ORDERS_FROM_EMAIL || "Comic Orders <onboarding@resend.dev>",
         to: [process.env.ORDERS_TO_EMAIL || "mail2nilaymishra@gmail.com"],
-        subject: `New ${format?.print ? "PRINT" : "digital"} order — ${session.metadata?.heroName || ""}`,
+        subject: `New ${format?.print ? "PRINT" : "digital"} ${bundle.length ? "bundle" : "order"} — ${m.heroName || ""}`,
         html: `<table>${rows.map(([k, v]) => `<tr><td><strong>${escapeHtml(k)}</strong></td><td>${escapeHtml(v || "")}</td></tr>`).join("")}</table>`,
       }),
     });
